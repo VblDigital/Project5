@@ -6,6 +6,8 @@
  * Time: 17:27
  */
 
+session_start();
+
 // connection to BDD
 try {
 //    $bdd = new PDO('mysql:host=localhost;dbname=project5_bdd', 'root', '');
@@ -15,5 +17,5 @@ try {
         print_r($row);*/
 
 } catch (PDOException $e) {
-    $message = $e->getMessage();
+    echo $e->getMessage();
 }

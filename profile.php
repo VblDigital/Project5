@@ -6,13 +6,34 @@
  * Time: 17:57
  */
 
-session_start();
+require 'include/config.php';
+if(empty($_SESSION['username']))
+{
+    header('Location: login.php');
+}
+
 ?>
 
 <html>
+
 <head>
+    <title>Votre profil</title>
 </head>
+
 <body>
-<p>Bienvenue <?php echo '$login' ?></p>
+<div align="center">
+
+    <?php
+    if(isset($errMsg)){
+        echo '<div>'.$errMsg.'</div>';
+     }
+     ?>
+
+    <div>
+        Bienvenue <?php echo $_SESSION['username']; ?><br>
+        Ceci est le blog de <?php echo $_SESSION['username']; ?><br>
+    </div>
+</div>
+
 </body>
 </html>
