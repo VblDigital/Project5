@@ -9,7 +9,7 @@
 require 'include/config.php';
 if(empty($_SESSION['username']))
 {
-    header('Location: login.php');
+    header('Location: admin/connect.php');
 }
 
 ?>
