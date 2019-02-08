@@ -8,37 +8,46 @@
 
 // connection to database
 require ('../include/config.php');
+// initialization of error message
+$errMsg = "";
 
-// we define if the form has been validated
+// we define if the form has been filled and validated
 if(isset($_POST['submit'])) {
 
-    // initialization of error message
-    $errMsg = "";
+    // we define if the form has been filled and validated
+    if (empty($_POST['username'])) {
 
-    // we define the variable with the data filled
-    if (isset($_POST['username']) AND isset($_POST['password'])) {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-    }
+        $errMsg = "Veuillez saisir un identifiant";
 
-    // we prepare the data which correspond to data filled
-    $query = $bdd->prepare('SELECT * FROM user WHERE username = :username');
-    $query->execute(array(
-        ':username' => $username
-    ));
-    $data = $query->fetch();
+    } elseif (empty($_POST['password'])) {
 
-    // compare the results
-    if ($data !== 0) {
-        if ($password == $data['password']) {
-            $_SESSION['username'] = $data['username'];
-            $_SESSION['password'] = $data['password'];
+        $errMsg = "Veuillez saisir votre mot de passe";
+
+    } elseif (isset($_POST['username']) && isset($_POST['password'])) {
+
+        // we define the variable with the data filled
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+        }
+
+        // we prepare the data which correspond to data filled
+        $query = $bdd->prepare('SELECT * FROM user WHERE username = :username && password = :password');
+        $query->execute(array(
+            ':username' => $username,
+            ':password' => $password
+        ));
+        $count = $query->rowCount();
+
+        // compare the results
+        if ($count > 0) {
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
             header('Location:../profile.php');
             exit;
-        } else
-            $errMsg = 'Le mot de passe n\'est pas correct.';
-    } else {
-        $errMsg = "Le compte de $username n'a pas été trouvé.";
+        } else {
+            $errMsg = 'Votre identifiant et/ou votre mot de passe est incorrect.';
+        }
     }
 }
 ?>
@@ -46,16 +55,10 @@ if(isset($_POST['submit'])) {
 <html>
 
 <head>
-    <title><h2>Se connecter</h2></title>
+    <title>Se connecter</title>
 </head>
 
 <body>
-
-    <?php
-    if(isset($errMsg)){
-        echo '<div>'.$errMsg.'</div>';
-    }
-    ?>
 
 <!--login form -->
 <div align="center">
@@ -64,10 +67,10 @@ if(isset($_POST['submit'])) {
             <h2>Se connecter</h2>
         </div>
         <div>
-            <input id="username" style="width:200px" type="text" name="username" placeholder="Identifiant" required> *
+            <input id="username" style="width:200px" type="text" name="username" placeholder="Identifiant"> *
         </div>
         <div>
-            <input id="password" style="width:200px" type="password" name="password" placeholder="Mot de passe" required> *
+            <input id="password" style="width:200px" type="password" name="password" placeholder="Mot de passe"> *
         </div>
         <br/>
         Les champs suivis d'une * sont obligatoires<br/>
@@ -76,6 +79,13 @@ if(isset($_POST['submit'])) {
             <input type="submit" name="submit" value="Valider">
         </div>
         <br/>
+        <strong>
+        <?php
+        if(isset($errMsg)){
+            echo '<div>'.$errMsg.'</div>';
+        }
+        ?>
+        </strong><br>
         <div>
             Pas encore inscrit ? Venez par <a href="register.php">ICI</a>
         </div>
