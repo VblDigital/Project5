@@ -7,6 +7,7 @@
  */
 
 require 'include/config.php';
+
 if(empty($_SESSION['username']))
 {
     header('Location: admin/connect.php');
@@ -32,6 +33,10 @@ if(empty($_SESSION['username']))
     <div>
         Bienvenue <?php echo $_SESSION['username']; ?><br>
         Ceci est le blog de <?php echo $_SESSION['username']; ?><br>
+    </div>
+    <div>
+        <a href="admin/update.php">Modifier son profil</a><br>
+        <a href="admin/logout.php">Se deconnecter</a>
     </div>
 </div>
 

@@ -11,10 +11,10 @@ require ('../include/config.php');
 // initialization of error message
 $errMsg = "";
 
-// we define if the form has been filled and validated
+// we define if the form has been validated
 if(isset($_POST['submit'])) {
 
-    // we define if the form has been filled and validated
+    // we define if the form has been filled
     if (empty($_POST['username'])) {
 
         $errMsg = "Veuillez saisir un identifiant";
@@ -35,9 +35,10 @@ if(isset($_POST['submit'])) {
         $query = $bdd->prepare('SELECT * FROM user WHERE username = :username && password = :password');
         $query->execute(array(
             ':username' => $username,
-            ':password' => $password
+            ':password' => $password,
         ));
         $count = $query->rowCount();
+        var_dump($email);
 
         // compare the results
         if ($count > 0) {
@@ -67,10 +68,10 @@ if(isset($_POST['submit'])) {
             <h2>Se connecter</h2>
         </div>
         <div>
-            <input id="username" style="width:200px" type="text" name="username" placeholder="Identifiant"> *
+            <input id="username" style="width:200px" type="text" name="username" placeholder="Identifiant" autocomplete="off" value=""> *
         </div>
         <div>
-            <input id="password" style="width:200px" type="password" name="password" placeholder="Mot de passe"> *
+            <input id="password" style="width:200px" type="password" name="password" placeholder="Mot de passe" autocomplete="off" value=""> *
         </div>
         <br/>
         Les champs suivis d'une * sont obligatoires<br/>
