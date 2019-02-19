@@ -5,47 +5,59 @@
  * Date: 05/02/2019
  * Time: 16:14
  */
-
 // connection to database
 require ('../include/config.php');
 // initialization of error message
 $errMsg = "";
+$usernametemp = "";
+$passwordtemp = "";
+$emailtemp = "";
 
 // we define if the form has been validated
 if(isset($_POST['submit'])) {
 
     // we define the variable with the data filled
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $email = $_POST['email'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
 
-        if($username == '') {
+    // username empty / password either / email not empty
+    if($username == '') {
+        if(($password == '' || $password !== '') && $email !== ''){
             $errMsg = 'Entrer un pseudonyme';
+            $emailtemp = $email;
         }
-        elseif ($password == '') {
+    }
+    // password empty / username not empty / email empty
+    if($password == ''){
+        if($username !== '' && $email == ''){
             $errMsg = 'Entrer un mot de passe';
+            $usernametemp = $username;
         }
-        elseif ($email == '') {
-            $errMsg = 'Entrer un email';
+    // password empty / username not empty / email not empty
+        elseif ($username !== '' && $email !== ''){
+            $errMsg = 'Entrer un mot de passe';
+            $usernametemp = $username;
+            $emailtemp = $email;
         }
-
-        if ($username !== '' && $password !== '' && $email !== '') {
-            // we prepare to insert data in BDD
-            $query = $bdd->prepare('INSERT INTO user (username, password, email) VALUES (:username, :password, :email)');
-            $query->execute(array(
-                ':username' => $username,
-                ':password' => $password,
-                ':email' => $email
-            ));
-            header('Location:register.php?action=joined');
-            exit;
-        }
+    }
+    // if all is filled
+    if ($username !== '' && $password !== '' && $email !== '') {
+        // we prepare to insert data in BDD
+        $query = $bdd->prepare('INSERT INTO user (username, password, email) VALUES (:username, :password, :email)');
+        $query->execute(array(
+            ':username' => $username,
+            ':password' => $password,
+            ':email' => $email
+        ));
+        header('Location:register.php?action=joined');
+        exit;
+    }
 }
-
+// result of the query after database record
 if(isset($_GET['action']) && $_GET['action'] == 'joined') {
     $errMsg = 'Vous êtes maintenant inscrit. Vous pouvez vous connecter avec <a href="connect.php">la page de connexion</a>';
 }
-
 ?>
 
 <html>
@@ -63,13 +75,13 @@ if(isset($_GET['action']) && $_GET['action'] == 'joined') {
             <h2>S'enregistrer</h2>
         </div>
         <div>
-            <input id="username" style="width:200px" type="text" name="username" placeholder="Identifiant"> *
+            <input id="username" style="width:200px" type="text" name="username" placeholder="Identifiant" value="<?php echo "$usernametemp"; ?>"> *
         </div>
         <div>
             <input id="password" style="width:200px" type="password" name="password" placeholder="Mot de passe"> *
         </div>
         <div>
-            <input id="email" style="width:200px" type="email" name="email" placeholder="Adresse email"> *
+            <input id="email" style="width:200px" type="email" name="email" placeholder="Adresse email" value="<?php echo "$emailtemp"; ?>"> *
         </div>
         <br/>
         Les champs suivis d'une * sont obligatoires<br/>
