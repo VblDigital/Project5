@@ -15,35 +15,39 @@ $errMsg = "";
 if(isset($_POST['submit'])) {
 
     // we define if the form has been filled
+    $connect = (isset($_POST['username']) && isset($_POST['password']));
+    $connect = true;
+
     if (empty($_POST['username'])) {
 
+        $connect = false;
         $errMsg = "Veuillez saisir un identifiant";
+    }
+    if (empty($_POST['password'])) {
 
-    } elseif (empty($_POST['password'])) {
-
+        $connect = false;
         $errMsg = "Veuillez saisir votre mot de passe";
-
-        // we define the variable with the data filled
-    } elseif (isset($_POST['username']) && isset($_POST['password'])) {
+    }
+     // we define the variable with the data filled
+     if ($connect) {
 
         $username = $_POST['username'];
         $password = $_POST['password'];
 
         // we prepare the data which correspond to data filled
-        $id = "";
         $query = $bdd->prepare('SELECT * FROM user WHERE username = :username AND password = :password');
         $query->execute(array(
             ':username' => $username,
             ':password' => $password,
         ));
-        $query->execute($query);
+        $user = $query->fetch();
         $count = $query->rowCount();
 
         // compare the results
         if ($count > 0) {
             $_SESSION['username'] = $username;
-            $_SESSION['id'] = $id;
-            var_dump($id);
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
             header('Location:../profile.php');
             exit;
         } else {

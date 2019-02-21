@@ -9,27 +9,56 @@ require '../include/config.php';
 // initialization of error message
 $errMsg = "";
 
-// we prepare data
-$username = $_SESSION['username'];
-if(isset($id))
-    {$id = $_SESSION['id'];
-    }
 
-print_r($_SESSION);
+if(isset($_SESSION['id']))
+{$id = $_SESSION['id'];
+}
 
-    // we define if the form has been validated
+// we define if the form has been validated
+
 if(isset($_POST['update'])) {
-    $newusername = $_POST['newusername'];
-    $id = $_SESSION['id'];
-    if (!empty($newusername)){
-        $sql = "UPDATE user set username = '$newusername' where id = '$id'";
-        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $prepare = $bdd->prepare($sql);
-        $prepare->execute();
-        $_SESSION['newusername'] = $_POST['newusername'];
-        header('Location:../profile.php?action=joined');
-        exit;
+    if($_POST['newusername']){
+        $newuser = $_POST['newusername'] ;
     }
+    if($_POST['newpassword']){
+        $pass = $_POST['newpassword'];
+    }
+    if($_POST['newemail']){
+        $mail = $_POST['newemail'];
+    }
+    $req = "UPDATE user SET";
+    $value = '';
+    if (!empty($_POST['newusername'])){
+        $value .= " username = '$newuser'";
+    }
+    if (!empty($_POST['newemail'])){
+        if(empty($value)){
+            $value .= " email = '$mail'";
+        } else {
+            $value .= ", email = '$mail'";
+        }
+    }
+    if (!empty($_POST['newpassword'])){
+        if(empty($value)){
+            $value .= " password = '$pass'";
+        } else {
+            $value .= ", password = '$pass'";
+        }
+    }
+    $req .= $value . " WHERE id = $id";
+    $prepare = $bdd->prepare($req);
+    $prepare -> execute(array());
+    if(!empty($_POST['newusername']))
+        {$_SESSION['newusername'] = $_POST['newusername'];
+        }
+    if(!empty($_POST['newpassword'])){
+        $_SESSION['newpassword'] = $_POST['newpassword'];
+        }
+    if(!empty($_POST['newemail'])){
+        $_SESSION['newemail'] = $_POST['newemail'];
+    }
+    header('Location:../profile.php?action=joined');
+    exit;
 }
 ?>
 
@@ -54,14 +83,14 @@ if(isset($_POST['update'])) {
             Votre pseudonyme :<br/>
             <input id="username" style="width:200px" type="text" name="newusername">
         </div>
-        <!--<div>
+        <div>
             Votre mot de passe :<br/>
             <input id="password" style="width:200px" type="password" name="newpassword">
         </div>
         <div>
             Votre adresse email :<br/>
             <input id="email" style="width:200px" type="email" name="newemail">
-        </div>-->
+        </div>
         <br/>
         <div>
             <input type="submit" name="update" value="Mettre à jour">
