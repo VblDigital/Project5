@@ -30,20 +30,19 @@ if(isset($_POST['submit'])) {
         $password = $_POST['password'];
 
         // we prepare the data which correspond to data filled
-        $id = "";
         $query = $bdd->prepare('SELECT * FROM user WHERE username = :username AND password = :password');
         $query->execute(array(
             ':username' => $username,
             ':password' => $password,
         ));
-        $query->execute($query);
+        $user = $query->fetch();
         $count = $query->rowCount();
 
         // compare the results
         if ($count > 0) {
             $_SESSION['username'] = $username;
-            $_SESSION['id'] = $id;
-            var_dump($id);
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
             header('Location:../profile.php');
             exit;
         } else {
