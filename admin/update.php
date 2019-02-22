@@ -9,7 +9,6 @@ require '../include/config.php';
 // initialization of error message
 $errMsg = "";
 
-
 if(isset($_SESSION['id']))
 {$id = $_SESSION['id'];
 }

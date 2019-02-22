@@ -15,14 +15,27 @@ if(empty($_SESSION['username']))
 {
     header('Location: admin/connect.php');
 }
-<<<<<<< HEAD
-=======
 
-print_r($_SESSION);
->>>>>>> 60d5e38885fa3a472c012c0f10f07961a8227168
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];
 $email = $_SESSION['email'];
+=======
+
+$username = $_SESSION['username'];
+$id = $_SESSION['id'];
+print_r($_SESSION);
+$email = "";
+
+// we prepare data
+$query = $bdd -> prepare("SELECT id, email FROM user WHERE username = '$_SESSION[username]'");
+$array = array(
+    'id' => $id,
+    'email' => $email
+);
+$query->execute($array);
+$data = $query->fetch();
+$id = $data['id'];
+$email = $data['email'];
 
 if(isset($_POST['modify']) && isset($id)) {
     header('Location:admin/update.php');
@@ -72,6 +85,7 @@ if(isset($_POST['modify']) && isset($id)) {
                 <td width="200"><?php
                     if(isset($_SESSION['newemail'])){echo $_SESSION['newemail'];}
                     else {echo $_SESSION['email'];} ?>
+
                 </td>
             </tr>
         </table>
