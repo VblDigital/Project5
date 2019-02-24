@@ -15,7 +15,6 @@ $errMsg = "";
 if(isset($_POST['submit'])) {
 
     // we define if the form has been filled
-
     $connect = (isset($_POST['username']) && isset($_POST['password']));
     $connect = true;
 
@@ -36,32 +35,26 @@ if(isset($_POST['submit'])) {
         $password = $_POST['password'];
 
         // we prepare the data which correspond to data filled
-
-
         $query = $bdd->prepare('SELECT * FROM user WHERE username = :username AND password = :password');
         $query->execute(array(
             ':username' => $username,
             ':password' => $password,
         ));
-
         $user = $query->fetch();
         $count = $query->rowCount();
 
         // compare the results
         if ($count > 0) {
             $_SESSION['username'] = $username;
-
             $_SESSION['id'] = $user['id'];
             $_SESSION['email'] = $user['email'];
-
-          header('Location:../profile.php');
+            header('Location:../profile.php');
             exit;
         } else {
             $errMsg = 'Votre identifiant et/ou votre mot de passe est incorrect.';
         }
     }
 }
-
 ?>
 
 <html>
@@ -104,5 +97,4 @@ if(isset($_POST['submit'])) {
     </form>
 </div>
 </body>
-
 </html>
