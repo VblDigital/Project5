@@ -15,11 +15,6 @@ if(empty($_SESSION['username']))
 {
     header('Location: admin/connect.php');
 }
-<<<<<<< HEAD
-=======
-
-print_r($_SESSION);
->>>>>>> 60d5e38885fa3a472c012c0f10f07961a8227168
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];
 $email = $_SESSION['email'];
