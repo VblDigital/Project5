@@ -7,6 +7,7 @@
  */
 // connection to database
 require ('../include/config.php');
+
 // Include the mesClass to create the users
 //require '../mesClass/Userclass.php';
 

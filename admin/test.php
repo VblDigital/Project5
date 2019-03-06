@@ -2,6 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: VALEBLES
+
  * Date: 27/02/2019
  * Time: 21:33
  */
@@ -33,4 +34,3 @@ $form = new App\Form($_POST);
     <!--<div>
         Pas encore inscrit ? Venez par <a href="register.php">ICI</a>
     </div>-->
-
