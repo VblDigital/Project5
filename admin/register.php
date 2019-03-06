@@ -7,7 +7,10 @@
  */
 // connection to database
 require ('../include/config.php');
-// initialization of error message
+
+// Include the mesClass to create the users
+//require '../mesClass/Userclass.php';
+
 $errMsg = "";
 $usernametemp = "";
 $passwordtemp = "";

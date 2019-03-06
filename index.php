@@ -1,33 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
+
+session_start();
+/** * Created by PhpStorm.
+
  * User: VALEBLES
  * Date: 24/01/2019
  * Time: 17:30
  */
+// connection to database
+require 'mesClass/Autoloader.php';
+\mesClass\Autoloader::register();
+$bdd = new mesClass\Database('project5_bdd');
+
+if(isset($_GET['p'])) {
+    $p = $_GET['p'];
+} else {
+    $p = 'home';
+}
+
+if ($p === 'home') {
+    require 'home.php';
+}
+if ($p === 'allpost') {
+    require 'post/allpost.php';
+}
 ?>
-
-<html>
-
-<head>
-    <title>Mon blog</title>
-</head>
-
-<body>
-    <div align="center">
-        <?php
-            if(isset($errMsg))
-            {
-                echo '<div>'.$errMsg.'</div>';
-            }
-            ?>
-            <div><b>Mon blog</b></div>
-            <br>
-            <div>
-            <a href="admin/connect.php">Se connecter</a> <br>
-            <a href="admin/register.php">S'enregistrer</a><br>
-            </div>
-    </div>
-</body>
-
-</html>

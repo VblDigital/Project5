@@ -1,13 +1,16 @@
 <?php
+session_start();
 /**
  * Created by PhpStorm.
  * User: VALEBLES
  * Date: 05/02/2019
  * Time: 16:14
  */
-
 // connection to database
-require ('../include/config.php');
+require '..\mesClass\Autoloader.php';
+\App\Autoloader::register();
+$bdd = new App\Database('project5_bdd');
+
 // initialization of error message
 $errMsg = "";
 
@@ -15,45 +18,12 @@ $errMsg = "";
 if(isset($_POST['submit'])) {
 
     // we define if the form has been filled
-    $connect = (isset($_POST['username']) && isset($_POST['password']));
-    $connect = true;
+    $connect = (isset($username) && isset($_POST['password']));
 
-    if (empty($_POST['username'])) {
-
-        $connect = false;
-        $errMsg = "Veuillez saisir un identifiant";
-    }
-    if (empty($_POST['password'])) {
-
-        $connect = false;
-        $errMsg = "Veuillez saisir votre mot de passe";
-    }
      // we define the variable with the data filled
      if ($connect) {
-
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        // we prepare the data which correspond to data filled
-        $query = $bdd->prepare('SELECT * FROM user WHERE username = :username AND password = :password');
-        $query->execute(array(
-            ':username' => $username,
-            ':password' => $password,
-        ));
-        $user = $query->fetch();
-        $count = $query->rowCount();
-
-        // compare the results
-        if ($count > 0) {
-            $_SESSION['username'] = $username;
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];
-            header('Location:../profile.php');
-            exit;
-        } else {
-            $errMsg = 'Votre identifiant et/ou votre mot de passe est incorrect.';
-        }
-    }
+         echo "OK";
+     }
 }
 ?>
 
