@@ -2,10 +2,10 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-                <a class="text-muted" href="#">S'inscrire</a>
+                <a class="text-muted" href="#">Se connecter</a>
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" href="#">Mon blog</a>
+                <a class="blog-header-logo text-dark" href="http://project5/index.php">Mon blog</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <a class="text-muted" href="#">

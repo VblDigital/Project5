@@ -1,18 +1,16 @@
 <?php
-
-//To create the object Users
-namespace model\mesClass;
 /**
  * Created by PhpStorm.
- * PostsCategories: VALEBLES
- * Date: 24/02/2019
- * Time: 11:21
+ * User: VALEBLES
+ * Date: 19/03/2019
+ * Time: 16:28
  */
-/**
- * mesClass PostsCategories
- * New mesClass to create the users
- */
-class User
+
+namespace model;
+
+require_once("Manager.php");
+
+class UserManager extends Manager
 {
     private $id;
     private $username;
@@ -21,70 +19,73 @@ class User
 
     /**
      * @param mixed $id
-     * @return int
      */
-    public function setId ( $id ) {
+    public function setId ( $id )
+    {
         $id = (int) $id;
-        if($id>0) {
-            $this->_id = $id;
+        if($id>0){
+            $this->id = $id;
         }
     }
-
     /**
      * @param mixed $username
-     * @return string
      */
-    public function setUsername ( $username ) {
+    public function setUsername ( $username )
+    {
         if(is_string($username)) {
-            $this->_username = $username;
+            $this->username = $username;
         }
     }
 
     /**
      * @param mixed $password
-     * @return string
      */
-    public function setPassword ( $password ) {
+    public function setPassword ( $password )
+    {
         if(is_string($password)) {
-            $this->_password = $password;
+            $this->password = $password;
         }
     }
 
     /**
      * @param mixed $email
-     * @return string
      */
-    public function setEmail ( $email ) {
+    public function setEmail ( $email )
+    {
         if(is_string($email)) {
-            $this->_email = $email;
+            $this->email = $email;
         }
     }
 
     /**
      * @return mixed
      */
-    public function getId () {
+    public function getId ()
+    {
         return $this->id;
     }
 
     /**
      * @return mixed
      */
-    public function getUsername () {
+    public function getUsername ()
+    {
         return $this->username;
     }
 
     /**
      * @return mixed
      */
-    public function getPassword () {
+    public function getPassword ()
+    {
         return $this->password;
     }
 
     /**
      * @return mixed
      */
-    public function getEmail () {
+    public function getEmail ()
+    {
         return $this->email;
     }
 }
