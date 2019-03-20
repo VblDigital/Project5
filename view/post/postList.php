@@ -21,7 +21,7 @@
                         par
                     </div>
                     <div class="blog-post">
-                        <?= $data['3'];;?><br/>
+                        <?= $data['3'];?><br/>
                     </div>
                     <div>
                         <a href="index.php?action=post&id=<?= $data['id'] ?>">Lire la suite</a>
