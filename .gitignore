@@ -1,4 +1,5 @@
 .idea/
 *.dia
 *.dia~
+.idea
 questions.txt
