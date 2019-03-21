@@ -1,0 +1,16 @@
+<?php
+
+namespace model;
+
+class Autoloader
+{
+    static function register ()
+    {
+        spl_autoload_register(array(__CLASS__, 'autoload'));
+    }
+    static function autoload ($class_name)
+    {
+        $path = "E:\Project5_blog\Project5\\";
+        require $path . '' . $class_name . '.php';
+    }
+}
