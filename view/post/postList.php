@@ -1,41 +1,39 @@
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
-<?php require ($path . 'view/introduction.php'); ?>
+<?php require ('./view/introduction.php'); ?>
     <main role="main" class="container">
         <div class="row">
             <div class="col-md-8 blog-main">
                 <div class="blog-post">
                     <?php
-                    while ($data = $post->fetch())
-                    {
-                    ?>
+                    foreach ($posts as $datas){
+                        ?>
                     <h2 class="blog-post-title">
-                        <?= $data['title']; ?>
+                        <?= $datas->getTitle (); ?>
                     </h2>
                     <div class="blog-post-meta">Publié le
                         <?php
-                        $date = $data['4'];
+                        $date = $datas->getCreatedDate();
                         setlocale(LC_TIME, 'fr_FR.utf8','fra');
-                        echo utf8_encode(strftime("%A %#d %B %Y", strtotime($date)));  ?>
+                        echo utf8_encode(strftime("%A %#d %B %Y", strtotime($date))); ?>
                         par
+                        <?php
+
+                        ?>
                     </div>
                     <div class="blog-post">
-                        <?= $data['3'];?><br/>
+                        <?= $datas->getChapo(); ?><br/>
                     </div>
                     <div>
-                        <a href="index.php?action=post&id=<?= $data['id'] ?>">Lire la suite</a>
+                        <a href="index.php?action=post&id=<?= $datas->getId(); ?>">Lire la suite</a>
                     </div>
                     <div class="blog-post-meta">Catégorie(s) :
                     </div>
                     <p class="blog-post-meta">
                     </p>
-                    <?php
-                    }
-                    $post->closeCursor();
-                    ?>
+                    <?php } ?>
                     <hr>
-
                     <nav class="blog-pagination">
                         <a class="btn btn-outline-primary" href="#">Older</a>
                         <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
@@ -53,4 +51,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require($path . 'view/template.php'); ?>
+<?php require('view/template.php'); ?>

@@ -1,4 +1,4 @@
-<?php $title = $post['title']; ?>
+<?php $title = $post->getTitle(); ?>
 
 <?php ob_start(); ?>
 <main role="main" class="container">
@@ -6,17 +6,18 @@
         <div class="col-md-10 blog-main">
             <div class="blog-post">
                 <h2 class="blog-post-title-single">
-                    <?= $post['title'] ?>
+                    <?= $post->getTitle(); ?>
                 </h2>
                 <div class="blog-post-meta">Publié le
                     <?php
-                    $date = $post['created_date'];
+                    $date = $post->getCreatedDate();
                     setlocale(LC_TIME, 'fr_FR.utf8','fra');
                     echo utf8_encode(strftime("%A %#d %B %Y", strtotime($date)));  ?>
                     par
+                    <?php ?>
                 </div>
                 <div class="blog-post">
-                    <?= $post['2'];;?><br/>
+                    <?= $post->getText();?><br/>
                 </div>
                 <div class="blog-post-meta">Catégorie(s) :
                 </div>
@@ -29,4 +30,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require($path . 'view/template.php'); ?>
+<?php require('view/template.php'); ?>
