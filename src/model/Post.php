@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace src\model;
 
 class Post {
     private $id;

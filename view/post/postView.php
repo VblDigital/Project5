@@ -13,8 +13,9 @@
                     $date = $post->getCreatedDate();
                     setlocale(LC_TIME, 'fr_FR.utf8','fra');
                     echo utf8_encode(strftime("%A %#d %B %Y", strtotime($date)));  ?>
-                    par
-                    <?php ?>
+                    par <?php foreach ($post as $author) {?>
+                        <div><?php echo $author->getCreatedBy()->getUsername()?></div>
+                        <?php }?>
                 </div>
                 <div class="blog-post">
                     <?= $post->getText();?><br/>

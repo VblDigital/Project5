@@ -17,16 +17,13 @@
                         $date = $datas->getCreatedDate();
                         setlocale(LC_TIME, 'fr_FR.utf8','fra');
                         echo utf8_encode(strftime("%A %#d %B %Y", strtotime($date))); ?>
-                        par
-                        <?php
-
-                        ?>
+                        par <?= var_dump($datas->getCreatedBy()); ?>
                     </div>
                     <div class="blog-post">
                         <?= $datas->getChapo(); ?><br/>
                     </div>
                     <div>
-                        <a href="index.php?action=post&id=<?= $datas->getId(); ?>">Lire la suite</a>
+                        <a href="../index.php?action=post&id=<?= $datas->getId(); ?>">Lire la suite</a>
                     </div>
                     <div class="blog-post-meta">Catégorie(s) :
                     </div>
