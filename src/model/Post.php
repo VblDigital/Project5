@@ -63,9 +63,7 @@ class Post {
      */
     public function setCreatedBy ( $created_by )
     {
-        if(is_string($created_by)) {
-            $this->created_by = $created_by;
-        }
+        $this->created_by = $created_by;
     }
     /**
      * @param mixed $updated_date
