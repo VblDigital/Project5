@@ -1,15 +1,22 @@
 <?php
 
-require('controller/frontendPost.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require 'vendor/autoload.php';
+require('src/controller/FrontendPost.php');
+
+$controller = new \src\controller\FrontendPost();
 
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            listPosts();
+            $controller->listPosts();
         }
         elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
+                $controller->post();
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -17,7 +24,7 @@ try {
         }
     }
     else {
-        listPosts();
+        $controller->listPosts();
     }
 }
 catch(Exception $e) {
