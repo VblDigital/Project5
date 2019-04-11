@@ -12,6 +12,7 @@ class Post {
     private $updated_date;
     private $updated_by;
     private $categories;
+    private $comments;
     /**
      * @param mixed $id
      * @return void
@@ -156,5 +157,21 @@ class Post {
     public function getCategories ()
     {
         return $this->categories;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
     }
 }

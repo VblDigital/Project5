@@ -20,8 +20,10 @@ class FrontendPost
         $postManager = new PostManager();
         $post = $postManager->getPost($_GET['id']);
 
-        $commentManager = new CommentManager();
-        $comment = $commentManager->getComments($_GET['id']);
+        $categoriesNames = array();
+        foreach ($post->getCategories() as $category) {
+            $categoriesNames[] = $category->getName();
+        }
 
         require('./view/post/postView.php');
     }

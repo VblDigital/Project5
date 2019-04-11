@@ -21,14 +21,19 @@ class PostManager extends Manager
     }
     public function getPost($postId)
     {
-        $post = $this->prepare('SELECT * FROM post WHERE id = ' . $_GET['id'], Post::class, false);
+        /** @var Post $post */
+        $post = $this->prepare('SELECT * FROM post WHERE id = ' . $postId, Post::class, false);
 
         $userManager = new UserManager();
         $post->setCreatedBy($userManager->getPostUser($post->getCreatedBy()));
 
         $categoryManager = new CategoryManager();
-        $category = $categoryManager->getCategories($_GET['id']);
-        $post->setCategories($category);
+        $categories = $categoryManager->getCategories($_GET['id']);
+        $post->setCategories($categories);
+
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getComments($postId);
+        $post->setComments($comments);
 
         return $post;
     }

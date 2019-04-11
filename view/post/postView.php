@@ -20,27 +20,24 @@
                 </div>
                 <div class="blog-post-meta">Catégorie(s) :
                     <?php
-                    foreach($post->getCategories() as $item)
-                        {
-                            echo $item->getCategoryId();
-                        }
+                    implode(',', $categoriesNames);
                     ?>
                 </div>
                 <div class="blog-post">
                     Commentaires :<br/><br/>
                 </div>
                 <div class="blog-post">
-                    <?php foreach($comment as $comments) { ?>
+                    <?php foreach($post->getComments() as $comment) { ?>
                     <div class="blog-post-meta">
                         Le
-                        <?php $dateComment = $comments->getDate();
+                        <?php $dateComment = $comment->getDate();
                         setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
                         echo utf8_encode(strftime("%A %#d %B %Y", strtotime($dateComment)));?>
                         par
-                        <?=$comments->getUserId()->getUsername() ;?>
+                        <?=$comment->getUserId()->getUsername() ;?>
                     </div>
                         <div class="blog-post">
-                            <?= $comments->getText();?>
+                            <?= $comment->getText();?>
                         </div>
                 </div>
                 <div>
