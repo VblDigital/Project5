@@ -1,19 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: VALEBLES
- * Date: 02/04/2019
- * Time: 23:21
- */
 
 namespace src\manager;
 
 use src\model\Category;
+use src\model\Posts_Categories;
 
 class CategoryManager extends Manager
 {
-    public function getCategoryId($postid)
+    public function getCategories ( $postId )
     {
-        return $this->prepare('SELECT * FROM posts_categories WHERE post_id =' . $postid, Category::class, true);
+        $categoriesId = $this->prepare('SELECT * FROM posts_categories WHERE post_id =' . $_GET['id'], Posts_Categories::class, true);
+        foreach ($categoriesId as $categories)
+        {
+            $categoriesName = $this->prepare('SELECT * FROM category WHERE id =' . $categories->getCategoryId(), Category::class, false);
+            $categories->setCategory_Id($categoriesName->getName());
+        }
+
+        return $categoriesId;
     }
 }

@@ -41,10 +41,7 @@ class Comment{
 
     public function setUser_Id ( $user_id )
     {
-        $user_id = (int)$user_id;
-        if ($user_id > 0) {
             $this->user_id = $user_id;
-        }
     }
 
     public function setPost_Id ( $post_id )

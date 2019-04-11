@@ -17,7 +17,7 @@
                         $date = $datas->getCreatedDate();
                         setlocale(LC_TIME, 'fr_FR.utf8','fra');
                         echo utf8_encode(strftime("%A %#d %B %Y", strtotime($date))); ?>
-                        par <?= $datas->getCreatedBy()->getUsername() ?>
+                        par <?= $datas->getCreatedBy()->getUsername(); ?>
                     </div>
                     <div class="blog-post">
                         <?= $datas->getChapo(); ?><br/>

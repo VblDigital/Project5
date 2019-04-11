@@ -6,8 +6,15 @@ use src\model\Comment;
 
 class CommentManager extends Manager
 {
-    public function getComment($postid)
+    public function getComments($postId)
     {
-        return $this->prepare('SELECT * FROM comment WHERE post_id =' . $postid, Comment::class, true);
+        $comments = $this->prepare('SELECT * FROM comment WHERE post_id =' . $_GET['id'], Comment::class, true);
+        $userManager = new UserManager();
+        foreach($comments as $items)
+        {
+            $items->setUser_Id($userManager->getPostUser($items->getUserId()));
+        }
+
+        return $comments;
     }
 }

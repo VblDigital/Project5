@@ -58,7 +58,7 @@ if(isset($_POST['submit'])) {
 }
 // result of the query after database record
 if(isset($_GET['action']) && $_GET['action'] == 'joined') {
-    $errMsg = 'Vous êtes maintenant inscrit. Vous pouvez vous connecter avec <a href="connect.php">la page de connexion</a>';
+    $errMsg = 'Vous êtes maintenant inscrit. Vous pouvez vous connecter avec <a href="connect_OLD.php">la page de connexion</a>';
 }
 ?>
 
@@ -100,7 +100,7 @@ if(isset($_GET['action']) && $_GET['action'] == 'joined') {
             ?>
         </strong><br>
         <div>
-            Déjà inscrit ? Venez par <a href="connect.php">ICI</a>
+            Déjà inscrit ? Venez par <a href="connect_OLD.php">ICI</a>
         </div>
     </form>
 </div>

@@ -3,12 +3,5 @@
  * Created by PhpStorm.
  * User: VALEBLES
  * Date: 10/04/2019
- * Time: 21:18
+ * Time: 21:26
  */
-
-namespace src\controller;
-
-class BackendConnect
-{
-
-}

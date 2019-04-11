@@ -11,6 +11,7 @@ class Post {
     private $created_by;
     private $updated_date;
     private $updated_by;
+    private $categories;
     /**
      * @param mixed $id
      * @return void
@@ -83,7 +84,16 @@ class Post {
             $this->updated_by = $updated_by;
         }
     }
+
     /**
+     * @param mixed $categories
+     */
+    public function setCategories ( $categories )
+    {
+        $this->categories = $categories;
+    }
+
+        /**
      * @return mixed
      */
     public function getId ()
@@ -138,5 +148,13 @@ class Post {
     public function getUpdatedBy ()
     {
         return $this->updated_by;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategories ()
+    {
+        return $this->categories;
     }
 }

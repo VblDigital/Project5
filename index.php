@@ -7,16 +7,16 @@ error_reporting(E_ALL);
 require 'vendor/autoload.php';
 require('src/controller/FrontendPost.php');
 
-$controller = new \src\controller\FrontendPost();
+$FrontPostController = new \src\controller\FrontendPost();
 
 try {
     if (isset($_GET['action'])) {
         if ($_GET['action'] == 'listPosts') {
-            $controller->listPosts();
+            $FrontPostController->listPosts();
         }
         elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                $controller->post();
+                $FrontPostController->post();
             }
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
@@ -24,7 +24,7 @@ try {
         }
     }
     else {
-        $controller->listPosts();
+        $FrontPostController->listPosts();
     }
 }
 catch(Exception $e) {

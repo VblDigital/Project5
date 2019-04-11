@@ -13,7 +13,7 @@ $errMsg = "";
 
 if(empty($_SESSION['username']))
 {
-    header('Location: admin/connect.php');
+    header('Location: admin/connect_OLD.php');
 }
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];
