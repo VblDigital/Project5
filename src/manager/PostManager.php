@@ -28,7 +28,7 @@ class PostManager extends Manager
         $post->setCreatedBy($userManager->getPostUser($post->getCreatedBy()));
 
         $categoryManager = new CategoryManager();
-        $categories = $categoryManager->getCategories($_GET['id']);
+        $categories = $categoryManager->getCategories($postId);
         $post->setCategories($categories);
 
         $commentManager = new CommentManager();
