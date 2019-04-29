@@ -1,11 +1,10 @@
 <?php
 
-namespace src\controller;
+namespace src\frontend\controller;
 
-use src\manager\CommentManager;
 use src\manager\PostManager;
 
-class FrontendPost
+class PostsController
 {
     public function listPosts()
     {

@@ -2,7 +2,6 @@
 
 namespace src\manager;
 
-use src\model\Category;
 use src\model\Post;
 
 class PostManager extends Manager
@@ -11,10 +10,12 @@ class PostManager extends Manager
     {
         $posts = $this->prepare('SELECT * FROM post order by created_date DESC LIMIT 0, 5', Post::class, true);
         $userManager = new UserManager();
+        $categoryManager = new CategoryManager();
 
         foreach ($posts as $post)
         {
             $post->setCreatedBy($userManager->getPostUser($post->getCreatedBy()));
+            $post->setCategories($categoryManager->getCategories($post->getId()));
         }
 
         return $posts;
@@ -28,12 +29,10 @@ class PostManager extends Manager
         $post->setCreatedBy($userManager->getPostUser($post->getCreatedBy()));
 
         $categoryManager = new CategoryManager();
-        $categories = $categoryManager->getCategories($postId);
-        $post->setCategories($categories);
+        $post->setCategories($categoryManager->getCategories($postId));
 
         $commentManager = new CommentManager();
-        $comments = $commentManager->getComments($postId);
-        $post->setComments($comments);
+        $post->setComments($commentManager->getComments($postId));
 
         return $post;
     }

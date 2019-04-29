@@ -26,6 +26,13 @@
                         <a href="../index.php?action=post&id=<?= $datas->getId(); ?>">Lire la suite</a>
                     </div>
                     <div class="blog-post-meta">Catégorie(s) :
+                        <?php
+                        $categoriesNames = array();
+                        foreach ($datas->getCategories() as $category) {
+                            $categoriesNames[] = $category->getName();
+                        }
+                        echo implode(', ', $categoriesNames);
+                        ?>
                     </div>
                     <p class="blog-post-meta">
                     </p>

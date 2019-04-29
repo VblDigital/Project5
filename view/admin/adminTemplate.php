@@ -11,16 +11,12 @@
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href= "./public/css/blog.css" rel="stylesheet">
+    <link href= "../../public/css/blog.css" rel="stylesheet">
 </head>
 <body>
-<?php include ('./view/menu.php'); ?>
 <?= $content ?>
-<footer class="blog-footer">
-    <p>Modèle de blog développé pour <a href="https://getbootstrap.com/">Bootstrap</a> par <a href="https://twitter.com/mdo">@mdo</a>.</p>
-    <p>
-        <a href="#">Retour au menu</a>     -     <a href ="./view/admin/adminIndex.php">Page d'administration</a>
-    </p>
-</footer>
 </body>
+<footer class="blog-footer">
+    <p><a href="../../index.php">Retour au blog</a></p>
+</footer>
 </html>
