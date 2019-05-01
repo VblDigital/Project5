@@ -1,17 +1,18 @@
-<?php $title = 'Ajouter une catégorie'; ?>
-
-<?php ob_start(); ?>
-
-<div>
-    <h2>Ajouter une nouvelle catégorie</h2>
-        <div class="col-md-8 blog-main">
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-10 blog-main">
             <div class="blog-post">
-                <?php require ('../../view/forms/addCategoryForm.php'); ?>
+                <div>
+                    <h2>Ajouter une catégorie</h2>
+                    <br>
+                </div>
+                <div>
+                    <form class="category-form" action="" method="post">
+                        <input type="text" name="category">
+                        <button type="submit">Enregistrer</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </main>
-<div class="blog-footer-less"><a href="adminIndex.php">Voir les catégories</a>  --  <a href="#">Modifier les catégories</a></div>
-<?php $content = ob_get_clean(); ?>
-
-<?php require('adminTemplate.php'); ?>

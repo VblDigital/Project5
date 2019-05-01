@@ -1,6 +1,7 @@
 <?php $title = $post->getTitle(); ?>
 
 <?php ob_start(); ?>
+
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-10 blog-main">
@@ -24,7 +25,16 @@
                     ?>
                 </div>
                 <div class="blog-post">
-                    Commentaires :<br/><br/>
+                    <?php
+                        if (empty($post->getComments()))
+                        {
+                            echo "Pas de Commentaires";
+                        }
+                        else
+                        {
+                            echo "Commentaires : ";
+                        }
+                    ?>
                 </div>
                 <div class="blog-post">
                     <?php foreach($post->getComments() as $comment) { ?>
@@ -36,19 +46,17 @@
                         par
                         <?=$comment->getUserId()->getUsername() ;?>
                     </div>
-                        <div class="blog-post">
-                            <?= $comment->getText();?>
-                        </div>
+                    <div class="blog-post">
+                        <?= $comment->getText();?>
+                    </div>
+                    <?php } ?>
                 </div>
-                <div>
-
-                </div>
-                <?php } ?>
             </div>
        </div>
    </div>
 </main>
+<?php require './view/blogFooter.php'?>
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('view/template.php'); ?>
+<?php require 'view/template.php'; ?>

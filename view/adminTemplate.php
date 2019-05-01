@@ -14,7 +14,6 @@
     <link href= "./public/css/blog.css" rel="stylesheet">
 </head>
 <body>
-<?php include ('./view/menu.php'); ?>
 <?= $content ?>
 </body>
 </html>
