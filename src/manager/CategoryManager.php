@@ -7,12 +7,18 @@ use src\model\Posts_Categories;
 
 class CategoryManager extends Manager
 {
+    public function getAllCategories ()
+    {
+        return $category = $this->prepare('SELECT * FROM category', Category::class, true);
+    }
+
     public function getCategories ( $postId )
     {
-        $linkPostsCategories = $this->prepare('SELECT * FROM posts_categories WHERE post_id =' . $postId, Posts_Categories::class, true);
+        $PostsCategories = $this->prepare('SELECT * FROM posts_categories WHERE post_id =' . $postId, Posts_Categories::class, true);
         $categories = [];
-        foreach ($linkPostsCategories as $linkPostsCategorie) {
-            $category = $this->prepare('SELECT * FROM category WHERE id =' . $linkPostsCategorie->getCategoryId(), Category::class, false);
+        foreach ($PostsCategories as $PostsCategory)
+        {
+            $category = $this->prepare('SELECT * FROM category WHERE id =' . $PostsCategory->getCategoryId(), Category::class, false);
             $categories[] = $category;
         }
 

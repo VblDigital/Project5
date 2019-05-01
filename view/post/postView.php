@@ -20,7 +20,7 @@
                 </div>
                 <div class="blog-post-meta">Catégorie(s) :
                     <?php
-                    implode(',', $categoriesNames);
+                    echo implode(', ', $categoriesNames);
                     ?>
                 </div>
                 <div class="blog-post">
