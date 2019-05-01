@@ -12,6 +12,11 @@ class CategoryManager extends Manager
         return $category = $this->prepare('SELECT * FROM category', Category::class, true);
     }
 
+    public function getCategory ($catId)
+    {
+        return $category = $this->prepare('SELECT * FROM category WHERE id=' . $catId, Category::class, false);
+    }
+
     public function getCategories ( $postId )
     {
         $PostsCategories = $this->prepare('SELECT * FROM posts_categories WHERE post_id =' . $postId, Posts_Categories::class, true);
@@ -21,7 +26,11 @@ class CategoryManager extends Manager
             $category = $this->prepare('SELECT * FROM category WHERE id =' . $PostsCategory->getCategoryId(), Category::class, false);
             $categories[] = $category;
         }
-
         return $categories;
+    }
+
+    public function addCategory()
+    {
+
     }
 }

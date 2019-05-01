@@ -150,14 +150,20 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 
+
 table.table.table-hover
 {
-  max-width: 500px;
+  max-width: 750px;
+}
+table.table.table-hover th,td
+{
+  max-width: 50px;
 }
 
 h2
 {
   margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 div.blog-footer-less
@@ -165,4 +171,9 @@ div.blog-footer-less
   color: #999;
   text-align: center;
   background-color: #f9f9f9;
+}
+
+.category-form
+{
+  margin-bottom: 1rem;
 }
