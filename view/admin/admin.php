@@ -12,10 +12,7 @@
                 </div>
             </div>
             <div>
-                <?php
-                    $router = new \src\backendController\Router();
-                    $router->url();
-                ?>
+                <?php require $view; ?>
             </div>
         </div>
     </div>

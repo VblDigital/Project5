@@ -11,7 +11,7 @@ class AdminCategoryController
         $categoryManager = new CategoryManager();
         $viewcategories = $categoryManager->getAllCategories();
 
-        return $viewcategories;
+        return ['data' => $viewcategories, 'view' => './view/admin/viewCategories.php'];
     }
 
     public function addCategory()
