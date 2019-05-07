@@ -1,6 +1,7 @@
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
+<?php include ('./view/menu.php'); ?>
 <?php require ('./view/introduction.php'); ?>
 
 <main role="main" class="container">

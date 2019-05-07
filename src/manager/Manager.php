@@ -5,7 +5,7 @@ class Manager
 {
     public static function getPDO ()
     {
-        $pdo = new \PDO('mysql:host=172.17.0.2;dbname=project5_bdd', 'root', 'root');
+        $pdo = new \PDO('mysql:host=localhost;dbname=project5_bdd', 'root', '');
         $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         return $pdo;

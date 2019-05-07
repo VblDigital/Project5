@@ -9,12 +9,12 @@ class CategoryManager extends Manager
 {
     public function getAllCategories ()
     {
-        return $category = $this->prepare('SELECT * FROM category', Category::class, true);
+        return $this->prepare('SELECT * FROM category', Category::class, true);
     }
 
     public function getCategory ($catId)
     {
-        return $category = $this->prepare('SELECT * FROM category WHERE id=' . $catId, Category::class, false);
+        return $this->prepare('SELECT * FROM category WHERE id=' . $catId, Category::class, false);
     }
 
     public function getCategories ( $postId )
@@ -29,8 +29,9 @@ class CategoryManager extends Manager
         return $categories;
     }
 
-    public function addCategory()
+    public function modifyCategory($catId, $name)
     {
+        return $this->prepare('UPDATE category SET name = "' . $name . '" WHERE id=' . $catId, Category::class, false);
 
     }
 }

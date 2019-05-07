@@ -2,17 +2,18 @@
 
 <?php ob_start(); ?>
 
+<?php include ('./view/menu.php'); ?>
+
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-10 blog-main">
             <div class="blog-post">
                 <div>
                 <h2>Administration du blog</h2>
-                <?php include './view/admin/adminMenu.php'; ?>
                 </div>
             </div>
             <div>
-                <?php require $view; ?>
+                <?php include $view; ?>
             </div>
         </div>
     </div>
@@ -22,4 +23,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require './view/adminTemplate.php'; ?>
+<?php require './view/template.php'; ?>

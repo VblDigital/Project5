@@ -1,6 +1,7 @@
 <?php $title = $post->getTitle(); ?>
 
 <?php ob_start(); ?>
+<?php include ('./view/menu.php'); ?>
 
 <main role="main" class="container">
     <div class="row">

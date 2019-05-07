@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 require './vendor/autoload.php';
 
 $postController = new \src\frontendController\PostsController();
-$adminController = new \src\frontendController\AdminController();
+$adminController = new \src\backendController\AdminController();
 
 try {
     if (isset($_GET['action'])) {
@@ -26,7 +26,7 @@ try {
         }
         elseif ($_GET['action'] == 'admin')
         {
-            $adminController->admin();
+            $adminController->url();
         }
     }
     else {

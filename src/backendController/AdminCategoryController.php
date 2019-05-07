@@ -3,6 +3,7 @@
 namespace src\backendController;
 
 use src\manager\CategoryManager;
+use src\model\Category;
 
 class AdminCategoryController
 {
@@ -11,21 +12,36 @@ class AdminCategoryController
         $categoryManager = new CategoryManager();
         $viewcategories = $categoryManager->getAllCategories();
 
-        return ['data' => $viewcategories, 'view' => './view/admin/viewCategories.php'];
+        return ['data' => $viewcategories, 'view' => './view/category/viewCategories.php'];
+    }
+
+    public function viewCategory()
+    {
+        $categoryManager = new CategoryManager();
+        $viewcategory = $categoryManager->getCategory($_GET['id']);
+
+        return ['data' => $viewcategory, 'view' => './view/category/modifyCategory.php'];
     }
 
     public function addCategory()
     {
         $categoryManager = new CategoryManager();
 
-        require '../../view/admin/addCategory.php';
+        require '../../view/category/addCategory.php';
     }
 
     public function modifyCategory()
     {
-        $categoryManager = new CategoryManager();
-        $modifycategories = $categoryManager->getCategory();
+        $id = $_GET['id'];
+        if (isset($_POST['catName']))
+        {
+            $name = $_POST['catName'];
+        }
 
-        require '../../view/admin/modifyCategory.php';
+        $categoryManager = new CategoryManager();
+        $modifiedCategory = $categoryManager->modifyCategory($id, $name);
+
+
+        return ['data' => $modifiedCategory, 'view' => './view/admin/admin.php'];
     }
 }
