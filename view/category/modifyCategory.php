@@ -11,7 +11,7 @@
                 <div>
                     <form class="category-form" action="./index.php?action=admin&p=modifyCategory&id=<?= $_GET['id']; ?>" method="post">
                         <p>Changer le nom de la catégorie :</p>
-                        <input type="text" name="catName" value="<?= $viewCategory->getName(); ?>">
+                        <input type="text" name="catName" value="<?= $data->getName(); ?>">
                         <button type="submit">Enregistrer</button>
                     </form>
                 </div>

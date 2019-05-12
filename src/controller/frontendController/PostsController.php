@@ -1,6 +1,6 @@
 <?php
 
-namespace src\frontendController;
+namespace src\controller\frontendController;
 
 use src\manager\PostManager;
 

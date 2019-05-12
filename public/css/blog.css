@@ -150,14 +150,13 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 
+/*
+ * Table
+ */
 
 table.table.table-hover
 {
-  max-width: 750px;
-}
-table.table.table-hover th,td
-{
-  max-width: 50px;
+  max-width: 850px;
 }
 
 h2
@@ -176,4 +175,18 @@ div.blog-footer-less
 .category-form
 {
   margin-bottom: 1rem;
+}
+
+*, ::after, ::before {
+    box-sizing: initial;
+}
+
+.id
+{
+  width: 70px;
+}
+
+.nom
+{
+  width: 90px;
 }

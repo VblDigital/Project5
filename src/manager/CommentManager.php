@@ -8,7 +8,7 @@ class CommentManager extends Manager
 {
     public function getComments($postId)
     {
-        $comments = $this->prepare('SELECT * FROM comment WHERE post_id =' . $postId, Comment::class, true);
+        $comments = $this->prepareObject('SELECT * FROM comment WHERE post_id =' . $postId, Comment::class, true);
         $userManager = new UserManager();
         foreach($comments as $comment)
         {

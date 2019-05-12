@@ -11,7 +11,13 @@ class Manager
         return $pdo;
     }
 
-    public function prepare ($statement, $class_name, $all = false)
+    public function prepareStmt ($statement)
+    {
+        $req = $this->getPDO()->prepare($statement);
+        $req->execute();
+    }
+
+    public function prepareObject ($statement, $class_name, $all = false)
     {
         $req = $this->getPDO()->prepare($statement);
         $req->execute(array());

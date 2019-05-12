@@ -9,8 +9,9 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="" method="post">
-                        <input type="text" name="category">
+                    <form class="category-form" action="./index.php?action=admin&p=addCategory" method="post">
+                        <p>Nom de la catégorie :</p>
+                        <input type="text" name="catName" value="">
                         <button type="submit">Enregistrer</button>
                     </form>
                 </div>

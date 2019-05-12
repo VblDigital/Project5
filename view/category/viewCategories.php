@@ -9,14 +9,17 @@
                         <tr>
                             <th>Référence catégorie</th>
                             <th>Nom de la catégorie</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($viewCategories as $category) {?>
-                                <tr >
-                                    <td><?= $category->getId(); ?></td>
-                                    <td><?= $category->getName(); ?></td>
+                            <?php foreach ($data as $category) {?>
+                                <tr>
+                                    <td class="id"><?= $category->getId(); ?></td>
+                                    <td class="nom"><?= $category->getName(); ?></td>
                                     <td><a href="index.php?action=admin&p=modifyCategoryForm&id=<?= $category->getId(); ?>">Modifier la catégorie</a></td>
+                                    <td><a href="index.php?action=admin&p=deleteCategory&id=<?= $category->getId(); ?>">Supprimer la catégorie</a></td>
                                 </tr>
                         </tbody>
                             <?php }?>
