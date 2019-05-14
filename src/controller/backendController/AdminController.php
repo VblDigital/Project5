@@ -8,4 +8,19 @@ class AdminController
     {
         require './view/admin/admin.php';
     }
+
+    public function adminCategories($dataCategories, $view)
+    {
+        require './view/admin/admin.php';
+    }
+
+    public function adminPost($dataPosts, $view)
+    {
+        require './view/admin/admin.php';
+    }
+
+    public function adminPostDisplay($dataUsers, $dataCategories, $view)
+    {
+        require './view/admin/admin.php';
+    }
 }

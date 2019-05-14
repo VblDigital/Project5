@@ -11,7 +11,7 @@ class AdminCategoryController
         $categoryManager = new CategoryManager();
         $viewcategories = $categoryManager->getAllCategories();
 
-        return ['data' => $viewcategories, 'view' => './view/category/viewCategories.php'];
+        return ['dataCategories' => $viewcategories, 'view' => './view/category/viewCategories.php'];
     }
 
     public function viewCategory()
@@ -19,35 +19,35 @@ class AdminCategoryController
         $categoryManager = new CategoryManager();
         $viewcategory = $categoryManager->getCategory($_GET['id']);
 
-        return ['data' => $viewcategory, 'view' => './view/category/modifyCategory.php'];
+        return ['dataCategories' => $viewcategory, 'view' => './view/category/modifyCategory.php'];
     }
 
     public function addCategory()
     {
-        if (isset($_POST['catName']))
-        {
-            $name = $_POST['catName'];
-        }
-        $categoryManager = new CategoryManager();
-        $categoryManager->addCategory($name);
-        $modifyCategory = $categoryManager->getAllCategories();
+        if (isset($_POST['categoryName']) && !empty($_POST['categoryName'])) {
+            $name = $_POST['categoryName'];
 
-        return ['data' => $modifyCategory, 'view' => './view/category/viewCategories.php'];
+            $categoryManager = new CategoryManager();
+            $categoryManager->addCategory($name);
+            $modifyCategory = $categoryManager->getAllCategories();
+
+            return ['dataCategories' => $modifyCategory, 'view' => './view/category/viewCategories.php'];
+        }
     }
 
     public function modifyCategory()
     {
         $id = $_GET['id'];
-        if (isset($_POST['catName']))
+        if (isset($_POST['categoryName']))
         {
-            $name = $_POST['catName'];
+            $name = $_POST['categoryName'];
         }
 
         $categoryManager = new CategoryManager();
         $categoryManager->modifyCategory($id, $name);
         $viewcategories = $categoryManager->getAllCategories();
 
-        return ['data' => $viewcategories, 'view' => './view/category/viewCategories.php'];
+        return ['dataCategories' => $viewcategories, 'view' => './view/category/viewCategories.php'];
     }
 
     public function deleteCategory()
@@ -58,6 +58,6 @@ class AdminCategoryController
         $categoryManager->deleteCategory($id);
         $viewcategories = $categoryManager->getAllCategories();
 
-        return ['data' => $viewcategories, 'view' => './view/category/viewCategories.php'];
+        return ['dataCategories' => $viewcategories, 'view' => './view/category/viewCategories.php'];
     }
 }

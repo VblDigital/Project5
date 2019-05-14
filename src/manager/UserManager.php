@@ -6,7 +6,7 @@ use src\model\User;
 
 class UserManager extends Manager
 {
-    public function getUser()
+    public function getUsers()
     {
         return $this->prepareObject('SELECT * FROM user', User::class, true );
     }

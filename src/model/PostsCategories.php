@@ -2,7 +2,7 @@
 
 namespace src\model;
 
-class Posts_Categories
+class PostsCategories
 {
     private $id;
     private $category_id;

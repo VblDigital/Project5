@@ -37,8 +37,18 @@ class PostManager extends Manager
         return $post;
     }
 
-    public function addPost($author, $title, $text, $chapo)
+    public function modifyPost($postId, $author, $title, $text, $chapo)
     {
-        return $this->prepareStmt('INSERT INTO post (created_by, title, text, chapo) VALUES ("'. $author . '", "'. $title . '", "'. $text . '", "'. $chapo . '")');
+        return $this->prepareStmt('UPDATE post SET created_by = "' . $author . '", title = "' . $title . '", text = "' . $text .'", chapo = "' . $chapo . '"  WHERE id=' . $postId);
+    }
+
+    public function addPost($postId, $catId, $author, $title, $text, $chapo)
+    {
+        return $this->prepareStmt('INSERT INTO posts_categories (category_id, post_id) VALUES ("' . $catId . '", "' . $postId . '")' && 'INSERT INTO post (created_by, title, text, chapo) VALUES ("'. $author . '", "'. $title . '", "'. $chapo . '", "'. $text . '")');
+    }
+
+    public function deletePost($postId)
+    {
+        return $this->prepareStmt('DELETE FROM post WHERE id=' . $postId);
     }
 }

@@ -14,7 +14,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($data as $category) {?>
+                            <?php foreach ($dataCategories as $category) {?>
                                 <tr>
                                     <td class="id"><?= $category->getId(); ?></td>
                                     <td class="nom"><?= $category->getName(); ?></td>

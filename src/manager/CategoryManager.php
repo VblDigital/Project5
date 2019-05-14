@@ -3,7 +3,7 @@
 namespace src\manager;
 
 use src\model\Category;
-use src\model\Posts_Categories;
+use src\model\PostsCategories;
 
 class CategoryManager extends Manager
 {
@@ -19,7 +19,7 @@ class CategoryManager extends Manager
 
     public function getCategories ( $postId )
     {
-        $PostsCategories = $this->prepareObject('SELECT * FROM posts_categories WHERE post_id =' . $postId, Posts_Categories::class, true);
+        $PostsCategories = $this->prepareObject('SELECT * FROM posts_categories WHERE post_id =' . $postId, PostsCategories::class, true);
         $categories = [];
         foreach ($PostsCategories as $PostsCategory)
         {

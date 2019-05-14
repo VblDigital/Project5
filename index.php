@@ -1,10 +1,5 @@
 <?php
 
-use src\controller\backendController\AdminCategoryController;
-use \src\controller\frontendController\PostsController;
-use \src\controller\backendController\AdminController;
-use \src\controller\backendController\AdminPostController;
-
 session_start();
 
 ini_set('display_errors', 1);
@@ -13,10 +8,19 @@ error_reporting(E_ALL);
 
 require './vendor/autoload.php';
 
+use src\controller\backendController\AdminCategoryController;
+use \src\controller\frontendController\PostsController;
+use \src\controller\backendController\AdminController;
+use \src\controller\backendController\AdminPostController;
+use \src\controller\backendController\AdminUserController;
+use src\manager\CategoryManager;
+use src\manager\UserManager;
+
 $postController = new PostsController();
 $adminCategoryController = new AdminCategoryController();
 $adminController = new AdminController();
 $adminPostController = new AdminPostController();
+$adminUserController = new AdminUserController();
 
 try {
     if (!isset($_GET['action'])) {
@@ -38,51 +42,94 @@ try {
             if (!isset($_GET['p'])) {
                 $adminController->admin($data, './view/admin/adminMenu.php');
             } else {
+
+                // Category
+
                 if ($_GET['p'] === 'viewCategories') {
                     $viewCategoriesData = $adminCategoryController->viewCategories();
 
-                    $data = $viewCategoriesData['data'];
+                    $dataCategories = $viewCategoriesData['dataCategories'];
                     $view = $viewCategoriesData['view'];
-                    $adminController->admin($data, $view);
+                    $adminController->adminCategories($dataCategories, $view);
 
                 } elseif ($_GET['p'] === 'addCategoryForm') {
-                    $data = null;
+                    $dataCategories = null;
                     $view = './view/category/addCategory.php';
-                    $adminController->admin($data, $view);
+                    $adminController->adminCategories($dataCategories, $view);
 
                 } elseif ($_GET['p'] === 'addCategory') {
                     $addCategoriesData = $adminCategoryController->addCategory();
 
-                    $data = $addCategoriesData['data'];
+                    $dataCategories = $addCategoriesData['dataCategories'];
                     $view = $addCategoriesData['view'];
-                    $adminController->admin($data, $view);
+                    $adminController->adminCategories($dataCategories, $view);
 
                 } elseif ($_GET['p'] === 'modifyCategoryForm') {
                     $viewCategoryData = $adminCategoryController->viewCategory();
 
-                    $data = $viewCategoryData['data'];
+                    $dataCategories = $viewCategoryData['dataCategories'];
                     $view = $viewCategoryData['view'];
-                    $adminController->admin($data, $view);
+                    $adminController->adminCategories($dataCategories, $view);
 
                 } elseif ($_GET['p'] === 'modifyCategory') {
                     $modifyCategoryData = $adminCategoryController->modifyCategory();
 
-                    $data = $modifyCategoryData['data'];
+                    $dataCategories = $modifyCategoryData['dataCategories'];
                     $view = $modifyCategoryData['view'];
-                    $adminController->admin($data, $view);
+                    $adminController->adminCategories($dataCategories, $view);
 
                 } elseif ($_GET['p'] === 'deleteCategory') {
                     $deleteCategoriesData = $adminCategoryController->deleteCategory();
 
-                    $data = $deleteCategoriesData['data'];
+                    $dataCategories = $deleteCategoriesData['dataCategories'];
                     $view = $deleteCategoriesData['view'];
-                    $adminController->admin($data, $view);
+                    $adminController->adminCategories($dataCategories, $view);
 
-                } elseif ($_GET['p'] === 'viewPost') {
+                }
+                //Post
+                //
+                elseif ($_GET['p'] === 'viewPosts') {
+
                     $viewPostsData = $adminPostController->viewPosts();
+                    $dataPosts = $viewPostsData['dataPosts'];
 
-                    $data = $viewPostsData['data'];
                     $view = $viewPostsData['view'];
+                    $adminController->adminPost($dataPosts, $view);
+
+                } elseif ($_GET['p'] === 'addPostForm') {
+
+                    $categoryManager = new CategoryManager();
+                    $dataCategories = $categoryManager->getAllCategories();
+
+                    $userManager = new UserManager();
+                    $dataUsers = $userManager->getUsers();
+
+                    $view = './view/post/addPost.php';
+
+                    $adminController->adminPostDisplay($dataUsers, $dataCategories, $view);
+
+                } elseif ($_GET['p'] === 'addPost') {
+                    $addPostData = $adminPostController->addPost();
+
+                    $dataPosts = $addPostData['dataPosts'];
+                    $view = $addPostData['view'];
+                    $adminController->adminPost($dataPosts, $view);
+
+                } elseif ($_GET['p'] === 'deletePost') {
+                    $deletePostData = $adminPostController->deletePost();
+
+                    $dataPosts = $deletePostData['dataPosts'];
+                    $view = $deletePostData['view'];
+                    $adminController->adminPost($dataPosts, $view);
+                }
+                //User
+                //
+                elseif ($_GET['p'] === 'viewUsers')
+                {
+                    $viewUsersData = $adminUserController->viewUsers();
+
+                    $data = $viewUsersData['data'];
+                    $view = $viewUsersData['view'];
                     $adminController->admin($data, $view);
                 }
             }
@@ -91,8 +138,4 @@ try {
 }
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
-}
-function view()
-{
-
 }

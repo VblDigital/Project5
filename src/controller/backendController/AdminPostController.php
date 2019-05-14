@@ -3,6 +3,7 @@
 namespace src\controller\backendController;
 
 use src\manager\PostManager;
+use src\model\Posts_Categories;
 
 class AdminPostController
 {
@@ -11,7 +12,7 @@ class AdminPostController
         $postManager = new PostManager();
         $viewposts = $postManager->getPosts();
 
-        return ['data' => $viewposts, 'view' => './view/post/viewPosts.php'];
+        return ['dataPosts' => $viewposts, 'view' => './view/post/viewPosts.php'];
     }
 
     public function viewPost()
@@ -19,45 +20,53 @@ class AdminPostController
         $postManager = new PostManager();
         $viewpost = $postManager->getPost($_GET['id']);
 
-        return ['data' => $viewpost, 'view' => './view/category/modifyPost.php'];
+        return ['dataPosts' => $viewpost, 'view' => './view/category/modifyPost.php'];
     }
 
     public function addPost()
     {
-        if (isset($_POST['postDate']))
+        if (isset($_POST['author']) && isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']))
         {
-            $name = $_POST['postDate'];
+            $author = $_POST['author'];
+            $title = $_POST['title'];
+            $chapo = $_POST['chapo'];
+            $text = $_POST['text'];
+            $category = $_POST['category'];
         }
-        $postManager = new CategoryManager();
-        $postManager->addPost($name);
-        $modifyCategory = $categoryManager->getAllCategories();
+        $postManager = new PostManager();
+        $postManager->addPost($author, $title, $chapo, $text, $category);
+        $viewPosts = $postManager->getPosts();
 
-        return ['data' => $modifyCategory, 'view' => './view/category/viewCategories.php'];
+        return ['dataPosts' => $viewPosts, 'view' => './view/category/viewPosts.php'];
     }
 
     public function modifyPost()
     {
         $id = $_GET['id'];
-        if (isset($_POST['catName']))
+        if (isset($_POST['author']) && isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']))
         {
-            $name = $_POST['catName'];
+            $author = $_POST['author'];
+            $title = $_POST['title'];
+            $chapo = $_POST['chapo'];
+            $text = $_POST['text'];
+            $category = $_POST['category'];
         }
 
-        $categoryManager = new CategoryManager();
-        $categoryManager->modifyCategory($id, $name);
-        $viewcategories = $categoryManager->getAllCategories();
+        $postManager = new PostManager();
+        $postManager->modifyPost($id, $author, $title, $chapo, $text, $category);
+        $viewPosts = $postManager->getPosts();
 
-        return ['data' => $viewcategories, 'view' => './view/category/viewCategories.php'];
+        return ['dataPosts' => $viewPosts, 'view' => './view/post/viewPosts.php'];
     }
 
-    public function deleteCategory()
+    public function deletePost()
     {
         $id = $_GET['id'];
 
-        $categoryManager = new CategoryManager();
-        $categoryManager->deleteCategory($id);
-        $viewcategories = $categoryManager->getAllCategories();
+        $postManager = new PostManager();
+        $postManager->deletePost($id);
+        $viewPosts = $postManager->getPosts();
 
-        return ['data' => $viewcategories, 'view' => './view/category/viewCategories.php'];
+        return ['dataPosts' => $viewPosts, 'view' => './view/post/viewPosts.php'];
     }
 }
