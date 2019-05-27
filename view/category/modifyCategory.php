@@ -11,7 +11,7 @@
                 <div>
                     <form class="category-form" action="./index.php?action=admin&p=modifyCategory&id=<?= $_GET['id']; ?>" method="post">
                         <p>Changer le nom de la catégorie :</p>
-                        <input type="text" name="categoryName" value="<?= $dataCategories->getName(); ?>">
+                        <textarea name="categoryName" rows="1" cols="45"><?php echo $dataCategories->getName(); ?></textarea><br />
                         <button type="submit">Enregistrer</button>
                     </form>
                 </div>

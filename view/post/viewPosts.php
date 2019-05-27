@@ -1,4 +1,5 @@
 <?php require './view/admin/adminMenu.php'; ?><main role="main" class="container">
+
     <div class="row">
         <div class="col-md-10 blog-main">
             <div class="blog-post">
@@ -11,6 +12,7 @@
                             <th>Posté le</th>
                             <th>Posté par</th>
                             <th>Titre</th>
+                            <th>Chapo</th>
                             <th>Texte</th>
                             <th>Catégorie(s)</th>
                             <th></th>
@@ -27,6 +29,7 @@
                             </td>
                             <td><?= $post->getCreatedBy()->getUsername(); ?></td>
                             <td><?= $post->getTitle(); ?></td>
+                            <td><?= $post->getChapo(); ?></td>
                             <td><?= $post->getText(); ?></td>
                             <td><?php $categoriesNames = array();
                                 foreach ($post->getCategories() as $category) {$categoriesNames[] = $category->getName();}

@@ -11,7 +11,7 @@
     </tr>
     <tr>
         <th>Les utilisateurs</th>
-        <td><a href="#">Voir les utilisateurs</a></td>
-        <td><a href="#">Ajouter un utilisateur</a></td>
+        <td><a href="index.php?action=admin&p=viewUsers">Voir les utilisateurs</a></td>
+        <td><a href="index.php?action=admin&p=addUserForm">Ajouter un utilisateur</a></td>
     </tr>
 </table>

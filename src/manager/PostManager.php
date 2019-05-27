@@ -3,12 +3,13 @@
 namespace src\manager;
 
 use src\model\Post;
+use src\model\PostsCategories;
 
 class PostManager extends Manager
 {
     public function getPosts()
     {
-        $posts = $this->prepareObject('SELECT * FROM post order by created_date DESC LIMIT 0, 5', Post::class, true);
+        $posts = $this->prepareObject('SELECT * FROM post order by created_date DESC', Post::class, true);
         $userManager = new UserManager();
         $categoryManager = new CategoryManager();
 
@@ -37,18 +38,31 @@ class PostManager extends Manager
         return $post;
     }
 
-    public function modifyPost($postId, $author, $title, $text, $chapo)
+    public function modifyPost($postId, $title, $text, $chapo)
     {
-        return $this->prepareStmt('UPDATE post SET created_by = "' . $author . '", title = "' . $title . '", text = "' . $text .'", chapo = "' . $chapo . '"  WHERE id=' . $postId);
+        $this->prepareStmt('UPDATE post SET title = "' . $title . '", text = "' . $text .'", chapo = "' . $chapo . '"  WHERE id=' . $postId);
+        return $this->getPost($postId);
     }
 
-    public function addPost($postId, $catId, $author, $title, $text, $chapo)
+    public function addPost($author, $title, $text, $chapo)
     {
-        return $this->prepareStmt('INSERT INTO posts_categories (category_id, post_id) VALUES ("' . $catId . '", "' . $postId . '")' && 'INSERT INTO post (created_by, title, text, chapo) VALUES ("'. $author . '", "'. $title . '", "'. $chapo . '", "'. $text . '")');
+        $this->prepareStmt('INSERT INTO post (created_by, title, text, chapo) VALUES ("'. $author . '", "'. $title . '", "'. $chapo . '", "'. $text . '")');
+        return $this->prepareObject('SELECT * FROM post ORDER BY id DESC LIMIT 1', Post::class, false);
+    }
+
+    public function linkPostToCategory($categoryId, $postId)
+    {
+        $this->prepareStmt('INSERT INTO posts_categories (category_id, post_id) values ("'.$categoryId.'", "'.$postId.'")');
+        return $this->getPost($postId);
     }
 
     public function deletePost($postId)
     {
         return $this->prepareStmt('DELETE FROM post WHERE id=' . $postId);
+    }
+
+    public function unlinkPostToCategory($postId)
+    {
+        $this->prepareStmt('DELETE FROM posts_categories WHERE post_id=' . $postId);
     }
 }

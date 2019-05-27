@@ -11,7 +11,7 @@
                 <div>
                     <form class="category-form" action="./index.php?action=admin&p=addCategory" method="post">
                         <p>Nom de la catégorie :</p>
-                        <input type="text" name="categoryName" value="">
+                        <textarea name="categoryName" value="" cols="45" rows="1"></textarea><br />
                         <button type="submit">Enregistrer</button>
                     </form>
                 </div>

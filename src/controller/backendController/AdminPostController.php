@@ -3,7 +3,6 @@
 namespace src\controller\backendController;
 
 use src\manager\PostManager;
-use src\model\Posts_Categories;
 
 class AdminPostController
 {
@@ -20,9 +19,12 @@ class AdminPostController
         $postManager = new PostManager();
         $viewpost = $postManager->getPost($_GET['id']);
 
-        return ['dataPosts' => $viewpost, 'view' => './view/category/modifyPost.php'];
+        return ['dataPost' => $viewpost, 'view' => './view/post/modifyPost.php'];
     }
 
+    /**
+     * @return array
+     */
     public function addPost()
     {
         if (isset($_POST['author']) && isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']))
@@ -34,18 +36,22 @@ class AdminPostController
             $category = $_POST['category'];
         }
         $postManager = new PostManager();
-        $postManager->addPost($author, $title, $chapo, $text, $category);
+        $post = $postManager->addPost($author, $title, $chapo, $text, $category);
+        $postId = $post->getId();
+        foreach ($category as $cat)
+        {
+            $postManager->linkPostToCategory($cat, $postId);
+        }
         $viewPosts = $postManager->getPosts();
 
-        return ['dataPosts' => $viewPosts, 'view' => './view/category/viewPosts.php'];
+        return ['dataPosts' => $viewPosts, 'view' => './view/post/viewPosts.php'];
     }
 
     public function modifyPost()
     {
         $id = $_GET['id'];
-        if (isset($_POST['author']) && isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']))
+        if (isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']))
         {
-            $author = $_POST['author'];
             $title = $_POST['title'];
             $chapo = $_POST['chapo'];
             $text = $_POST['text'];
@@ -53,10 +59,17 @@ class AdminPostController
         }
 
         $postManager = new PostManager();
-        $postManager->modifyPost($id, $author, $title, $chapo, $text, $category);
+        $post = $postManager->modifyPost($id, $title, $chapo, $text);
+        $postManager->unlinkPostToCategory($id);
+        $postId = $post->getId();
+        foreach ($category as $cat)
+        {
+            $postManager->linkPostToCategory($cat, $postId);
+        }
+
         $viewPosts = $postManager->getPosts();
 
-        return ['dataPosts' => $viewPosts, 'view' => './view/post/viewPosts.php'];
+        return ['dataPost' => $viewPosts, 'view' => './view/post/viewPosts.php'];
     }
 
     public function deletePost()
@@ -65,6 +78,7 @@ class AdminPostController
 
         $postManager = new PostManager();
         $postManager->deletePost($id);
+        $postManager->unlinkPostToCategory($id);
         $viewPosts = $postManager->getPosts();
 
         return ['dataPosts' => $viewPosts, 'view' => './view/post/viewPosts.php'];

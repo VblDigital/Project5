@@ -1,6 +1,5 @@
 <?php include ('./view/admin/adminMenu.php'); ?>
 
-
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-10 blog-main">
@@ -14,22 +13,23 @@
                         <p>Auteur :<br/>
                             <select id="author" name="author">
                                 <?php foreach ($dataUsers as $user) {?>
-                                <option value="<?= $user->getUsername(); ?>"><?= $user->getUsername(); ?></option>
+                                <option value="<?= $user->getId(); ?>"><?= $user->getUsername(); ?></option>
                                 <?php } ?>
                             </select>
                         </p>
                         <p>Titre :<br/>
-                        <input type="text" name="title" value="" size="80px"></p>
+                            <textarea name="title" cols="50" rows="1"></textarea>
+                        </p>
                         <p>Chapo :<br/>
-                        <input type="chapobox" name="chapo" value="" size="150px"></p>
+                            <textarea name="chapo" cols="150" rows="3"></textarea>
+                        </p>
                         <p>Texte :<br/>
-                        <input type="textbox" name="text" value="" size="30px"></p>
-                        <p>Categorie :<br/>
-                        <select id="category" name="category">
-                            <?php foreach ($dataCategories as $post) {?>
-                                <option value="<?= $post->getName(); ?>"><?= $post->getName(); ?></option>
+                            <textarea name="text" cols="150" rows="10"></textarea>
+                        </p>
+                        <p>Categorie(s) :<br/><br/>
+                            <?php foreach ($dataCategories as $category) {?>
+                                <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>"><?= $category->getName(); ?><br/></input>
                             <?php } ?>
-                        </select>
                         </p>
                         <button type="submit">Enregistrer</button>
                     </form>
