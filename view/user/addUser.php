@@ -11,16 +11,16 @@
                 <div>
                     <form class="user-form" action="./index.php?action=admin&p=addUser" method="post">
                         <p>Pseudonyme :<br/>
-                            <textarea name="username" value="" cols="50" rows="1"></textarea>
+                            <textarea name="username" cols="50" rows="1"></textarea>
                         </p>
                         <p>Mot de passe :<br/>
-                            <textarea name="password" value="" cols="50" rows="1"></textarea>
+                            <textarea name="password" cols="50" rows="1"></textarea>
                         </p>
                         <!--<p>Répétez le mot de passe :<br/>
                             <textarea name="passwordcheck" value="" cols="50" rows="1"></textarea>
                         </p>-->
                         <p>Adresse email :<br/>
-                            <textarea name="email" value="" cols="50" rows="1"></textarea>
+                            <textarea name="email" cols="50" rows="1"></textarea>
                         </p>
                         <button type="submit">Enregistrer</button>
                     </form>

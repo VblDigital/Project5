@@ -14,6 +14,7 @@ class Comment{
     private $date;
     private $user_id;
     private $post_id;
+    private $published;
 
     /**
      * @param mixed $id
@@ -50,6 +51,11 @@ class Comment{
         if ($post_id > 0) {
             $this->post_id = $post_id;
         }
+    }
+
+    public function setPublished( $published )
+    {
+        $this->published = $published;
     }
 
     /**
@@ -90,5 +96,10 @@ class Comment{
     public function getPostId ()
     {
         return $this->post_id;
+    }
+
+    public function getPublished ()
+    {
+        return $this->published;
     }
 }

@@ -37,4 +37,10 @@ class UserManager extends Manager
         return $this->prepareStmt('DELETE FROM user WHERE id=' . $userId);
     }
 
+    public function addVisitor($commentLogin)
+    {
+        $this->prepareStmt('INSERT INTO user (username) VALUES ("'. $commentLogin . '")');
+        return $this->prepareObject('SELECT * FROM user ORDER BY id DESC LIMIT 1', User::class, false);
+    }
+
 }

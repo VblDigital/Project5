@@ -9,8 +9,7 @@
         <div class="col-md-8 blog-main">
             <div class="blog-post">
                 <?php
-                foreach ($posts as $datas){
-                ?>
+                foreach ($posts as $datas){ ?>
                 <h2 class="blog-post-title">
                     <?= $datas->getTitle (); ?>
                 </h2>
@@ -28,11 +27,8 @@
                     <a href="./index.php?action=posts&p=post&id=<?= $datas->getId(); ?>">Lire la suite</a>
                 </div>
                 <div class="blog-post-meta">Catégorie(s) :
-                    <?php
-                    $categoriesNames = array();
-                    foreach ($datas->getCategories() as $category) {
-                        $categoriesNames[] = $category->getName();
-                    }
+                    <?php $categoriesNames = array();
+                    foreach ($datas->getCategories() as $category) {$categoriesNames[] = $category->getName();}
                     echo implode(', ', $categoriesNames);
                     ?>
                 </div>
@@ -58,4 +54,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('view/template.php'); ?>
+<?php require'view/template.php'; ?>

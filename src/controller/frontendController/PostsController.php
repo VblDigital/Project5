@@ -2,6 +2,7 @@
 
 namespace src\controller\frontendController;
 
+use src\manager\CommentManager;
 use src\manager\PostManager;
 
 class PostsController
@@ -11,7 +12,7 @@ class PostsController
         $postManager = new PostManager();
         $posts = $postManager->getPosts();
 
-        require('./view/post/postList.php');
+        require './view/post/postList.php';
     }
 
     public function post()
@@ -24,6 +25,23 @@ class PostsController
             $categoriesNames[] = $category->getName();
         }
 
-        require('./view/post/postView.php');
+        require './view/post/postView.php';
     }
+
+    public function submitComment()
+    {
+        $commentManager = new CommentManager();
+        $commentManager->submitComment($_GET['id']);
+
+        $postManager = new PostManager();
+        $post = $postManager->getPost($_GET['id']);
+
+        $categoriesNames = array();
+        foreach ($post->getCategories() as $category) {
+            $categoriesNames[] = $category->getName();
+        }
+
+        require './view/post/postView.php';
+    }
+
 }

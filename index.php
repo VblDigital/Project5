@@ -15,12 +15,17 @@ use \src\controller\backendController\AdminPostController;
 use \src\controller\backendController\AdminUserController;
 use src\manager\CategoryManager;
 use src\manager\UserManager;
+use \src\controller\frontendController\CommentController;
+use \src\controller\backendController\AdminCommentController;
 
 $postController = new PostsController();
 $adminCategoryController = new AdminCategoryController();
 $adminController = new AdminController();
 $adminPostController = new AdminPostController();
 $adminUserController = new AdminUserController();
+$adminCommentController = new AdminCommentController();
+$commentController = new CommentController();
+
 
 try {
     if (!isset($_GET['action'])) {
@@ -35,6 +40,14 @@ try {
                 } else {
                     throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
                 }
+            } elseif ($_GET['p'] == 'submitComment') {
+                if (isset($_GET['id']) && $_GET['id'] > 0) {
+                    $postId = $_GET['id'];
+                    var_dump($postId);
+                }
+                die;
+                $commentController->submitComment($postId);
+                return $textResult = "OK";
             }
         } elseif ($_GET['action'] == 'admin') {
 
@@ -186,6 +199,24 @@ try {
                     $dataUser = $deleteUserData['dataUser'];
                     $view = $deleteUserData['view'];
                     $adminController->admin($view, null,null, null, $dataUser);
+
+                }
+
+                //Comments
+
+                elseif ($_GET['p'] === 'viewComments') {
+                    $viewCommentsData = $adminCommentController->viewComments();
+
+                    $dataComments = $viewCommentsData['dataComments'];
+                    $view = $viewCommentsData['view'];
+                    $adminController->admin($view, null, null, null, null, $dataComments);
+
+                } elseif ($_GET['p'] === 'deleteComment') {
+                    $deleteCommentData = $adminCommentController->deleteComment();
+
+                    $dataComments = $deleteCommentData['dataComments'];
+                    $view = $deleteCommentData['view'];
+                    $adminController->admin($view, null,null, null, null, $dataComments);
 
                 }
             }

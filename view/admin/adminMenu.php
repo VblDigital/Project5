@@ -14,4 +14,9 @@
         <td><a href="index.php?action=admin&p=viewUsers">Voir les utilisateurs</a></td>
         <td><a href="index.php?action=admin&p=addUserForm">Ajouter un utilisateur</a></td>
     </tr>
+    <tr>
+        <th>Modérer les commentaires</th>
+        <td><a href="index.php?action=admin&p=viewSubmittedComments">Voir les commentaires en attente</a></td>
+        <td><a href="index.php?action=admin&p=viewComments">Voir les commentaires publiés</a></td>
+    </tr>
 </table>

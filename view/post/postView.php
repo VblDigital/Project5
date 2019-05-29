@@ -1,7 +1,7 @@
 <?php $title = $post->getTitle(); ?>
 
 <?php ob_start(); ?>
-<?php include ('./view/menu.php'); ?>
+<?php include './view/menu.php'; ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -29,12 +29,18 @@
                     <?php
                         if (empty($post->getComments()))
                         {
-                            echo "Pas de Commentaires";
+                            echo "Pas de Commentaires. Ajoutez le premier commentaire de ce billet !";
                         }
                         else
                         {
                             echo "Commentaires : ";
                         }
+                    ?>
+                </div>
+                <div class="warning">
+                    <?php
+                    if (isset($textResult))
+                    {echo "<br/> $textResult <br/>";  }
                     ?>
                 </div>
                 <div class="blog-post">
@@ -48,9 +54,13 @@
                         <?=$comment->getUserId()->getUsername() ;?>
                     </div>
                     <div class="blog-post">
+
                         <?= $comment->getText();?>
                     </div>
-                    <?php } ?>
+                    <?php }?>
+                    <div>
+                        <?php require './view/comment/commentForm.php'; ?>
+                    </div>
                 </div>
             </div>
        </div>

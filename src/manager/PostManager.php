@@ -3,7 +3,6 @@
 namespace src\manager;
 
 use src\model\Post;
-use src\model\PostsCategories;
 
 class PostManager extends Manager
 {
