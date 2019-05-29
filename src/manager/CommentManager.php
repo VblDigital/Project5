@@ -26,9 +26,19 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    public function approveComment($commentId)
+    {
+        $this->prepareStmt('update comment SET published = "1" WHERE id = "' . $commentId . '"');
+    }
+
     public function getPublishedComments ()
     {
-        return $this->prepareObject('SELECT * FROM comment', Comment::class, true);
+        return $this->prepareObject('SELECT * FROM comment WHERE published = "1"', Comment::class, true);
+    }
+
+    public function getSubmittedComments ()
+    {
+        return $this->prepareObject('SELECT * FROM comment WHERE published = "0"', Comment::class, true);
     }
 
     public function deleteComment($commentId)

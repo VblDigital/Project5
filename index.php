@@ -45,7 +45,6 @@ try {
                     $postId = $_GET['id'];
                     var_dump($postId);
                 }
-                die;
                 $commentController->submitComment($postId);
                 return $textResult = "OK";
             }
@@ -211,8 +210,28 @@ try {
                     $view = $viewCommentsData['view'];
                     $adminController->admin($view, null, null, null, null, $dataComments);
 
+                } elseif ($_GET['p'] === 'viewSubmittedComments') {
+                    $viewCommentsData = $adminCommentController->viewSubmittedComments();
+
+                    $dataComments = $viewCommentsData['dataComments'];
+                    $view = $viewCommentsData['view'];
+                    $adminController->admin($view, null, null, null, null, $dataComments);
+
+                } elseif ($_GET['p'] === 'approveComment') {
+                    $viewCommentsData = $adminCommentController->approveComment();
+
+                    $view = $viewCommentsData['view'];
+                    $adminController->admin($view, null, null, null, null, null);
+
                 } elseif ($_GET['p'] === 'deleteComment') {
                     $deleteCommentData = $adminCommentController->deleteComment();
+
+                    $dataComments = $deleteCommentData['dataComments'];
+                    $view = $deleteCommentData['view'];
+                    $adminController->admin($view, null,null, null, null, $dataComments);
+
+                } elseif ($_GET['p'] === 'deleteSubmittedComment') {
+                    $deleteCommentData = $adminCommentController->deleteSubmittedComment();
 
                     $dataComments = $deleteCommentData['dataComments'];
                     $view = $deleteCommentData['view'];

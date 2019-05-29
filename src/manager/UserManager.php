@@ -21,6 +21,11 @@ class UserManager extends Manager
         return $this->prepareObject('SELECT * FROM user WHERE id =' . $postId, User::class, false);
     }
 
+    public function getCommentUser($commentId)
+    {
+        return $this->prepareObject('SELECT * FROM user WHERE id =' . $commentId, User::class, false);
+    }
+
     public function addUser($username, $password, $email)
     {
         $this->prepareStmt('INSERT INTO user (username, password, email) VALUES ("'. $username . '", "'. $password . '", "'. $email . '")');
