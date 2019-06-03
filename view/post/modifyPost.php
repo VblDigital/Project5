@@ -21,23 +21,13 @@
                             <textarea name="text" cols="150" rows="10"><?= $dataPosts->getText();?></textarea>
                         <p>Categorie(s) :<br/><br/>
                             <?php
-                            // à supprimer ensuite
-                            $categoriesNames = array();
-                            $catId = $dataPosts->getCategories();
-                            foreach ($catId as $item) {
-                                $id = $item->getId();
-                            }
-                            foreach ($dataPosts->getCategories() as $category) {
-                                $categoriesNames[] = $category->getName();
-                            }
-                            echo implode(', ', $categoriesNames);?><br/><br/><?php
-                            // fin
-                            foreach ($dataCategories as $category) {
-                                $allCatId = $category->getId(); ?>
+                            foreach ($dataCategories as $category) {?>
                                 <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>"
-                                <?php if($id == $allCatId){?>checked<?php } ?>><?= $category->getName(); ?><br/></input>
-                            <?php } ?>
-                        </p>
+                                <?php foreach ($dataPosts->getCategories() as $postCat)
+                                {$postCatId = [$postCat->getId()];
+                                if(in_array($category->getId(), $postCatId))
+                                { ?>checked <?php }} ?>><?= $category->getName(); ?><br/>
+                        <?php } ?></p>
                         <button type="submit">Enregistrer</button>
                     </form>
                 </div>
