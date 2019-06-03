@@ -24,7 +24,7 @@
                     <?= $datas->getChapo(); ?><br/>
                 </div>
                 <div>
-                    <a href="./index.php?action=posts&p=post&id=<?= $datas->getId(); ?>">Lire la suite</a>
+                    <a href="./index.php?p=post&id=<?= $datas->getId(); ?>">Lire la suite</a>
                 </div>
                 <div class="blog-post-meta">Catégorie(s) :
                     <?php $categoriesNames = array();

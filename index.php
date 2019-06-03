@@ -28,220 +28,208 @@ $commentController = new CommentController();
 
 
 try {
-    if (!isset($_GET['action'])) {
+    if (!isset($_GET['action']) && !isset($_GET['p'])) {
         $postController->listPosts();
-    } else {
-        if ($_GET['action'] == 'posts') {
-            if ($_GET['p'] == 'listPosts') {
-                $postController->listPosts();
-            } elseif ($_GET['p'] == 'post') {
-                if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $postController->post();
-                } else {
-                    throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
-                }
-            } elseif ($_GET['p'] == 'submitComment')
-            {
-                $addCommentData = $adminCommentController->submitComment();
-                $textResult = "Votre message a été soumis pour approbation";
-                header('location:./index.php?action=posts&p=post&id=' . $addCommentData . '&warning=' . $textResult);
-            }
-        } elseif ($_GET['action'] == 'admin') {
+    } elseif (!isset($_GET['action']) && isset($_GET['p']) && $_GET['p'] == 'listPosts') {
+        $postController->listPosts();
+    } elseif (!isset($_GET['action']) && $_GET['p'] == 'post') {
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $postController->post();
+        } else {
+            throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
+        }
+    } elseif (!isset($_GET['action']) && $_GET['p'] == 'submitComment') {
+        $addCommentData = $adminCommentController->submitComment();
+        $textResult = "Votre message a été soumis pour approbation";
+        header('location:./index.php?p=post&id=' . $addCommentData . '&warning=' . $textResult);
+    } elseif (isset($_GET['action']) && $_GET['action'] == 'admin') {
+        if (!isset($_GET['p'])) {
+            $adminController->admin('./view/admin/adminMenu.php', null);
+        } else {
 
-            if (!isset($_GET['p'])) {
-                $adminController->admin('./view/admin/adminMenu.php', null);
-            } else {
+            // Category
 
-                // Category
+            if ($_GET['p'] === 'viewCategories') {
+                $viewCategoriesData = $adminCategoryController->viewCategories();
 
-                if ($_GET['p'] === 'viewCategories') {
-                    $viewCategoriesData = $adminCategoryController->viewCategories();
+                $dataCategories = $viewCategoriesData['dataCategories'];
+                $view = $viewCategoriesData['view'];
+                $adminController->admin($view, null, $dataCategories);
 
-                    $dataCategories = $viewCategoriesData['dataCategories'];
-                    $view = $viewCategoriesData['view'];
-                    $adminController->admin($view, null, $dataCategories);
+            } elseif ($_GET['p'] === 'addCategoryForm') {
+                $dataCategories = null;
+                $view = './view/category/addCategory.php';
+                $adminController->admin($view, null, $dataCategories);
 
-                } elseif ($_GET['p'] === 'addCategoryForm') {
-                    $dataCategories = null;
-                    $view = './view/category/addCategory.php';
-                    $adminController->admin($view, null, $dataCategories);
+            } elseif ($_GET['p'] === 'addCategory') {
+                $addCategoriesData = $adminCategoryController->addCategory();
 
-                } elseif ($_GET['p'] === 'addCategory') {
-                    $addCategoriesData = $adminCategoryController->addCategory();
+                $dataCategories = $addCategoriesData['dataCategories'];
+                $view = $addCategoriesData['view'];
+                $adminController->admin($view, null, $dataCategories);
 
-                    $dataCategories = $addCategoriesData['dataCategories'];
-                    $view = $addCategoriesData['view'];
-                    $adminController->admin($view, null, $dataCategories);
+            } elseif ($_GET['p'] === 'modifyCategoryForm') {
+                $viewCategoryData = $adminCategoryController->viewCategory();
 
-                } elseif ($_GET['p'] === 'modifyCategoryForm') {
-                    $viewCategoryData = $adminCategoryController->viewCategory();
+                $dataCategories = $viewCategoryData['dataCategories'];
+                $view = $viewCategoryData['view'];
+                $adminController->admin($view, null, $dataCategories);
 
-                    $dataCategories = $viewCategoryData['dataCategories'];
-                    $view = $viewCategoryData['view'];
-                    $adminController->admin($view, null, $dataCategories);
+            } elseif ($_GET['p'] === 'modifyCategory') {
+                $modifyCategoryData = $adminCategoryController->modifyCategory();
 
-                } elseif ($_GET['p'] === 'modifyCategory') {
-                    $modifyCategoryData = $adminCategoryController->modifyCategory();
+                $dataCategories = $modifyCategoryData['dataCategories'];
+                $view = $modifyCategoryData['view'];
+                $adminController->admin($view, null, $dataCategories);
 
-                    $dataCategories = $modifyCategoryData['dataCategories'];
-                    $view = $modifyCategoryData['view'];
-                    $adminController->admin($view, null, $dataCategories);
+            } elseif ($_GET['p'] === 'deleteCategory') {
+                $deleteCategoriesData = $adminCategoryController->deleteCategory();
 
-                } elseif ($_GET['p'] === 'deleteCategory') {
-                    $deleteCategoriesData = $adminCategoryController->deleteCategory();
+                $dataCategories = $deleteCategoriesData['dataCategories'];
+                $view = $deleteCategoriesData['view'];
+                $adminController->admin($view, null, $dataCategories);
 
-                    $dataCategories = $deleteCategoriesData['dataCategories'];
-                    $view = $deleteCategoriesData['view'];
-                    $adminController->admin($view, null, $dataCategories);
+            } //Post
 
-                }
-                //Post
+            elseif ($_GET['p'] === 'viewPosts') {
 
-                elseif ($_GET['p'] === 'viewPosts') {
+                $viewPostsData = $adminPostController->viewPosts();
+                $dataPosts = $viewPostsData['dataPosts'];
 
-                    $viewPostsData = $adminPostController->viewPosts();
-                    $dataPosts = $viewPostsData['dataPosts'];
+                $view = $viewPostsData['view'];
+                $adminController->admin($view, null, null, $dataPosts);
 
-                    $view = $viewPostsData['view'];
-                    $adminController->admin($view, null, null, $dataPosts);
+            } elseif ($_GET['p'] === 'addPostForm') {
+                $dataPosts = null;
 
-                } elseif ($_GET['p'] === 'addPostForm') {
-                    $dataPosts = null;
+                $categoryManager = new CategoryManager();
+                $dataCategories = $categoryManager->getAllCategories();
 
-                    $categoryManager = new CategoryManager();
-                    $dataCategories = $categoryManager->getAllCategories();
+                $userManager = new UserManager();
+                $dataUsers = $userManager->getUsers();
 
-                    $userManager = new UserManager();
-                    $dataUsers = $userManager->getUsers();
+                $view = './view/post/addPost.php';
 
-                    $view = './view/post/addPost.php';
+                $adminController->admin($view, null, $dataCategories, null, $dataUsers);
 
-                    $adminController->admin($view, null, $dataCategories, null, $dataUsers);
+            } elseif ($_GET['p'] === 'addPost') {
+                $addPostData = $adminPostController->addPost();
 
-                } elseif ($_GET['p'] === 'addPost') {
-                    $addPostData = $adminPostController->addPost();
+                $dataPosts = $addPostData['dataPosts'];
+                $view = $addPostData['view'];
+                $adminController->admin($view, null, null, $dataPosts);
 
-                    $dataPosts = $addPostData['dataPosts'];
-                    $view = $addPostData['view'];
-                    $adminController->admin($view, null, null, $dataPosts);
+            } elseif ($_GET['p'] === 'modifyPostForm') {
+                $viewPostData = $adminPostController->viewPost();
 
-                } elseif ($_GET['p'] === 'modifyPostForm') {
-                    $viewPostData = $adminPostController->viewPost();
+                $viewCategoriesData = $adminCategoryController->viewCategories();
+                $dataCategories = $viewCategoriesData['dataCategories'];
 
-                    $viewCategoriesData = $adminCategoryController->viewCategories();
-                    $dataCategories = $viewCategoriesData['dataCategories'];
+                $dataPost = $viewPostData['dataPost'];
+                $view = $viewPostData['view'];
+                $adminController->admin($view, null, $dataCategories, $dataPost);
 
-                    $dataPost = $viewPostData['dataPost'];
-                    $view = $viewPostData['view'];
-                    $adminController->admin($view, null, $dataCategories, $dataPost);
+            } elseif ($_GET['p'] === 'modifyPost') {
+                $modifyPostData = $adminPostController->modifyPost();
 
-                } elseif ($_GET['p'] === 'modifyPost') {
-                    $modifyPostData = $adminPostController->modifyPost();
+                $viewCategoryData = $adminCategoryController->viewCategory();
+                $dataCategories = $viewCategoryData['dataCategories'];
 
-                    $viewCategoryData = $adminCategoryController->viewCategory();
-                    $dataCategories = $viewCategoryData['dataCategories'];
+                $dataPost = $modifyPostData['dataPost'];
+                $view = $modifyPostData['view'];
+                $adminController->admin($view, null, $dataCategories, $dataPost);
 
-                    $dataPost = $modifyPostData['dataPost'];
-                    $view = $modifyPostData['view'];
-                    $adminController->admin($view, null, $dataCategories, $dataPost);
+            } elseif ($_GET['p'] === 'deletePost') {
+                $deletePostData = $adminPostController->deletePost();
 
-                } elseif ($_GET['p'] === 'deletePost') {
-                    $deletePostData = $adminPostController->deletePost();
+                $dataPosts = $deletePostData['dataPosts'];
+                $view = $deletePostData['view'];
+                $adminController->admin($view, null, null, $dataPosts);
+            } //User
 
-                    $dataPosts = $deletePostData['dataPosts'];
-                    $view = $deletePostData['view'];
-                    $adminController->admin($view, null, null, $dataPosts);
-                }
+            elseif ($_GET['p'] === 'viewUsers') {
+                $viewUsersData = $adminUserController->viewUsers();
 
-                //User
+                $dataUsers = $viewUsersData['dataUsers'];
+                $view = $viewUsersData['view'];
+                $adminController->admin($view, null, null, null, $dataUsers);
 
-                elseif ($_GET['p'] === 'viewUsers')
-                {
-                    $viewUsersData = $adminUserController->viewUsers();
+            } elseif ($_GET['p'] === 'addUserForm') {
+                $dataUsers = null;
+                $view = './view/user/addUser.php';
+                $adminController->admin($view, null, null, null, $dataUsers);
 
-                    $dataUsers = $viewUsersData['dataUsers'];
-                    $view = $viewUsersData['view'];
-                    $adminController->admin($view, null, null, null, $dataUsers);
+            } elseif ($_GET['p'] === 'addUser') {
+                $addUserData = $adminUserController->addUser();
 
-                } elseif ($_GET['p'] === 'addUserForm') {
-                    $dataUsers = null;
-                    $view = './view/user/addUser.php';
-                    $adminController->admin($view, null, null, null, $dataUsers);
+                $dataUsers = $addUserData['dataUsers'];
+                $view = $addUserData['view'];
+                $adminController->admin($view, null, null, null, $dataUsers);
 
-                } elseif ($_GET['p'] === 'addUser') {
-                    $addUserData = $adminUserController->addUser();
+            } elseif ($_GET['p'] === 'modifyUserForm') {
+                $viewUserData = $adminUserController->viewUser();
 
-                    $dataUsers = $addUserData['dataUsers'];
-                    $view = $addUserData['view'];
-                    $adminController->admin($view, null, null, null, $dataUsers);
+                $dataUsers = $viewUserData['dataUser'];
+                $view = $viewUserData['view'];
+                $adminController->admin($view, null, null, null, $dataUsers);
 
-                } elseif ($_GET['p'] === 'modifyUserForm') {
-                    $viewUserData = $adminUserController->viewUser();
+            } elseif ($_GET['p'] === 'modifyUser') {
+                $modifyUserData = $adminUserController->modifyUser();
 
-                    $dataUsers = $viewUserData['dataUser'];
-                    $view = $viewUserData['view'];
-                    $adminController->admin($view, null, null, null, $dataUsers);
+                $dataUsers = $modifyUserData['dataUsers'];
+                $view = $modifyUserData['view'];
+                $adminController->admin($view, null, null, null, $dataUsers);
 
-                } elseif ($_GET['p'] === 'modifyUser') {
-                    $modifyUserData = $adminUserController->modifyUser();
+            } elseif ($_GET['p'] === 'modifyUserPass') {
+                $modifyUserData = $adminUserController->modifyUserPass();
 
-                    $dataUsers = $modifyUserData['dataUsers'];
-                    $view = $modifyUserData['view'];
-                    $adminController->admin($view, null, null, null, $dataUsers);
+                $dataUsers = $modifyUserData['dataUsers'];
+                $view = $modifyUserData['view'];
+                $adminController->admin($view, null, null, null, $dataUsers);
 
-                } elseif ($_GET['p'] === 'modifyUserPass') {
-                    $modifyUserData = $adminUserController->modifyUserPass();
+            } elseif ($_GET['p'] === 'deleteUser') {
+                $deleteUserData = $adminUserController->deleteUser();
 
-                    $dataUsers = $modifyUserData['dataUsers'];
-                    $view = $modifyUserData['view'];
-                    $adminController->admin($view, null, null, null, $dataUsers);
+                $dataUser = $deleteUserData['dataUser'];
+                $view = $deleteUserData['view'];
+                $adminController->admin($view, null, null, null, $dataUser);
 
-                } elseif ($_GET['p'] === 'deleteUser') {
-                    $deleteUserData = $adminUserController->deleteUser();
+            } //Comments
 
-                    $dataUser = $deleteUserData['dataUser'];
-                    $view = $deleteUserData['view'];
-                    $adminController->admin($view, null,null, null, $dataUser);
+            elseif ($_GET['p'] === 'viewComments') {
+                $viewCommentsData = $adminCommentController->viewComments();
 
-                }
+                $dataComments = $viewCommentsData['dataComments'];
+                $view = $viewCommentsData['view'];
+                $adminController->admin($view, null, null, null, null, $dataComments);
 
-                //Comments
+            } elseif ($_GET['p'] === 'viewSubmittedComments') {
+                $viewCommentsData = $adminCommentController->viewSubmittedComments();
 
-                elseif ($_GET['p'] === 'viewComments') {
-                    $viewCommentsData = $adminCommentController->viewComments();
+                $dataComments = $viewCommentsData['dataComments'];
+                $view = $viewCommentsData['view'];
+                $adminController->admin($view, null, null, null, null, $dataComments);
 
-                    $dataComments = $viewCommentsData['dataComments'];
-                    $view = $viewCommentsData['view'];
-                    $adminController->admin($view, null, null, null, null, $dataComments);
+            } elseif ($_GET['p'] === 'approveComment') {
+                $viewCommentsData = $adminCommentController->approveComment();
 
-                } elseif ($_GET['p'] === 'viewSubmittedComments') {
-                    $viewCommentsData = $adminCommentController->viewSubmittedComments();
+                $view = $viewCommentsData['view'];
+                $adminController->admin($view, null, null, null, null, null);
 
-                    $dataComments = $viewCommentsData['dataComments'];
-                    $view = $viewCommentsData['view'];
-                    $adminController->admin($view, null, null, null, null, $dataComments);
+            } elseif ($_GET['p'] === 'deleteComment') {
+                $deleteCommentData = $adminCommentController->deleteComment();
 
-                } elseif ($_GET['p'] === 'approveComment') {
-                    $viewCommentsData = $adminCommentController->approveComment();
+                $dataComments = $deleteCommentData['dataComments'];
+                $view = $deleteCommentData['view'];
+                $adminController->admin($view, null, null, null, null, $dataComments);
 
-                    $view = $viewCommentsData['view'];
-                    $adminController->admin($view, null, null, null, null, null);
+            } elseif ($_GET['p'] === 'deleteSubmittedComment') {
+                $deleteCommentData = $adminCommentController->deleteSubmittedComment();
 
-                } elseif ($_GET['p'] === 'deleteComment') {
-                    $deleteCommentData = $adminCommentController->deleteComment();
+                $dataComments = $deleteCommentData['dataComments'];
+                $view = $deleteCommentData['view'];
+                $adminController->admin($view, null, null, null, null, $dataComments);
 
-                    $dataComments = $deleteCommentData['dataComments'];
-                    $view = $deleteCommentData['view'];
-                    $adminController->admin($view, null,null, null, null, $dataComments);
-
-                } elseif ($_GET['p'] === 'deleteSubmittedComment') {
-                    $deleteCommentData = $adminCommentController->deleteSubmittedComment();
-
-                    $dataComments = $deleteCommentData['dataComments'];
-                    $view = $deleteCommentData['view'];
-                    $adminController->admin($view, null,null, null, null, $dataComments);
-
-                }
             }
         }
     }

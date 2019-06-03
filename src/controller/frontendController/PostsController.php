@@ -2,7 +2,6 @@
 
 namespace src\controller\frontendController;
 
-use src\manager\CommentManager;
 use src\manager\PostManager;
 
 class PostsController
@@ -26,10 +25,4 @@ class PostsController
         }
         require './view/post/postView.php';
     }
-
-    public function submitComment()
-    {
-
-    }
-
 }
