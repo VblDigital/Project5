@@ -3,6 +3,7 @@
 namespace src\controller\backendController;
 
 use src\manager\CategoryManager;
+use src\manager\PostManager;
 
 class AdminCategoryController
 {

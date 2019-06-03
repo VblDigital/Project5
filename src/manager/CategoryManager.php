@@ -41,6 +41,14 @@ class CategoryManager extends Manager
 
     public function deleteCategory($catId)
     {
-        return $this->prepareStmt('DELETE FROM category WHERE id=' . $catId);
+        try{
+            return $this->prepareStmt('DELETE FROM category WHERE id=' . $catId);
+        }
+        catch (\PDOException $e) {
+            $erreur = explode(':', $e->getMessage());
+            if ($erreur[2] == 1451) {
+                echo $errorMessage = "Cette catégorie est utilisée par un(plusieurs) billet(s) actif(s), elle ne peut être supprimée !";
+            }
+        }
     }
 }

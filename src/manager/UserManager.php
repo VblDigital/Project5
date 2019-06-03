@@ -2,6 +2,7 @@
 
 namespace src\manager;
 
+use mysql_xdevapi\Exception;
 use src\model\User;
 
 class UserManager extends Manager
@@ -45,7 +46,15 @@ class UserManager extends Manager
 
     public function deleteUser($userId)
     {
-        return $this->prepareStmt('DELETE FROM user WHERE id=' . $userId);
+        try{
+            return $this->prepareStmt('DELETE FROM user WHERE id=' . $userId);
+        }
+        catch (\PDOException $e) {
+            $erreur = explode(':', $e->getMessage());
+            if ($erreur[2] == 1451) {
+                echo $errorMessage = "Cet utilisateur a toujours des billets actifs, il ne peut être supprimé !";
+            }
+        }
     }
 
     public function addVisitor($commentLogin)
@@ -53,5 +62,4 @@ class UserManager extends Manager
         $this->prepareStmt('INSERT INTO user (username) VALUES ("'. $commentLogin . '")');
         return $this->prepareObject('SELECT * FROM user ORDER BY id DESC LIMIT 1', User::class, false);
     }
-
 }

@@ -25,6 +25,9 @@
                         </tr>
                         </tbody>
                         <?php }?>
+                        <div>
+                            <?php if (isset($errorMessage)) {echo $errorMessage;} ?>
+                        </div>
                     </table>
                     <br>
                 </div>
