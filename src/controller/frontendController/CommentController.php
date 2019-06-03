@@ -10,18 +10,15 @@ class CommentController
 {
     public function submitComment($postId)
     {
-        if (isset($_POST['commentAuthor']) && isset($_POST['commentText']))
+        if (isset($_POST['commentAuthor']) && isset($_POST['commentText']) && isset($_POST['postId']))
         {
             $commentAuthor = $_POST['commentAuthor'];
             $commentText = $_POST['commentText'];
+            $postId = $_POST['postId'];
         }
 
-        $userManager = new UserManager();
-        $user = $userManager->addVisitor($commentAuthor);
-        $userId = $user->getId();
-
         $commentManager = new CommentManager();
-        $newComment = $commentManager->submitComment($commentText, $userId, $postId);
+        $newComment = $commentManager->submitComment($commentText, $commentAuthor, $postId);
 
         return $newComment;
     }

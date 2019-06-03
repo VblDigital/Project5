@@ -21,7 +21,7 @@
                         <?php if (isset($dataComments)) {
                             foreach ($dataComments as $comment) {?>
                         <tr>
-                            <td class="id"><?= $comment->getUserId(); ?></td>
+                            <td class="id"><?= $comment->getAuthor(); ?></td>
                             <td class="nom"><?= $comment->getText(); ?></td>
                             <td class="nom"><?php $date = $comment->getDate();
                                 setlocale(LC_TIME, 'fr_FR.utf8','fra');

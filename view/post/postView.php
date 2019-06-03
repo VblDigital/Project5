@@ -37,12 +37,6 @@
                         }
                     ?>
                 </div>
-                <div class="warning">
-                    <?php
-                    if (isset($textResult))
-                    {echo "<br/> $textResult <br/>";  }
-                    ?>
-                </div>
                 <div class="blog-post">
                     <?php foreach($post->getComments() as $comment) { ?>
                     <div class="blog-post-meta">
@@ -51,13 +45,19 @@
                         setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
                         echo utf8_encode(strftime("%A %#d %B %Y", strtotime($dateComment)));?>
                         par
-                        <?=$comment->getUserId()->getUsername() ;?>
+                        <?=$comment->getAuthor() ;?>
                     </div>
                     <div class="blog-post">
-
                         <?= $comment->getText();?>
-                    </div>
+                    </div><br/>
                     <?php }?>
+                    <div class="warning">
+                        <?php
+                        if (isset($_GET['warning']))
+                        {$warning = $_GET['warning'];
+                            echo "<br/> $warning <br/>";  }
+                        ?>
+                    </div>
                     <div>
                         <?php require './view/comment/commentForm.php'; ?>
                     </div>

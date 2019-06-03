@@ -20,10 +20,10 @@
                 </div>
                 <div>
                     <br/>
-                    <form class="user-form" action="" method="post">
+                    <form class="user-form" action="./index.php?action=admin&p=modifyUserPass&id=<?= $_GET['id']; ?>" method="post">
                         <p>Modifier le mot de passe :</p>
                         <p>Nouveau mot de passe :<br/>
-                            <textarea name="password" cols="100" rows="1"></textarea>
+                            <input type="password" name="password" cols="100" rows="1"></input>
                         </p>
                         <!--<p>Répétez le mot de passe :<br/>
                             <textarea name="passwordcheck" value="" cols="50" rows="1"></textarea>

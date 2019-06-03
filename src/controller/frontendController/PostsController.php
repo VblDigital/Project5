@@ -24,24 +24,12 @@ class PostsController
         foreach ($post->getCategories() as $category) {
             $categoriesNames[] = $category->getName();
         }
-
         require './view/post/postView.php';
     }
 
     public function submitComment()
     {
-        $commentManager = new CommentManager();
-        $commentManager->submitComment($_GET['id']);
 
-        $postManager = new PostManager();
-        $post = $postManager->getPost($_GET['id']);
-
-        $categoriesNames = array();
-        foreach ($post->getCategories() as $category) {
-            $categoriesNames[] = $category->getName();
-        }
-
-        require './view/post/postView.php';
     }
 
 }

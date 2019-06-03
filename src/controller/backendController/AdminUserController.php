@@ -61,6 +61,21 @@ class AdminUserController
         return ['dataUsers' => $viewUsers, 'view' => './view/user/viewUsers.php'];
     }
 
+    public function modifyUserPass()
+    {
+        $id = $_GET['id'];
+        if (isset($_POST['password']))
+        {
+            $password = $_POST['password'];
+        }
+
+        $userManager = new UserManager();
+        $userManager->modifyUserPass($id, $password);
+        $viewUsers = $userManager->getUsers();
+
+        return ['dataUsers' => $viewUsers, 'view' => './view/user/viewUsers.php'];
+    }
+
     public function deleteUser()
     {
         $id = $_GET['id'];

@@ -20,7 +20,7 @@
                         <?php if (isset($dataComments)){
                             foreach ($dataComments as $comment) {?>
                         <tr>
-                            <td class="id"><?= $comment->getUserId(); ?></td>
+                            <td class="id"><?= $comment->getAuthor(); ?></td>
                             <td class="nom"><?= $comment->getText(); ?></td>
                             <td class="nom"><?= $comment->getDate(); ?></td>
                             <td class="nom"><?= $comment->getPostId(); ?></td>

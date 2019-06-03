@@ -8,22 +8,13 @@ class CommentManager extends Manager
 {
     public function submitComment($commentText, $commentAuthor, $postId)
     {
-        $this->prepareStmt('INSERT INTO comment (text, user_id, post_id) VALUES ("'. $commentText . '", "'. $commentAuthor . '", "'. $postId . '")');
+        $this->prepareStmt('INSERT INTO comment (text, author, post_id) VALUES ("'. $commentText . '", "' . $commentAuthor . '", "'. $postId . '")');
     }
 
     public function getComments($postId)
     {
-        $comments = $this->prepareObject('SELECT * FROM comment WHERE post_id =' . $postId, Comment::class, true);
-        $userManager = new UserManager();
-        foreach($comments as $comment)
-        {
-            if ($comment->getPublished() == '1')
-            {
-                $comment->setUser_Id($userManager->getPostUser($comment->getUserId()));
-                var_dump($comment);
-            }
-        }
-        return $comments;
+        return $this->prepareObject('SELECT * FROM comment WHERE post_id =' . $postId . ' AND published = "1"', Comment::class, true);
+
     }
 
     public function approveComment($commentId)

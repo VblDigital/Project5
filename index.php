@@ -40,13 +40,11 @@ try {
                 } else {
                     throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
                 }
-            } elseif ($_GET['p'] == 'submitComment') {
-                if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    $postId = $_GET['id'];
-                    var_dump($postId);
-                }
-                $commentController->submitComment($postId);
-                return $textResult = "OK";
+            } elseif ($_GET['p'] == 'submitComment')
+            {
+                $addCommentData = $adminCommentController->submitComment();
+                $textResult = "Votre message a été soumis pour approbation";
+                header('location:./index.php?action=posts&p=post&id=' . $addCommentData . '&warning=' . $textResult);
             }
         } elseif ($_GET['action'] == 'admin') {
 
@@ -131,7 +129,6 @@ try {
                     $viewPostData = $adminPostController->viewPost();
 
                     $viewCategoriesData = $adminCategoryController->viewCategories();
-
                     $dataCategories = $viewCategoriesData['dataCategories'];
 
                     $dataPost = $viewPostData['dataPost'];
@@ -187,6 +184,13 @@ try {
 
                 } elseif ($_GET['p'] === 'modifyUser') {
                     $modifyUserData = $adminUserController->modifyUser();
+
+                    $dataUsers = $modifyUserData['dataUsers'];
+                    $view = $modifyUserData['view'];
+                    $adminController->admin($view, null, null, null, $dataUsers);
+
+                } elseif ($_GET['p'] === 'modifyUserPass') {
+                    $modifyUserData = $adminUserController->modifyUserPass();
 
                     $dataUsers = $modifyUserData['dataUsers'];
                     $view = $modifyUserData['view'];

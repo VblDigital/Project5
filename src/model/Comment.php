@@ -12,7 +12,7 @@ class Comment{
     private $id;
     private $text;
     private $date;
-    private $user_id;
+    private $author;
     private $post_id;
     private $published;
 
@@ -40,9 +40,9 @@ class Comment{
         }
     }
 
-    public function setUser_Id ( $user_id )
+    public function setAuthor ( $author )
     {
-            $this->user_id = $user_id;
+            $this->author = $author;
     }
 
     public function setPost_Id ( $post_id )
@@ -85,9 +85,9 @@ class Comment{
     /**
      * @return mixed
      */
-    public function getUserId ()
+    public function getAuthor ()
     {
-        return $this->user_id;
+        return $this->author;
     }
 
     /**

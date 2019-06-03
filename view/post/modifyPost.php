@@ -23,10 +23,12 @@
                             <?php
                             foreach ($dataCategories as $category) {?>
                                 <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>"
-                                <?php foreach ($dataPosts->getCategories() as $postCat)
-                                {$postCatId = [$postCat->getId()];
-                                if(in_array($category->getId(), $postCatId))
-                                { ?>checked <?php }} ?>><?= $category->getName(); ?><br/>
+                                    <?php foreach ($dataPosts->getCategories() as $postCat)
+                                    {$postCatId = [$postCat->getId()];
+                                        if(in_array($category->getId(), $postCatId))
+                                            { ?>checked <?php }
+                                    } ?>
+                                ><?= $category->getName(); ?><br/>
                         <?php } ?></p>
                         <button type="submit">Enregistrer</button>
                     </form>

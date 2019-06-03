@@ -14,7 +14,7 @@
                             <textarea name="username" cols="50" rows="1"></textarea>
                         </p>
                         <p>Mot de passe :<br/>
-                            <textarea name="password" cols="50" rows="1"></textarea>
+                            <input type="password" name="password" cols="50" rows="1"></input>
                         </p>
                         <!--<p>Répétez le mot de passe :<br/>
                             <textarea name="passwordcheck" value="" cols="50" rows="1"></textarea>

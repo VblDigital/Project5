@@ -7,6 +7,21 @@ use src\manager\CommentManager;
 
 class AdminCommentController
 {
+        public function submitComment()
+    {
+        if (isset($_POST['commentAuthor']) && ($_POST['commentText']) && ($_POST['postId'])) {
+            {
+                $author = $_POST['commentAuthor'];
+                $text = $_POST['commentText'];
+                $postId = $_POST['postId'];
+            }
+
+            $commentManager = new CommentManager();
+            $commentManager->submitComment($text, $author, $postId);
+            return $postId;
+        }
+    }
+
     public function viewComments()
     {
         $commentManager = new CommentManager();

@@ -37,6 +37,12 @@ class UserManager extends Manager
         return $this->getUser($userId);
     }
 
+    public function modifyUserPass($userId, $password)
+    {
+        $this->prepareStmt('UPDATE user SET password = "' . $password . '" WHERE id=' . $userId);
+        return $this->getUser($userId);
+    }
+
     public function deleteUser($userId)
     {
         return $this->prepareStmt('DELETE FROM user WHERE id=' . $userId);
