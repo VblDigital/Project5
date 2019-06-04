@@ -9,7 +9,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="./index.php?action=admin&p=addPost" method="post">
+                    <form class="category-form" action="addPost" method="post">
                         <p>Auteur :<br/>
                             <select id="author" name="author">
                                 <?php foreach ($dataUsers as $user) {?>

@@ -20,8 +20,8 @@
                             <td class="id"><?= $user->getId(); ?></td>
                             <td class="nom"><?= $user->getUsername(); ?></td>
                             <td class="nom"><?= $user->getEmail(); ?></td>
-                            <td><a href="index.php?action=admin&p=modifyUserForm&id=<?= $user->getId(); ?>">Modifier l'utilisateur</a></td>
-                            <td><a href="index.php?action=admin&p=deleteUser&id=<?= $user->getId(); ?>">Supprimer l'utilisateur</a></td>
+                            <td><a href="modifyUserForm-<?= $user->getId(); ?>">Modifier l'utilisateur</a></td>
+                            <td><a href="deleteUser-<?= $user->getId(); ?>">Supprimer l'utilisateur</a></td>
                         </tr>
                         </tbody>
                         <?php }?>

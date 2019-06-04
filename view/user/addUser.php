@@ -9,7 +9,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="user-form" action="./index.php?action=admin&p=addUser" method="post">
+                    <form class="user-form" action="addUser" method="post">
                         <p>Pseudonyme :<br/>
                             <textarea name="username" cols="50" rows="1"></textarea>
                         </p>

@@ -1,0 +1,9 @@
+
+RewriteEngine On
+
+RewriteBase /http://project5/
+
+RewriteRule ^post-([0-9]+)$ /index.php?p=post&id=$1 [L]
+RewriteRule ^admin$ /?action=admin [L]
+RewriteRule ^([a-zA-Z]+)$ /index.php?action=admin&p=$1 [L]
+RewriteRule ^([a-zA-Z]+)-([0-9]+)$ /index.php?action=admin&p=$1&id=$2 [L]

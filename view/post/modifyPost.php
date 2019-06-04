@@ -9,7 +9,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="./index.php?action=admin&p=modifyPost&id=<?= $_GET['id']; ?>" method="post">
+                    <form class="category-form" action="modifyPost-<?= $_GET['id']; ?>" method="post">
                         <p>Auteur :<br/>
                             <?= $dataPosts->getCreatedBy()->getUsername(); ?>
                         </p>

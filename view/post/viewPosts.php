@@ -36,8 +36,8 @@
                                 echo implode(', ', $categoriesNames);
                                 ?>
                             </td>
-                            <td><a href="index.php?action=admin&p=modifyPostForm&id=<?= $post->getId(); ?>">Modifier le billet</a></td>
-                            <td><a href="index.php?action=admin&p=deletePost&id=<?= $post->getId(); ?>">Supprimer le billet</a></td>
+                            <td><a href="modifyPostForm-<?= $post->getId(); ?>">Modifier le billet</a></td>
+                            <td><a href="deletePost-<?= $post->getId(); ?>">Supprimer le billet</a></td>
                         </tr>
                         </tbody>
                         <?php }?>

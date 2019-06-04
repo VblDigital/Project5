@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-10 blog-main">
             <div class="blog-post">
-                <a href="javascript:history.go(-1)"> <<<< Retour</a>
+                <a href="../index.php"> <<<< Retour</a>
                 <h2 class="blog-post-title-single">
                     <?= $post->getTitle();?>
                 </h2>

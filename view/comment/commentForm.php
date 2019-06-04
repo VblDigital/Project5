@@ -3,7 +3,7 @@
         <br/><h3>Ajouter un commentaire</h3>
     </div>
     <div>
-        <form class="comment-form" action="./index.php?action=posts&p=submitComment&id=<?php $_GET['id'];?>" method="post">
+        <form class="comment-form" action="submitComment-<?php $_GET['id'];?>" method="post">
             <p>Pseudonyme :</p>
             <textarea name="commentAuthor" cols="50" rows="1"></textarea>
             <p>Texte :</p>

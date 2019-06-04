@@ -9,7 +9,7 @@
                 </div>
                 <div>
                     <br/>
-                    <form class="user-form" action="./index.php?action=admin&p=modifyUser&id=<?= $_GET['id']; ?>" method="post">
+                    <form class="user-form" action="modifyUser-<?= $_GET['id']; ?>" method="post">
                         <p>Modifier les coordonnées :</p>
                         <p>Pseudonyme :</p>
                             <textarea name="username" cols="100" rows="1"><?= $dataUsers->getUsername(); ?></textarea>
@@ -20,7 +20,7 @@
                 </div>
                 <div>
                     <br/>
-                    <form class="user-form" action="./index.php?action=admin&p=modifyUserPass&id=<?= $_GET['id']; ?>" method="post">
+                    <form class="user-form" action="modifyUserPass-<?= $_GET['id']; ?>" method="post">
                         <p>Modifier le mot de passe :</p>
                         <p>Nouveau mot de passe :<br/>
                             <input type="password" name="password" cols="100" rows="1"></input>
