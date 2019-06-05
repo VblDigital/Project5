@@ -17,6 +17,7 @@ use src\manager\CategoryManager;
 use src\manager\UserManager;
 use \src\controller\frontendController\CommentController;
 use \src\controller\backendController\AdminCommentController;
+use \src\controller\backendController\AdminLoginController;
 
 $postController = new PostsController();
 $adminCategoryController = new AdminCategoryController();
@@ -25,6 +26,7 @@ $adminPostController = new AdminPostController();
 $adminUserController = new AdminUserController();
 $adminCommentController = new AdminCommentController();
 $commentController = new CommentController();
+$adminLoginController = new AdminLoginController();
 
 
 try {
@@ -38,14 +40,25 @@ try {
         } else {
             throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
         }
+
     } elseif (!isset($_GET['action']) && $_GET['p'] == 'submitComment') {
         $addCommentData = $adminCommentController->submitComment();
         $textResult = "Votre message a été soumis pour approbation";
         header('location:./index.php?p=post&id=' . $addCommentData . '&warning=' . $textResult);
+
     } elseif (isset($_GET['action']) && $_GET['action'] == 'admin') {
-        if (!isset($_GET['p'])) {
-            $adminController->admin('./view/admin/adminMenu.php', null);
-        } else {
+
+        $userLoggedIn = $adminLoginController->userLoggedIn();
+
+        if (!isset($_GET['p']) && $userLoggedIn == false) {
+            $adminController->admin('./view/user/userConnectForm.php', null);
+        } elseif ($_GET['p'] == 'connect') {
+            $connect = $adminLoginController->login();
+
+            $userToLog = $connect['userToLog'];
+            $adminController->admin('./view/admin/adminMenu.php', null, null, null, null, null, $userToLog);
+
+        } elseif ($userLoggedIn == true)
 
             // Category
 
@@ -232,7 +245,6 @@ try {
 
             }
         }
-    }
 }
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();

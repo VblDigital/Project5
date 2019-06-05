@@ -1,3 +1,4 @@
+<?php var_dump($userLoggedIn); ?>
 <table class="table table-hover">
     <tr>
         <th>Les catégories</th>
