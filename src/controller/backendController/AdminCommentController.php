@@ -41,7 +41,8 @@ class AdminCommentController
     public function approveComment()
     {
         $commentManager = new CommentManager();
-        $viewcomments = $commentManager->approveComment($_GET['id']);
+        $commentManager->approveComment($_GET['id']);
+        $viewcomments = $commentManager->getSubmittedComments();
 
         return ['dataComments' => $viewcomments, 'view' => './view/comment/viewSubmittedComments.php'];
     }

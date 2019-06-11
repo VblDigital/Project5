@@ -19,10 +19,15 @@ class PostsController
         $postManager = new PostManager();
         $post = $postManager->getPost($_GET['id']);
 
-        $categoriesNames = array();
-        foreach ($post->getCategories() as $category) {
-            $categoriesNames[] = $category->getName();
+        if ($post == true) {
+            $categoriesNames = array();
+            foreach ($post->getCategories() as $category) {
+                $categoriesNames[] = $category->getName();
+            }
+
+            require './view/post/postView.php';
+        } else {
+            echo "Ce billet n'existe pas ! <br/><a href='index.php'>Retour à la liste des billets</a>" ;
         }
-        require './view/post/postView.php';
     }
 }

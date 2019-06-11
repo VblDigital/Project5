@@ -22,19 +22,20 @@ class PostManager extends Manager
     }
     public function getPost($postId)
     {
-        /** @var Post $post */
         $post = $this->prepareObject('SELECT * FROM post WHERE id = ' . $postId, Post::class, false);
 
-        $userManager = new UserManager();
-        $post->setCreatedBy($userManager->getPostUser($post->getCreatedBy()));
+        if($post == true) {
 
-        $categoryManager = new CategoryManager();
-        $post->setCategories($categoryManager->getCategories($postId));
+            $userManager = new UserManager();
+            $post->setCreatedBy($userManager->getPostUser($post->getCreatedBy()));
 
-        $commentManager = new CommentManager();
-        $post->setComments($commentManager->getComments($postId));
+            $categoryManager = new CategoryManager();
+            $post->setCategories($categoryManager->getCategories($postId));
 
-        return $post;
+            $commentManager = new CommentManager();
+            $post->setComments($commentManager->getComments($postId));
+        }
+            return $post;
     }
 
     public function modifyPost($postId, $title, $text, $chapo)

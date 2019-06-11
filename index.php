@@ -30,9 +30,7 @@ $adminLoginController = new AdminLoginController();
 
 
 try {
-    if (!isset($_GET['action']) && !isset($_GET['p'])) {
-        $postController->listPosts();
-    } elseif (!isset($_GET['action']) && isset($_GET['p']) && $_GET['p'] == 'listPosts') {
+    if (!isset($_GET['action']) && !isset($_GET['p']) || !isset($_GET['action']) && isset($_GET['p']) && $_GET['p'] == 'listPosts') {
         $postController->listPosts();
     } elseif (!isset($_GET['action']) && $_GET['p'] == 'post') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -44,21 +42,13 @@ try {
     } elseif (!isset($_GET['action']) && $_GET['p'] == 'submitComment') {
         $addCommentData = $adminCommentController->submitComment();
         $textResult = "Votre message a été soumis pour approbation";
-        header('location:./index.php?p=post&id=' . $addCommentData . '&warning=' . $textResult);
+        header('location:post-' . $addCommentData . '-' . $textResult);
 
     } elseif (isset($_GET['action']) && $_GET['action'] == 'admin') {
 
-        $userLoggedIn = $adminLoginController->userLoggedIn();
-
-        if (!isset($_GET['p']) && $userLoggedIn == false) {
-            $adminController->admin('./view/user/userConnectForm.php', null);
-        } elseif ($_GET['p'] == 'connect') {
-            $connect = $adminLoginController->login();
-
-            $userToLog = $connect['userToLog'];
-            $adminController->admin('./view/admin/adminMenu.php', null, null, null, null, null, $userToLog);
-
-        } elseif ($userLoggedIn == true)
+        if (!isset($_GET['p'])) {
+            $adminController->admin('./view/admin/adminMenu.php', null);
+        } else {
 
             // Category
 
@@ -226,8 +216,9 @@ try {
             } elseif ($_GET['p'] === 'approveComment') {
                 $viewCommentsData = $adminCommentController->approveComment();
 
+                $dataComments = $viewCommentsData['dataComments'];
                 $view = $viewCommentsData['view'];
-                $adminController->admin($view, null, null, null, null, null);
+                $adminController->admin($view, null, null, null, null, $dataComments);
 
             } elseif ($_GET['p'] === 'deleteComment') {
                 $deleteCommentData = $adminCommentController->deleteComment();
@@ -245,6 +236,7 @@ try {
 
             }
         }
+    }
 }
 catch(Exception $e) {
     echo 'Erreur : ' . $e->getMessage();
