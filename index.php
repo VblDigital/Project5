@@ -17,6 +17,7 @@ use src\manager\CategoryManager;
 use src\manager\UserManager;
 use \src\controller\frontendController\CommentController;
 use \src\controller\backendController\AdminCommentController;
+use \src\controller\backendController\AdminLoginController;
 
 $postController = new PostsController();
 $adminCategoryController = new AdminCategoryController();
@@ -25,12 +26,11 @@ $adminPostController = new AdminPostController();
 $adminUserController = new AdminUserController();
 $adminCommentController = new AdminCommentController();
 $commentController = new CommentController();
+$adminLoginController = new AdminLoginController();
 
 
 try {
-    if (!isset($_GET['action']) && !isset($_GET['p'])) {
-        $postController->listPosts();
-    } elseif (!isset($_GET['action']) && isset($_GET['p']) && $_GET['p'] == 'listPosts') {
+    if (!isset($_GET['action']) && !isset($_GET['p']) || !isset($_GET['action']) && isset($_GET['p']) && $_GET['p'] == 'listPosts') {
         $postController->listPosts();
     } elseif (!isset($_GET['action']) && $_GET['p'] == 'post') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -38,11 +38,14 @@ try {
         } else {
             throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
         }
+
     } elseif (!isset($_GET['action']) && $_GET['p'] == 'submitComment') {
         $addCommentData = $adminCommentController->submitComment();
         $textResult = "Votre message a été soumis pour approbation";
-        header('location:./index.php?p=post&id=' . $addCommentData . '&warning=' . $textResult);
+        header('location:post-' . $addCommentData . '-' . $textResult);
+
     } elseif (isset($_GET['action']) && $_GET['action'] == 'admin') {
+
         if (!isset($_GET['p'])) {
             $adminController->admin('./view/admin/adminMenu.php', null);
         } else {
@@ -213,8 +216,9 @@ try {
             } elseif ($_GET['p'] === 'approveComment') {
                 $viewCommentsData = $adminCommentController->approveComment();
 
+                $dataComments = $viewCommentsData['dataComments'];
                 $view = $viewCommentsData['view'];
-                $adminController->admin($view, null, null, null, null, null);
+                $adminController->admin($view, null, null, null, null, $dataComments);
 
             } elseif ($_GET['p'] === 'deleteComment') {
                 $deleteCommentData = $adminCommentController->deleteComment();

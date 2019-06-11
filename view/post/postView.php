@@ -54,9 +54,9 @@
                     <?php }?>
                     <div class="warning">
                         <?php
-                        if (isset($_GET['warning']))
-                        {$warning = $_GET['warning'];
-                            echo "<br/> $warning <br/>";  }
+                        if (isset($_GET['warning'])){
+                            echo "<br/> " . $_GET['warning'] . "<br/>";
+                        }
                         ?>
                     </div>
                     <div>
