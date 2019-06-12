@@ -45,10 +45,11 @@ try {
         header('location:post-' . $addCommentData . '-' . $textResult);
 
     } elseif (isset($_GET['action']) && $_GET['action'] == 'admin') {
+        $_SESSION['username'] = '';
 
-        if (!isset($_GET['p'])) {
-            $adminController->admin('./view/admin/adminMenu.php', null);
-        } else {
+        if (!isset($_GET['p']) && ($_SESSION['username'] == false) || isset($_GET['p']) && ($_SESSION['username'] == false)) {
+            $adminController->admin('./view/user/userConnectForm.php', null);
+        } elseif (isset($_GET['p']) && $_SESSION['username'] == true){
 
             // Category
 
@@ -197,7 +198,9 @@ try {
                 $view = $deleteUserData['view'];
                 $adminController->admin($view, null, null, null, $dataUser);
 
-            } //Comments
+            }
+
+            //Comments
 
             elseif ($_GET['p'] === 'viewComments') {
                 $viewCommentsData = $adminCommentController->viewComments();

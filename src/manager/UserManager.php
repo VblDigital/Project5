@@ -57,9 +57,18 @@ class UserManager extends Manager
         }
     }
 
-    public function addVisitor($commentLogin)
+    public function checkUser($username, $password)
     {
-        $this->prepareStmt('INSERT INTO user (username) VALUES ("'. $commentLogin . '")');
-        return $this->prepareObject('SELECT * FROM user ORDER BY id DESC LIMIT 1', User::class, false);
+        $users = array();
+        $users = $this->prepareObject('SELECT username, password FROM user', User::class, true );
+
+        try{
+            if(in_array($username, $users) && in_array($password, $users)){
+                return $_SESSION['username'] == true;
+            }
+
+        }catch (\Exception $e) {
+            echo 'Erreur : le login et/ou le mot de passe sont incorrect(s)';
+        }
     }
 }

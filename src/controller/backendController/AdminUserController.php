@@ -86,4 +86,18 @@ class AdminUserController
 
         return ['dataUser' => $viewUsers, 'view' => './view/user/viewUsers.php'];
     }
+
+    public function checkUser()
+    {
+        if (isset($_POST['username']) && isset($_POST['password']))
+        {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+        }
+
+        $userManager = new UserManager();
+        $checkusers = $userManager->checkUser($username, $password);
+
+        return ['dataUser' => $checkusers, 'view' => './view/admin/admin.php'];
+    }
 }

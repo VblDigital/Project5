@@ -30,3 +30,5 @@ RewriteRule ^deleteUser-([0-9]+)$ /index.php?action=admin&p=deleteUser&id=$1 [L]
 RewriteRule ^approveComment-([0-9]+)$ /index.php?action=admin&p=approveComment&id=$1 [L]
 RewriteRule ^deleteComment-([0-9]+)$ /index.php?action=admin&p=deleteComment&id=$1 [L]
 RewriteRule ^deleteSubmittedComment-([0-9]+)$ /index.php?action=admin&p=deleteSubmittedComment&id=$1 [L]
+
+RewriteRule ^checkUser$ /index.php?action=admin&p=checkUser [L]
