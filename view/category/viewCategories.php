@@ -18,8 +18,8 @@
                                 <tr>
                                     <td class="id"><?= $category->getId(); ?></td>
                                     <td class="nom"><?= $category->getName(); ?></td>
-                                    <td><a href="modifycategoryform-<?= $category->getId(); ?>">Modifier la catégorie</a></td>
-                                    <td><a href="deletecategory-<?= $category->getId(); ?>">Supprimer la catégorie</a></td>
+                                    <td><a href="admin-modifycategoryform-<?= $category->getId(); ?>">Modifier la catégorie</a></td>
+                                    <td><a href="admin-deletecategory-<?= $category->getId(); ?>">Supprimer la catégorie</a></td>
                                 </tr>
                         </tbody>
                             <?php }?>

@@ -8,6 +8,13 @@
         <div class="col-md-10 blog-main">
             <div class="blog-post">
                 <a href="../index.php"> <<<< Retour</a>
+                <div class="warning">
+                    <?php
+                    if (isset($_GET['warning'])){
+                        echo "<br/> " . $_GET['warning'] . "<br/>";
+                    }
+                    ?>
+                </div>
                 <h2 class="blog-post-title-single">
                     <?= $post->getTitle();?>
                 </h2>
@@ -52,13 +59,6 @@
                         <?= $comment->getText();?>
                     </div><br/>
                     <?php }?>
-                    <div class="warning">
-                        <?php
-                        if (isset($_GET['warning'])){
-                            echo "<br/> " . $_GET['warning'] . "<br/>";
-                        }
-                        ?>
-                    </div>
                     <div>
                         <?php require './view/comment/commentForm.php'; ?>
                     </div>

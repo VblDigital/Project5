@@ -98,6 +98,6 @@ class AdminUserController
         $userManager = new UserManager();
         $checkusers = $userManager->checkUser($username, $password);
 
-        header('Location: /');
+        header('Location: /admin');
     }
 }

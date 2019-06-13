@@ -1,12 +1,12 @@
 <?php
 
-session_start();
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require './vendor/autoload.php';
+
+session_start();
 
 use src\controller\backendController\AdminCategoryController;
 use \src\controller\frontendController\PostsController;
@@ -240,14 +240,14 @@ try {
                 $view = $deleteCommentData['view'];
                 $adminController->admin($view, null, null, null, null, $dataComments);
 
+            } elseif ($_GET['p'] === 'userlogout'){
+                $_SESSION['user']=false;
+                $adminController->admin('./view/user/userConnectForm.php', null);
+
             }
         } elseif (!isset($_GET['p']) && $_SESSION['user']) {
-            $_GET['id'] = 1;
-            $deleteCommentData = $adminCommentController->deleteSubmittedComment();
-
-            $dataComments = $deleteCommentData['dataComments'];
-            $view = $deleteCommentData['view'];
-            $adminController->admin($view, null, null, null, null, $dataComments);
+                $view = 'view/admin/adminMenu.php';
+                $adminController->admin($view, null);
         }
     }
 }

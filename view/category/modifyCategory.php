@@ -9,7 +9,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="modifycategory-<?= $_GET['id']; ?>" method="post">
+                    <form class="category-form" action="admin-modifycategory-<?= $_GET['id']; ?>" method="post">
                         <p>Changer le nom de la catégorie :</p>
                         <textarea name="categoryName" rows="1" cols="45"><?php echo $dataCategories->getName(); ?></textarea><br />
                         <button type="submit">Enregistrer</button>
