@@ -11,6 +11,8 @@ class Post {
     private $created_by;
     private $updated_date;
     private $updated_by;
+    private $file_name;
+    private $file_url;
     private $categories;
     private $comments;
     /**
@@ -87,6 +89,22 @@ class Post {
     }
 
     /**
+     * @param mixed $file_name
+     */
+    public function setFileName ( $file_name )
+    {
+        $this->file_name = $file_name;
+    }
+
+    /**
+     * @param mixed $file_url
+     */
+    public function setFileUrl ( $file_url )
+    {
+        $this->file_url = $file_url;
+    }
+
+    /**
      * @param mixed $categories
      */
     public function setCategories ( $categories )
@@ -149,6 +167,22 @@ class Post {
     public function getUpdatedBy ()
     {
         return $this->updated_by;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFileName ()
+    {
+        return $this->file_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFileUrl ()
+    {
+        return $this->file_url;
     }
 
     /**

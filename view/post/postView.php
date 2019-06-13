@@ -28,6 +28,9 @@
                 <div class="blog-post">
                     <?= $post->getText();?><br/>
                 </div>
+                <div>
+                    <img class='medium' src="<?= $post->getFileUrl();?>"/>
+                </div>
                 <div class="blog-post-meta">Catégorie(s) :
                     <?php
                     echo implode(', ', $categoriesNames);

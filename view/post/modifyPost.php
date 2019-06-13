@@ -19,6 +19,13 @@
                             <textarea name="chapo" cols="150" rows="3"><?= $dataPosts->getChapo();?></textarea>
                         <p>Texte :</p>
                             <textarea name="text" cols="150" rows="10"><?= $dataPosts->getText();?></textarea>
+                        <?php if($dataPosts->getFileName()== null) {
+                            echo '<br/><strong>Pas encore d\'image</strong>';
+                        } else {?><img class='medium' src="<?= $dataPosts->getFileUrl();?>" /><?php } ?>
+                        <p>
+                            Ajouter une image :<br/>
+                            <input type="file" name="img" />
+                        </p>
                         <p>Categorie(s) :<br/><br/>
                             <?php
                             foreach ($dataCategories as $category) {?>

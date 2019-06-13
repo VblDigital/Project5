@@ -40,13 +40,13 @@ class PostManager extends Manager
 
     public function modifyPost($postId, $title, $text, $chapo)
     {
-        $this->prepareStmt('UPDATE post SET title = "' . $title . '", text = "' . $text .'", chapo = "' . $chapo . '"  WHERE id=' . $postId);
+        $this->prepareStmt('UPDATE post SET title = "' . $title . '", text = "' . $text .'", chapo = "' . $chapo . '" WHERE id=' . $postId);
         return $this->getPost($postId);
     }
 
-    public function addPost($author, $title, $text, $chapo)
+    public function addPost($author, $title, $text, $chapo, $fileName, $imgFolder)
     {
-        $this->prepareStmt('INSERT INTO post (created_by, title, text, chapo) VALUES ("'. $author . '", "'. $title . '", "'. $chapo . '", "'. $text . '")');
+        $this->prepareStmt('INSERT INTO post (created_by, title, text, chapo, file_name, file_url) VALUES ("'. $author . '", "'. $title . '", "'. $chapo . '", "'. $text . '", "' . $fileName . '", "' . $imgFolder . '")');
         return $this->prepareObject('SELECT * FROM post ORDER BY id DESC LIMIT 1', Post::class, false);
     }
 

@@ -217,3 +217,11 @@ select {
 .warning {
   color: red;
 }
+
+img.small {
+  height: 150px;
+}
+
+img.medium {
+  max-height: 350px;
+}

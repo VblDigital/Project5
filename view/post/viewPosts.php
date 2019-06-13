@@ -1,5 +1,5 @@
-<?php require './view/admin/adminMenu.php'; ?><main role="main" class="container">
-
+<?php require './view/admin/adminMenu.php'; ?>
+<main role="main" class="container">
     <div class="row">
         <div class="col-md-10 blog-main">
             <div class="blog-post">
@@ -15,6 +15,7 @@
                             <th>Chapo</th>
                             <th>Texte</th>
                             <th>Catégorie(s)</th>
+                            <th>Image</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -35,6 +36,11 @@
                                 foreach ($post->getCategories() as $category) {$categoriesNames[] = $category->getName();}
                                 echo implode(', ', $categoriesNames);
                                 ?>
+                            </td>
+                            <td>
+                                <?php if($post->getFileName()== null) {
+                                echo '';
+                                } else {?><img class='small' src="<?= $post->getFileUrl();?>" /><?php } ?>
                             </td>
                             <td><a href="admin-modifypostform-<?= $post->getId(); ?>">Modifier le billet</a></td>
                             <td><a href="admin-deletepost-<?= $post->getId(); ?>">Supprimer le billet</a></td>

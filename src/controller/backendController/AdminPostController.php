@@ -27,16 +27,25 @@ class AdminPostController
      */
     public function addPost()
     {
-        if (isset($_POST['author']) && isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']))
+        if(isset($_FILES)){
+            $fileName = $_FILES['img']['name'];
+            $fileTmpName = $_FILES['img']['tmp_name'];
+            $imgFolder = './public/img/' . $fileName;
+            move_uploaded_file($fileTmpName, $imgFolder);
+        }
+
+        if (isset($_POST['author']) && isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']) && isset($fileName) && isset($imgFolder))
         {
             $author = $_POST['author'];
             $title = $_POST['title'];
             $chapo = $_POST['chapo'];
             $text = $_POST['text'];
+            $fileName = $_FILES['img']['name'];
+            $imgFolder = './public/img/' . $fileName;
             $category = $_POST['category'];
         }
         $postManager = new PostManager();
-        $post = $postManager->addPost($author, $title, $chapo, $text, $category);
+        $post = $postManager->addPost($author, $title, $chapo, $text, $fileName, $imgFolder, $category);
         $postId = $post->getId();
         foreach ($category as $cat)
         {
