@@ -27,8 +27,8 @@
                                 setlocale(LC_TIME, 'fr_FR.utf8','fra');
                                 echo utf8_encode(strftime("%#d %B %Y", strtotime($date)));?></td>
                             <td class="nom"><?= $comment->getPostId(); ?></td>
-                            <td><a href="approveComment-<?= $comment->getId(); ?>">Approuver le commentaire</a></td>
-                            <td><a href="deleteSubmittedComment-<?= $comment->getId(); ?>">Supprimer le commentaire</a></td>
+                            <td><a href="approvecomment-<?= $comment->getId(); ?>">Approuver le commentaire</a></td>
+                            <td><a href="deletesubmittedcomment-<?= $comment->getId(); ?>">Supprimer le commentaire</a></td>
                         </tr>
                         </tbody>
                         <?php }

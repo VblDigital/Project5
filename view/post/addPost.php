@@ -9,7 +9,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="addPost" method="post">
+                    <form class="category-form" action="admin-addpost" method="post" enctype="multipart/form-data">
                         <p>Auteur :<br/>
                             <select id="author" name="author">
                                 <?php foreach ($dataUsers as $user) {?>
@@ -30,6 +30,10 @@
                             <?php foreach ($dataCategories as $category) {?>
                                 <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>"><?= $category->getName(); ?><br/></input>
                             <?php } ?>
+                        </p>
+                        <p>
+                            Ajouter une image :<br/>
+                            <input type="file" name="img" />
                         </p>
                         <button type="submit">Enregistrer</button>
                     </form>

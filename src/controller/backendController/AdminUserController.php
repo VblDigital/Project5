@@ -98,6 +98,6 @@ class AdminUserController
         $userManager = new UserManager();
         $checkusers = $userManager->checkUser($username, $password);
 
-        return ['dataUser' => $checkusers, 'view' => './view/admin/admin.php'];
+        header('Location: /');
     }
 }

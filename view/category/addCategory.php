@@ -9,7 +9,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="addCategory" method="post">
+                    <form class="category-form" action="addcategory" method="post">
                         <p>Nom de la catégorie :</p>
                         <textarea name="categoryName" value="" cols="45" rows="1"></textarea><br />
                         <button type="submit">Enregistrer</button>

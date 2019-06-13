@@ -59,16 +59,6 @@ class UserManager extends Manager
 
     public function checkUser($username, $password)
     {
-        $users = array();
-        $users = $this->prepareObject('SELECT username, password FROM user', User::class, true );
-
-        try{
-            if(in_array($username, $users) && in_array($password, $users)){
-                return $_SESSION['username'] == true;
-            }
-
-        }catch (\Exception $e) {
-            echo 'Erreur : le login et/ou le mot de passe sont incorrect(s)';
-        }
+        $_SESSION['user'] = $this->prepareObject('SELECT * FROM user where username = "'. $username . '" && password = "'. $password . '"', User::class, false );
     }
 }

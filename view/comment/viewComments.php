@@ -24,7 +24,7 @@
                             <td class="nom"><?= $comment->getText(); ?></td>
                             <td class="nom"><?= $comment->getDate(); ?></td>
                             <td class="nom"><?= $comment->getPostId(); ?></td>
-                            <td><a href="deleteComment-<?= $comment->getId(); ?>">Supprimer le commentaire</a></td>
+                            <td><a href="deletecomment-<?= $comment->getId(); ?>">Supprimer le commentaire</a></td>
                         </tr>
                         </tbody>
                         <?php }

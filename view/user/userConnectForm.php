@@ -2,7 +2,7 @@
     <div>
         Pour accéder à la page d'administration, il vous faut au préalable vous connecter :
     </div>
-    <form  name="loginForm" method="POST" action="">
+    <form  name="loginForm" method="POST" action="./index.php?action=admin&p=check-user">
         <div>
             <?php
             if(isset($errMsg)){

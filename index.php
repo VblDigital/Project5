@@ -39,17 +39,20 @@ try {
             throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
         }
 
-    } elseif (!isset($_GET['action']) && $_GET['p'] == 'submitComment') {
+    } elseif (!isset($_GET['action']) && $_GET['p'] == 'submitcomment') {
         $addCommentData = $adminCommentController->submitComment();
         $textResult = "Votre message a été soumis pour approbation";
-        header('location:post-' . $addCommentData . '-' . $textResult);
+        header('Location:post-' . $addCommentData . '-' . $textResult);
 
     } elseif (isset($_GET['action']) && $_GET['action'] == 'admin') {
-        $_SESSION['username'] = '';
+        if (isset($_GET['p']) && $_GET['p'] == 'check-user'){
 
-        if (!isset($_GET['p']) && ($_SESSION['username'] == false) || isset($_GET['p']) && ($_SESSION['username'] == false)) {
+            $adminUserController->checkUser();
+        }
+
+        if (!isset($_GET['p']) && ($_SESSION['user'] == false) || isset($_GET['p']) && ($_SESSION['user'] == false)) {
             $adminController->admin('./view/user/userConnectForm.php', null);
-        } elseif (isset($_GET['p']) && $_SESSION['username'] == true){
+        } elseif (isset($_GET['p']) && $_SESSION['user']){
 
             // Category
 
@@ -238,6 +241,13 @@ try {
                 $adminController->admin($view, null, null, null, null, $dataComments);
 
             }
+        } elseif (!isset($_GET['p']) && $_SESSION['user']) {
+            $_GET['id'] = 1;
+            $deleteCommentData = $adminCommentController->deleteSubmittedComment();
+
+            $dataComments = $deleteCommentData['dataComments'];
+            $view = $deleteCommentData['view'];
+            $adminController->admin($view, null, null, null, null, $dataComments);
         }
     }
 }
