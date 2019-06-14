@@ -76,6 +76,15 @@ class AdminPostController
             $postManager->linkPostToCategory($cat, $postId);
         }
 
+        $fileName = $_FILES['img']['name'];
+        if(isset($fileName)){
+            $postId = $_GET['id'];
+            $fileTmpName = $_FILES['img']['tmp_name'];
+            $imgFolder = './public/img/' . $fileName;
+            move_uploaded_file($fileTmpName, $imgFolder);
+            $postManager->addFile($postId, $fileName, $imgFolder);
+        }
+
         $viewPosts = $postManager->getPosts();
 
         return ['dataPost' => $viewPosts, 'view' => './view/post/viewPosts.php'];

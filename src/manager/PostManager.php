@@ -65,4 +65,9 @@ class PostManager extends Manager
     {
         $this->prepareStmt('DELETE FROM posts_categories WHERE post_id=' . $postId);
     }
+
+    public function addFile($postId, $fileName, $imgFolder){
+        $this->prepareStmt('UPDATE post SET file_name = "' . $fileName . '", file_url = "' . $imgFolder .'" WHERE id=' . $postId);
+        return $this->getPost($postId);
+    }
 }

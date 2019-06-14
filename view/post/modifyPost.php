@@ -9,7 +9,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="admin-modifypost-<?= $_GET['id']; ?>" method="post">
+                    <form class="category-form" action="admin-modifypost-<?= $_GET['id']; ?>" method="post" enctype="multipart/form-data">
                         <p>Auteur :<br/>
                             <?= $dataPosts->getCreatedBy()->getUsername(); ?>
                         </p>
@@ -23,7 +23,7 @@
                             echo '<br/><strong>Pas encore d\'image</strong>';
                         } else {?><img class='medium' src="<?= $dataPosts->getFileUrl();?>" /><?php } ?>
                         <p>
-                            Ajouter une image :<br/>
+                            Changer l'image :<br/>
                             <input type="file" name="img" />
                         </p>
                         <p>Categorie(s) :<br/><br/>
