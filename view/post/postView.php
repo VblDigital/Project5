@@ -10,8 +10,8 @@
                 <a href="../index.php"> <<<< Retour</a>
                 <div class="warning">
                     <?php
-                    if (isset($_GET['warning'])){
-                        echo "<br/> " . $_GET['warning'] . "<br/>";
+                    if (isset($warning)){
+                        echo "<br/> " . $warning . "<br/>";
                     }
                     ?>
                 </div>

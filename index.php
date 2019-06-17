@@ -18,6 +18,7 @@ use src\manager\UserManager;
 use \src\controller\frontendController\CommentController;
 use \src\controller\backendController\AdminCommentController;
 use \src\controller\backendController\AdminLoginController;
+use \src\controller\frontendController\ContactController;
 
 $postController = new PostsController();
 $adminCategoryController = new AdminCategoryController();
@@ -27,18 +28,31 @@ $adminUserController = new AdminUserController();
 $adminCommentController = new AdminCommentController();
 $commentController = new CommentController();
 $adminLoginController = new AdminLoginController();
+$contactController = new ContactController();
 
 
 try {
     if (!isset($_GET['action']) && !isset($_GET['p']) || !isset($_GET['action']) && isset($_GET['p']) && $_GET['p'] == 'listPosts') {
         $postController->listPosts();
-    } elseif (!isset($_GET['action']) && $_GET['p'] == 'post') {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $postController->post();
-        } else {
-            throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
+    } elseif (!isset($_GET['action'])){
+        if($_GET['p'] == 'post') {
+            if (isset($_GET['id']) && $_GET['id'] > 0) {
+                $postController->post();
+            } else {
+                throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
+            }
+        } elseif ($_GET['p'] == 'profile'){
+            require './view/profile/profile.php';
+        } elseif ($_GET['p'] == 'cv'){
+            require './view/profile/cv.php';
+        } elseif ($_GET['p'] == 'product'){
+            require ('./view/profile/product.php');
+        } elseif ($_GET['p'] == 'contactform') {
+            require('./view/contact/contactForm.php');
+        } elseif ($_GET['p'] == 'contact') {
+            //$contact = $contactController->sendContact();
+            header('Location:contactform');
         }
-
     } elseif (!isset($_GET['action']) && $_GET['p'] == 'submitcomment') {
         $addCommentData = $adminCommentController->submitComment();
         $textResult = "Votre message a été soumis pour approbation";

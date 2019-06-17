@@ -222,6 +222,28 @@ img.small {
   height: 150px;
 }
 
+img.xsmall {
+  height: 50px;
+}
+
 img.medium {
   max-height: 350px;
+}
+
+img.profileImg {
+  padding-top: 40px;
+}
+
+a.p-2 {
+  font-family: "Caviar Dreams";
+  font-size: larger;
+}
+
+div.article{
+  width: 100%;
+}
+
+img.cv {
+  padding-top: 40px;
+  width:150px;
 }
