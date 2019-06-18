@@ -1,4 +1,5 @@
-<?php include ('./view/admin/adminMenu.php'); ?>
+<?php require ('./view/admin/adminMenu.php');
+$input = new \src\controller\Input(); ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -9,7 +10,7 @@
                 </div>
                 <div>
                     <br/>
-                    <form class="user-form" action="admin-modifyuser-<?= $_GET['id']; ?>" method="post">
+                    <form class="user-form" action="admin-modifyuser-<?= $input->get('id'); ?>" method="post">
                         <p>Modifier les coordonnées :</p>
                         <p>Pseudonyme :</p>
                             <textarea name="username" cols="100" rows="1"><?= $dataUsers->getUsername(); ?></textarea>
@@ -20,7 +21,7 @@
                 </div>
                 <div>
                     <br/>
-                    <form class="user-form" action="admin-modifyuserpass-<?= $_GET['id']; ?>" method="post">
+                    <form class="user-form" action="admin-modifyuserpass-<?= $input->get('id'); ?>" method="post">
                         <p>Modifier le mot de passe :</p>
                         <p>Nouveau mot de passe :<br/>
                             <input type="password" name="password" cols="100" rows="1"></input>

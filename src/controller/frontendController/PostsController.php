@@ -2,6 +2,7 @@
 
 namespace src\controller\frontendController;
 
+use src\controller\Input;
 use src\manager\PostManager;
 
 class PostsController
@@ -16,8 +17,10 @@ class PostsController
 
     public function post()
     {
+        $input = new Input();
+
         $postManager = new PostManager();
-        $post = $postManager->getPost($_GET['id']);
+        $post = $postManager->getPost($input->get('id'));
 
         if ($post == true) {
             $categoriesNames = array();

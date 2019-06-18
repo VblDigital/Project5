@@ -112,6 +112,14 @@ class Post {
         $this->categories = $categories;
     }
 
+    /**
+     * @param mixed $comments
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+    }
+
         /**
      * @return mixed
      */
@@ -201,11 +209,4 @@ class Post {
         return $this->comments;
     }
 
-    /**
-     * @param mixed $comments
-     */
-    public function setComments($comments)
-    {
-        $this->comments = $comments;
-    }
 }

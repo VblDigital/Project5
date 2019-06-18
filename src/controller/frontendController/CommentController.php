@@ -1,20 +1,21 @@
 <?php
 
-
 namespace src\controller\frontendController;
 
+use src\controller\Input;
 use src\manager\CommentManager;
-use src\manager\UserManager;
 
 class CommentController
 {
     public function submitComment($postId)
     {
+        $input = new Input();
+
         if (isset($_POST['commentAuthor']) && isset($_POST['commentText']) && isset($_POST['postId']))
         {
-            $commentAuthor = $_POST['commentAuthor'];
-            $commentText = $_POST['commentText'];
-            $postId = $_POST['postId'];
+            $commentAuthor = $input->post('commentAuthor');
+            $commentText = $input->post('commentText');
+            $postId = $input->post('postId');
         }
 
         $commentManager = new CommentManager();

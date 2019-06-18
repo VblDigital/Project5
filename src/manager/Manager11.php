@@ -18,8 +18,6 @@ class Manager
         $req->setFetchMode(\PDO::FETCH_CLASS, $class_name);
         if ($all) {
             return $req->fetchAll();
-        } else {
-            return $req->fetch();
-        }
+        } return $req->fetch();
     }
 }

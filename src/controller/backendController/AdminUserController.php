@@ -2,6 +2,7 @@
 
 namespace src\controller\backendController;
 
+use src\controller\Input;
 use src\manager\UserManager;
 
 class AdminUserController
@@ -24,19 +25,21 @@ class AdminUserController
 
     public function viewUser()
     {
+        $input = new Input();
         $userManager = new UserManager();
-        $viewuser = $userManager->getUser($_GET['id']);
+        $viewuser = $userManager->getUser($input->get('id'));
 
         return ['dataUser' => $viewuser, 'view' => './view/user/modifyUser.php'];
     }
 
     public function addUser()
     {
+        $input = new Input();
         if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']))
         {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $email = $_POST['email'];
+            $username = $input->post('username');
+            $password = $input->post('password');
+            $email = $input->post('email');
         }
         $userManager = new UserManager();
         $userManager->addUser($username, $password, $email);
@@ -47,11 +50,12 @@ class AdminUserController
 
     public function modifyUser()
     {
-        $id = $_GET['id'];
+        $input = new Input();
+        $id = $input->get('id');
         if (isset($_POST['username']) && isset($_POST['email']))
         {
-            $username = $_POST['username'];
-            $email = $_POST['email'];
+            $username = $input->post('username');
+            $email = $input->post('email');
         }
 
         $userManager = new UserManager();
@@ -63,10 +67,12 @@ class AdminUserController
 
     public function modifyUserPass()
     {
-        $id = $_GET['id'];
+        $input = new Input();
+        $id = $input->get('id');
+
         if (isset($_POST['password']))
         {
-            $password = $_POST['password'];
+            $password = $input->post('password');
         }
 
         $userManager = new UserManager();
@@ -78,7 +84,8 @@ class AdminUserController
 
     public function deleteUser()
     {
-        $id = $_GET['id'];
+        $input = new Input();
+        $id = $input->get('id');
 
         $userManager = new UserManager();
         $userManager->deleteUser($id);
@@ -89,10 +96,11 @@ class AdminUserController
 
     public function checkUser()
     {
+        $input = new Input();
         if (isset($_POST['username']) && isset($_POST['password']))
         {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+            $username = $input->post('username');
+            $password = $input->post('password');
         }
 
         $userManager = new UserManager();

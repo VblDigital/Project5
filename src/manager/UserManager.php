@@ -3,6 +3,7 @@
 namespace src\manager;
 
 use mysql_xdevapi\Exception;
+use src\controller\Input;
 use src\model\User;
 
 class UserManager extends Manager
@@ -59,6 +60,7 @@ class UserManager extends Manager
 
     public function checkUser($username, $password)
     {
+        $input = new Input();
         $_SESSION['user'] = $this->prepareObject('SELECT * FROM user where username = "'. $username . '" && password = "'. $password . '"', User::class, false );
     }
 }

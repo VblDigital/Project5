@@ -2,6 +2,7 @@
 
 namespace src\controller\backendController;
 
+use src\controller\Input;
 use src\manager\PostManager;
 
 class AdminPostController
@@ -16,8 +17,9 @@ class AdminPostController
 
     public function viewPost()
     {
+        $input = new Input();
         $postManager = new PostManager();
-        $viewpost = $postManager->getPost($_GET['id']);
+        $viewpost = $postManager->getPost($input->get('id'));
 
         return ['dataPost' => $viewpost, 'view' => './view/post/modifyPost.php'];
     }
@@ -27,6 +29,8 @@ class AdminPostController
      */
     public function addPost()
     {
+        $input = new Input();
+
         if(isset($_FILES)){
             $fileName = $_FILES['img']['name'];
             $fileTmpName = $_FILES['img']['tmp_name'];
@@ -36,13 +40,13 @@ class AdminPostController
 
         if (isset($_POST['author']) && isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']) && isset($fileName) && isset($imgFolder))
         {
-            $author = $_POST['author'];
-            $title = $_POST['title'];
-            $chapo = $_POST['chapo'];
-            $text = $_POST['text'];
+            $author = $input->post('author');
+            $title = $input->post('title');
+            $chapo = $input->post('chapo');
+            $text = $input->post('text');
             $fileName = $_FILES['img']['name'];
             $imgFolder = './public/img/' . $fileName;
-            $category = $_POST['category'];
+            $category = $input->post('category');
         }
         $postManager = new PostManager();
         $post = $postManager->addPost($author, $title, $chapo, $text, $fileName, $imgFolder, $category);
@@ -58,13 +62,14 @@ class AdminPostController
 
     public function modifyPost()
     {
-        $id = $_GET['id'];
+        $input = new Input();
+        $id = $input->get('id');
         if (isset($_POST['title']) && isset($_POST['chapo']) && isset($_POST['text']) && isset($_POST['category']))
         {
-            $title = $_POST['title'];
-            $chapo = $_POST['chapo'];
-            $text = $_POST['text'];
-            $category = $_POST['category'];
+            $title = $input->post('title');
+            $chapo = $input->post('chapo');
+            $text = $input->post('text');
+            $category = $input->post('category');
         }
 
         $postManager = new PostManager();
@@ -76,15 +81,16 @@ class AdminPostController
             $postManager->linkPostToCategory($cat, $postId);
         }
 
-        $fileName = $_FILES['img']['name'];
-        if(isset($fileName)){
-            $postId = $_GET['id'];
-            $fileTmpName = $_FILES['img']['tmp_name'];
-            $imgFolder = './public/img/' . $fileName;
-            move_uploaded_file($fileTmpName, $imgFolder);
-            $postManager->addFile($postId, $fileName, $imgFolder);
+        if($_FILES['img']['size'] > 0) {
+            $fileName = $_FILES['img']['name'];
+            if (isset($fileName)) {
+                $postId = $input->get('id');
+                $fileTmpName = $_FILES['img']['tmp_name'];
+                $imgFolder = './public/img/' . $fileName;
+                move_uploaded_file($fileTmpName, $imgFolder);
+                $postManager->addFile($postId, $fileName, $imgFolder);
+            }
         }
-
         $viewPosts = $postManager->getPosts();
 
         return ['dataPost' => $viewPosts, 'view' => './view/post/viewPosts.php'];
@@ -92,7 +98,8 @@ class AdminPostController
 
     public function deletePost()
     {
-        $id = $_GET['id'];
+        $input = new Input();
+        $id = $input->get('id');
 
         $postManager = new PostManager();
         $postManager->deletePost($id);

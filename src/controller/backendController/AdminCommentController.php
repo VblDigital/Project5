@@ -1,19 +1,20 @@
 <?php
 
-
 namespace src\controller\backendController;
 
+use src\controller\Input;
 use src\manager\CommentManager;
 
 class AdminCommentController
 {
-        public function submitComment()
+    public function submitComment()
     {
+        $input = new Input();
         if (isset($_POST['commentAuthor']) && ($_POST['commentText']) && ($_POST['postId'])) {
             {
-                $author = $_POST['commentAuthor'];
-                $text = $_POST['commentText'];
-                $postId = $_POST['postId'];
+                $author = $input->post('commentAuthor');
+                $text = $input->post('commentText');
+                $postId = $input->post('postId');
             }
 
             $commentManager = new CommentManager();
@@ -40,8 +41,9 @@ class AdminCommentController
 
     public function approveComment()
     {
+        $input = new Input();
         $commentManager = new CommentManager();
-        $commentManager->approveComment($_GET['id']);
+        $commentManager->approveComment($input->get('id'));
         $viewcomments = $commentManager->getSubmittedComments();
 
         return ['dataComments' => $viewcomments, 'view' => './view/comment/viewSubmittedComments.php'];
@@ -49,7 +51,8 @@ class AdminCommentController
 
     public function deleteComment()
     {
-        $id = $_GET['id'];
+        $input = new Input();
+        $id = $input->get('id');
 
         $commentManager = new CommentManager();
         $commentManager->deleteComment($id);
@@ -60,7 +63,8 @@ class AdminCommentController
 
     public function deleteSubmittedComment()
     {
-        $id = $_GET['id'];
+        $input = new Input();
+        $id = $input->get('id');
 
         $commentManager = new CommentManager();
         $commentManager->deleteComment($id);

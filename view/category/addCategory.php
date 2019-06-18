@@ -1,4 +1,4 @@
-<?php include ('./view/admin/adminMenu.php'); ?>
+<?php require ('./view/admin/adminMenu.php'); ?>
 
 <main role="main" class="container">
     <div class="row">

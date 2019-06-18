@@ -1,4 +1,5 @@
 <?php require './view/admin/adminMenu.php'; ?>
+
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-10 blog-main">

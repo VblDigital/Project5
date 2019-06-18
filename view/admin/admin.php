@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 
-<?php include ('./view/menu.php'); ?>
+<?php require ('./view/menu.php'); ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -23,7 +23,7 @@
     </div>
 </main>
 
-<?php include './view/blogFooterLight.php'?>
+<?php require './view/blogFooterLight.php'?>
 
 <?php $content = ob_get_clean(); ?>
 

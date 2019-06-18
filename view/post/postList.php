@@ -1,7 +1,7 @@
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
-<?php include ('./view/menu.php'); ?>
+<?php require ('./view/menu.php'); ?>
 <?php require ('./view/introduction.php'); ?>
 
 <main role="main" class="container">
@@ -46,6 +46,7 @@
         <div class="p-4 mb-3 bg-light rounded">
             <h4 class="font-italic">En bref</h4>
             <p class="mb-0">N'hésitez pas à me contacter via le formulaire de contact ou via ma page Facebook professionnelle <img class="xsmall" src="./public/img/facebook.jpg" /></p>
+            <p>Mon projet est visible sur <a href="https://github.com/vbopenclass/Project5">GitHub</a>.</p>
         </div>
         </aside>
     </div>

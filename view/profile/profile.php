@@ -1,7 +1,8 @@
 <?php $title = 'Mon profil'; ?>
 
 <?php ob_start(); ?>
-<?php include './view/menu.php'; ?>
+<?php require './view/menu.php';
+$input = new \src\controller\Input(); ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -11,7 +12,7 @@
                 <div class="warning">
                     <?php
                     if (isset($_GET['warning'])){
-                        echo "<br/> " . $_GET['warning'] . "<br/>";
+                        echo "<br/> " . htmlspecialchars($input->get('warning')) . "<br/>";
                     }
                     ?>
                 </div>

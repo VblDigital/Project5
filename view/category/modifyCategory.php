@@ -1,4 +1,5 @@
-<?php include ('./view/admin/adminMenu.php'); ?>
+<?php require ('./view/admin/adminMenu.php');
+$input = new \src\controller\Input(); ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -9,7 +10,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="admin-modifycategory-<?= $_GET['id']; ?>" method="post">
+                    <form class="category-form" action="admin-modifycategory-<?= $input->get('id'); ?>" method="post">
                         <p>Changer le nom de la catégorie :</p>
                         <textarea name="categoryName" rows="1" cols="45"><?php echo $dataCategories->getName(); ?></textarea><br />
                         <button type="submit">Enregistrer</button>

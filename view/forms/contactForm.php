@@ -1,7 +1,7 @@
 <?php $title = 'Mon profil'; ?>
 
 <?php ob_start(); ?>
-<?php include './view/menu.php'; ?>
+<?php require './view/menu.php'; ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -11,7 +11,7 @@
                     <h2>Pour me contacter</h2>
                 </div>
                 <div>
-                    <form class="category-form" action="contact" method="post">
+                    <form class="category-form" action="../../index.php" method="post">
                         <p>Votre nom :<br/>
                             <textarea name="name" cols="50" rows="1"></textarea>
                         </p>

@@ -1,4 +1,5 @@
-<?php include ('./view/admin/adminMenu.php'); ?>
+<?php require ('./view/admin/adminMenu.php');
+$input = new \src\controller\Input(); ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -9,7 +10,7 @@
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="admin-modifypost-<?= $_GET['id']; ?>" method="post" enctype="multipart/form-data">
+                    <form class="category-form" action="admin-modifypost-<?= $input->get('id'); ?>" method="post" enctype="multipart/form-data">
                         <p>Auteur :<br/>
                             <?= $dataPosts->getCreatedBy()->getUsername(); ?>
                         </p>
@@ -20,12 +21,19 @@
                         <p>Texte :</p>
                             <textarea name="text" cols="150" rows="10"><?= $dataPosts->getText();?></textarea>
                         <?php if($dataPosts->getFileName()== null) {
-                            echo '<br/><strong>Pas encore d\'image</strong>';
-                        } else {?><img class='medium' src="<?= $dataPosts->getFileUrl();?>" /><?php } ?>
-                        <p>
-                            Changer l'image :<br/>
+                            echo '<br/><strong>Pas encore d\'image</strong>
+                            <p>
+                            Ajouter une image :<br/>
                             <input type="file" name="img" />
-                        </p>
+                            </p>';
+                        } elseif ($dataPosts->getFileName()!== null) {
+                            ?><img class='medium' src="<?= $dataPosts->getFileUrl();?>" />
+                            <p>
+                                Changer l'image :<br/>
+                                <input type="file" name="img" />
+                            </p>
+                            <?php
+                        } ?>
                         <p>Categorie(s) :<br/><br/>
                             <?php
                             foreach ($dataCategories as $category) {?>

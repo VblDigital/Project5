@@ -1,7 +1,7 @@
 <?php $title = 'Mon profil'; ?>
 
 <?php ob_start(); ?>
-<?php include './view/menu.php'; ?>
+<?php require './view/menu.php'; ?>
 
     <main role="main" class="container">
         <div class="row">
@@ -10,7 +10,7 @@
                     <a href="../../index.php"> <<<< Retour</a>
                 </div>
                 <div>
-                    <img src="./public/img/CVValerieBleser.png" />
+                    <embed src=./public/file/CVValerieBleser.pdf width=800 height=1200 type='application/pdf'/>.
                 </div>
             </div>
         </div>

@@ -1,7 +1,8 @@
 <?php $title = $post->getTitle(); ?>
 
 <?php ob_start(); ?>
-<?php include './view/menu.php'; ?>
+<?php require './view/menu.php';
+$input = new \src\controller\Input(); ?>
 
 <main role="main" class="container">
     <div class="row">
@@ -10,8 +11,8 @@
                 <a href="../index.php"> <<<< Retour</a>
                 <div class="warning">
                     <?php
-                    if (isset($warning)){
-                        echo "<br/> " . $warning . "<br/>";
+                    if (isset($_GET['warning'])){
+                        echo "<br/> " . htmlspecialchars($input->get('warning')) . "<br/>";
                     }
                     ?>
                 </div>
@@ -34,8 +35,13 @@
                 <div class="blog-post-meta">Catégorie(s) :
                     <?php
                     echo implode(', ', $categoriesNames);
-                    ?>
-                </div>
+                    ?><br/><?php
+                    if(($post->getUpdatedDate()==! "")){
+                        $date = $post->getUpdatedDate();
+                        setlocale(LC_TIME, 'fr_FR.utf8','fra');
+                        echo "Modifié le : " . utf8_encode(strftime("%A %#d %B %Y", strtotime($date)));
+                    } ?>
+                </div><br/>
                 <div class="blog-post">
                     <?php
                         if (empty($post->getComments()))
@@ -63,7 +69,7 @@
                     </div><br/>
                     <?php }?>
                     <div>
-                        <?php require './view/comment/commentForm.php'; ?>
+                        <?php require './view/forms/commentForm.php'; ?>
                     </div>
                 </div>
             </div>
