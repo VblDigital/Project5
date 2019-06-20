@@ -10,8 +10,13 @@
                 <div>
                     <h2>Pour me contacter</h2>
                 </div>
+                <div class="warning">
+                    <?php if (isset($texte)){
+                        echo $texte;}
+                    ?><br/>
+                </div>
                 <div>
-                    <form class="category-form" action="../../index.php" method="post">
+                    <form class="category-form" action="contact" method="post">
                         <p>Votre nom :<br/>
                             <textarea name="name" cols="50" rows="1"></textarea>
                         </p>

@@ -1,4 +1,5 @@
 RewriteEngine On
+Options -Indexes
 
 RewriteBase /
 

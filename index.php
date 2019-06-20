@@ -8,8 +8,6 @@ require './vendor/autoload.php';
 
 session_start();
 
-
-
 use src\controller\backendController\AdminCategoryController;
 use \src\controller\frontendController\PostsController;
 use \src\controller\backendController\AdminController;
@@ -21,6 +19,9 @@ use \src\controller\backendController\AdminCommentController;
 use \src\controller\frontendController\CommentController;
 use \src\controller\frontendController\ContactController;
 use \src\controller\Input;
+use Mailgun\Mailgun;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 $adminCategoryController = new AdminCategoryController();
 $postController = new PostsController();
@@ -31,7 +32,6 @@ $adminCommentController = new AdminCommentController();
 $commentController = new CommentController();
 $contactController = new ContactController();
 $input = new Input();
-
 
 try {
     if (!isset($_GET['action']) && !isset($_GET['p']) || !isset($_GET['action']) && isset($_GET['p']) && $input->get('p') == 'listPosts') {
@@ -48,12 +48,11 @@ try {
         } elseif ($input->get('p') == 'cv') {
             require './view/profile/cv.php';
         } elseif ($input->get('p') == 'product') {
-            require('./view/profile/product.php');
+            require'./view/profile/product.php';
         } elseif ($input->get('p') == 'contactform') {
-            require('./view/forms/contactForm.php');
+            require'./view/forms/contactForm.php';
         } elseif ($input->get('p') == 'contact') {
-            //$contact = $contactController->sendContact();
-            header('Location:contactform');
+            $contact = $contactController->sendContact();
         } elseif ($input->get('p') == 'submitcomment') {
             $addCommentData = $adminCommentController->submitComment();
             $textResult = "Votre message a été soumis pour approbation";

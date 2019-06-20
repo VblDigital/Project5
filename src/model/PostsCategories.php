@@ -11,8 +11,7 @@ class PostsCategories
     /**
      * @param mixed $id
      */
-    public function setId ( $id ): void
-    {
+    public function setId ( $id ): void {
         $id = (int)$id;
         if ($id > 0) {
             $this->id = $id;
@@ -22,8 +21,7 @@ class PostsCategories
     /**
      * @param mixed $name
      */
-    public function setCategory_id ( $category_id ): void
-    {
+    public function setCategory_id ( $category_id ): void {
         $this->category_id = $category_id;
     }
 
