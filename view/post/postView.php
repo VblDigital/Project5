@@ -1,4 +1,5 @@
-<?php $title = $post->getTitle(); ?>
+<?php $title = $post->getTitle();
+$message = new \src\Message(); ?>
 
 <?php ob_start(); ?>
 <?php require './view/menu.php';
@@ -8,14 +9,15 @@ $input = new \src\controller\Input(); ?>
     <div class="row">
         <div class="col-md-10 blog-main">
             <div class="blog-post">
-                <a href="../index.php"> <<<< Retour</a>
+                <div class="lien">
+                    <a href="../index.php"> <<<< Retour</a>
+                </div>
                 <div class="warning">
                     <?php
-                    if (isset($_GET['warning'])){
-                        echo "<br/> " . htmlspecialchars($input->get('warning')) . "<br/>";
-                    }
+                        $message->message();
                     ?>
                 </div>
+                <!-- POST -->
                 <h2 class="blog-post-title-single">
                     <?= $post->getTitle();?>
                 </h2>
@@ -32,6 +34,7 @@ $input = new \src\controller\Input(); ?>
                 <div>
                     <img class='medium' src="<?= $post->getFileUrl();?>"/>
                 </div>
+                <!-- Category(ies) -->
                 <div class="blog-post-meta">Catégorie(s) :
                     <?php
                     echo implode(', ', $categoriesNames);
@@ -42,6 +45,7 @@ $input = new \src\controller\Input(); ?>
                         echo "Modifié le : " . utf8_encode(strftime("%A %#d %B %Y", strtotime($date)));
                     } ?>
                 </div><br/>
+                <!-- Comment(s) -->
                 <div class="blog-post">
                     <?php
                         if (empty($post->getComments()))
@@ -68,6 +72,7 @@ $input = new \src\controller\Input(); ?>
                         <?= $comment->getText();?>
                     </div><br/>
                     <?php }?>
+                    <!-- To add comment -->
                     <div>
                         <?php require './view/forms/commentForm.php'; ?>
                     </div>

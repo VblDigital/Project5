@@ -1,7 +1,9 @@
-<?php $title = 'Menu Administration';?>
+<?php $input = new \src\controller\Input();
+$title = 'Menu Administration';?>
 
 <?php ob_start(); ?>
 
+<!-- admin menu -->
 <?php require ('./view/menu.php'); ?>
 
 <main role="main" class="container">
@@ -9,8 +11,9 @@
         <div class="col-md-10 blog-main">
             <div class="blog-post">
                 <h4>
-                    <?php if ($_SESSION != null && $_SESSION['user']) {
-                        echo "Bonjour " . ($_SESSION['user']->getUsername()) . "!"; ?><br/>
+                    <!-- if logged, to log out -->
+                    <?php if ($input->session() != null && $input->session('user')) {
+                        print_r("Bonjour " . ($input->session('user')->getUsername()) . "!"); ?><br/>
                         </h4>
                         <a href="admin-logout">Se deconnecter</a><?php
                     }?>
@@ -19,7 +22,8 @@
                 </div>
             </div>
             <div>
-                <?php include $view; ?>
+                <!-- display the part defined in index.php -->
+                <?php require $view; ?>
             </div>
         </div>
     </div>
@@ -29,4 +33,5 @@
 
 <?php $content = ob_get_clean(); ?>
 
+<!-- common part of all frontend pages -->
 <?php require './view/template.php'; ?>

@@ -5,8 +5,17 @@ namespace src\controller\frontendController;
 use src\controller\Input;
 use src\manager\PostManager;
 
+/**
+ * Class PostsController
+ * @package src\controller\frontendController
+ * To display the posts on the homepage
+ */
 class PostsController
 {
+    /**
+     * @return array
+     * Display all the posts on frontend
+     */
     public function listPosts()
     {
         $postManager = new PostManager();
@@ -15,6 +24,10 @@ class PostsController
         require './view/post/postList.php';
     }
 
+    /**
+     * @return array
+     * Display one specific post on frontend
+     */
     public function post()
     {
         $input = new Input();

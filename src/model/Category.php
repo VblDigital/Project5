@@ -2,7 +2,10 @@
 
 namespace src\model;
 
-
+/**
+ * Class Category
+ * @package src\model
+ */
 class Category
 {
     private $id;

@@ -247,3 +247,11 @@ img.cv {
   padding-top: 40px;
   width:150px;
 }
+
+div.center {
+  text-align: center;
+}
+
+div.lien {
+  padding-bottom: 10px;
+}

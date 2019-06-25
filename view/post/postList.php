@@ -1,3 +1,4 @@
+<!-- First page displayed on homepage with all posts list -->
 <?php $title = 'Mon blog'; ?>
 
 <?php ob_start(); ?>
@@ -8,6 +9,7 @@
     <div class="row">
         <div class="col-md-8 blog-main">
             <div class="blog-post">
+                <!-- Left part - all the posts displayed with chapo and link to reach a post related to id -->
                 <?php
                 foreach ($posts as $datas){ ?>
                 <h2 class="blog-post-title">
@@ -42,13 +44,8 @@
                 </nav>
             </div>
         </div>
-        <aside class="col-md-4 blog-sidebar">
-        <div class="p-4 mb-3 bg-light rounded">
-            <h4 class="font-italic">En bref</h4>
-            <p class="mb-0">N'hésitez pas à me contacter via le formulaire de contact ou via ma page Facebook professionnelle <img class="xsmall" src="./public/img/facebook.jpg" /></p>
-            <p>Mon projet est visible sur <a href="https://github.com/vbopenclass/Project5">GitHub</a>.</p>
-        </div>
-        </aside>
+        <!-- right part - links to social media -->
+        <?php require './view/aside.php'; ?>
     </div>
 </main>
 <?php require './view/blogFooter.php'?>

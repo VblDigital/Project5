@@ -14,6 +14,7 @@
     <link href= "../../public/css/blog.css" rel="stylesheet">
 </head>
 <body>
+<!-- common part of all backend pages -->
 <?= $content ?>
 </body>
 <footer class="blog-footer">

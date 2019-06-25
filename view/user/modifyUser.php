@@ -10,27 +10,11 @@ $input = new \src\controller\Input(); ?>
                 </div>
                 <div>
                     <br/>
-                    <form class="user-form" action="admin-modifyuser-<?= $input->get('id'); ?>" method="post">
-                        <p>Modifier les coordonnées :</p>
-                        <p>Pseudonyme :</p>
-                            <textarea name="username" cols="100" rows="1"><?= $dataUsers->getUsername(); ?></textarea>
-                        <p>Adresse email :<br/></p>
-                            <textarea name="email" cols="100" rows="1"><?= $dataUsers->getEmail(); ?></textarea>
-                        <button type="submit">Enregistrer</button>
-                    </form>
+                    <?php require './view/forms/modifyUserForm.php'; ?>
                 </div>
                 <div>
                     <br/>
-                    <form class="user-form" action="admin-modifyuserpass-<?= $input->get('id'); ?>" method="post">
-                        <p>Modifier le mot de passe :</p>
-                        <p>Nouveau mot de passe :<br/>
-                            <input type="password" name="password" cols="100" rows="1"></input>
-                        </p>
-                        <!--<p>Répétez le mot de passe :<br/>
-                            <textarea name="passwordcheck" value="" cols="50" rows="1"></textarea>
-                        </p>-->
-                        <button type="submit">Enregistrer</button>
-                    </form>
+                    <?php require './view/forms/modifyUserPassForm.php'; ?>
                 </div>
             </div>
         </div>

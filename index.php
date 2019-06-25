@@ -1,13 +1,16 @@
 <?php
 
+// to display the error message
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// autoloader installed with Composer
 require './vendor/autoload.php';
 
 session_start();
 
+// path to Controllers and Managers
 use src\controller\backendController\AdminCategoryController;
 use \src\controller\frontendController\PostsController;
 use \src\controller\backendController\AdminController;
@@ -23,6 +26,7 @@ use Mailgun\Mailgun;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+// object creation
 $adminCategoryController = new AdminCategoryController();
 $postController = new PostsController();
 $adminController = new AdminController();
@@ -32,43 +36,53 @@ $adminCommentController = new AdminCommentController();
 $commentController = new CommentController();
 $contactController = new ContactController();
 $input = new Input();
+$message = new \src\Message();
 
 try {
     if (!isset($_GET['action']) && !isset($_GET['p']) || !isset($_GET['action']) && isset($_GET['p']) && $input->get('p') == 'listPosts') {
+        // frontend -> display all the posts
         $postController->listPosts();
     } elseif (!isset($_GET['action'])) {
         if ($input->get('p') == 'post') {
             if (isset($_GET['id']) && $input->get('id') > 0) {
+                // frontend -> display one post
                 $postController->post();
             } else {
+                // frontend -> if no post available
                 throw new Exception('Aucun identifiant de billet envoyé ! <br/><a href="index.php">Retour</a>');
             }
+        // all the other frontend pages
         } elseif ($input->get('p') == 'profile') {
             require './view/profile/profile.php';
         } elseif ($input->get('p') == 'cv') {
             require './view/profile/cv.php';
+        } elseif ($input->get('p') == '404') {
+            require './view/404.php';
         } elseif ($input->get('p') == 'product') {
-            require'./view/profile/product.php';
+            require './view/profile/product.php';
         } elseif ($input->get('p') == 'contactform') {
-            require'./view/forms/contactForm.php';
+            require './view/forms/contactForm.php';
         } elseif ($input->get('p') == 'contact') {
             $contact = $contactController->sendContact();
+            require './view/forms/contactForm.php';
         } elseif ($input->get('p') == 'submitcomment') {
             $addCommentData = $adminCommentController->submitComment();
-            $textResult = "Votre message a été soumis pour approbation";
-            header('Location:post-' . $addCommentData . '-' . $textResult);
+            $message->setMessage('Votre commentaire a été soumis pour validation. Il sera traité dans les meilleurs délais.');
+            header('Location:post-' . $addCommentData);
         }
+    // to access to the backend
     } elseif (isset($_GET['action']) && $input->get('action') == 'admin') {
         if (isset($_GET['p']) && $input->get('p') == 'check-user'){
-
+            // login
             $adminUserController->checkUser();
         }
 
         if (!isset($_GET['p']) && ($input->session('user') == false) || isset($_GET['p']) && ($input->session('user') == false)) {
+            // if the user is not logged
             $adminController->admin('./view/forms/userConnectForm.php', null);
         } elseif (isset($_GET['p']) && $input->session('user')){
 
-            // Category
+            // backend -> Categories
 
             if ($input->get('p') === 'viewCategories') {
                 $viewCategoriesData = $adminCategoryController->viewCategories();
@@ -86,8 +100,9 @@ try {
                 $addCategoriesData = $adminCategoryController->addCategory();
 
                 $dataCategories = $addCategoriesData['dataCategories'];
+                $alert = $addCategoriesData['alert'];
                 $view = $addCategoriesData['view'];
-                $adminController->admin($view, null, $dataCategories);
+                $adminController->admin($view, null, $dataCategories, null, null, null, $alert);
 
             } elseif ($input->get('p') === 'modifyCategoryForm') {
                 $viewCategoryData = $adminCategoryController->viewCategory();
@@ -110,7 +125,7 @@ try {
                 $view = $deleteCategoriesData['view'];
                 $adminController->admin($view, null, $dataCategories);
 
-            } //Post
+            } // backend -> Posts
 
             elseif ($input->get('p') === 'viewPosts') {
 
@@ -166,7 +181,9 @@ try {
                 $dataPosts = $deletePostData['dataPosts'];
                 $view = $deletePostData['view'];
                 $adminController->admin($view, null, null, $dataPosts);
-            } //User
+            }
+
+            // backend -> Users
 
             elseif ($input->get('p') === 'viewUsers') {
                 $viewUsersData = $adminUserController->viewUsers();
@@ -217,7 +234,7 @@ try {
 
             }
 
-            //Comments
+            // backend -> Comments
 
             elseif ($input->get('p') === 'viewComments') {
                 $viewCommentsData = $adminCommentController->viewComments();

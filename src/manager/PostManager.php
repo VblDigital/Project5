@@ -4,8 +4,15 @@ namespace src\manager;
 
 use src\model\Post;
 
+/**
+ * Class PostManager with sql requests related to posts
+ * @package src\manager
+ */
 class PostManager extends Manager
 {
+    /**
+     * @return array|mixed
+     */
     public function getPosts()
     {
         $posts = $this->prepareObject('SELECT * FROM post order by created_date DESC', Post::class, true);
@@ -20,7 +27,12 @@ class PostManager extends Manager
 
         return $posts;
     }
-    public function getPost($postId)
+
+    /**
+     * @param $postId
+     * @return array|mixed
+     */
+    public function getPost( $postId)
     {
         $post = $this->prepareObject('SELECT * FROM post WHERE id = ' . $postId, Post::class, false);
 
@@ -38,35 +50,68 @@ class PostManager extends Manager
             return $post;
     }
 
-    public function modifyPost($postId, $title, $text, $chapo)
+    /**
+     * @param $postId
+     * @param $title
+     * @param $text
+     * @param $chapo
+     * @return array|mixed
+     */
+    public function modifyPost( $postId, $title, $text, $chapo)
     {
         $this->prepareStmt('UPDATE post SET title = "' . $title . '", text = "' . $text .'", chapo = "' . $chapo . '", updated_date = current_timestamp WHERE id=' . $postId);
         return $this->getPost($postId);
     }
 
-    public function addPost($author, $title, $text, $chapo, $fileName, $imgFolder)
+    /**
+     * @param $author
+     * @param $title
+     * @param $text
+     * @param $chapo
+     * @param $fileName
+     * @param $imgFolder
+     * @return array|mixed
+     */
+    public function addPost( $author, $title, $text, $chapo, $fileName, $imgFolder)
     {
         $this->prepareStmt('INSERT INTO post (created_by, title, text, chapo, file_name, file_url) VALUES ("'. $author . '", "'. $title . '", "'. $chapo . '", "'. $text . '", "' . $fileName . '", "' . $imgFolder . '")');
         return $this->prepareObject('SELECT * FROM post ORDER BY id DESC LIMIT 1', Post::class, false);
     }
 
-    public function linkPostToCategory($categoryId, $postId)
+    /**
+     * @param $categoryId
+     * @param $postId
+     * @return array|mixed
+     */
+    public function linkPostToCategory( $categoryId, $postId)
     {
         $this->prepareStmt('INSERT INTO posts_categories (category_id, post_id) values ("'.$categoryId.'", "'.$postId.'")');
         return $this->getPost($postId);
     }
 
-    public function deletePost($postId)
+    /**
+     * @param $postId
+     */
+    public function deletePost( $postId)
     {
         return $this->prepareStmt('DELETE FROM post WHERE id=' . $postId);
     }
 
-    public function unlinkPostToCategory($postId)
+    /**
+     * @param $postId
+     */
+    public function unlinkPostToCategory( $postId)
     {
         $this->prepareStmt('DELETE FROM posts_categories WHERE post_id=' . $postId);
     }
 
-    public function addFile($postId, $fileName, $imgFolder){
+    /**
+     * @param $postId
+     * @param $fileName
+     * @param $imgFolder
+     * @return array|mixed
+     */
+    public function addFile( $postId, $fileName, $imgFolder){
         $this->prepareStmt('UPDATE post SET file_name = "' . $fileName . '", file_url = "' . $imgFolder .'" WHERE id=' . $postId);
         return $this->getPost($postId);
     }

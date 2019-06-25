@@ -6,8 +6,8 @@
     <main role="main" class="container">
         <div class="row">
             <div class="col-md-10 blog-main">
-                <div class="blog-post">
-                    <a href="../../index.php"> <<<< Retour</a>
+                <div class="lien">
+                    <a href="../index.php"> <<<< Retour</a>
                 </div>
                 <div>
                     <embed src=./public/file/CVValerieBleser.pdf width=800 height=1200 type='application/pdf'/>.

@@ -1,20 +1,14 @@
 <?php $title = 'Mon profil'; ?>
 
 <?php ob_start(); ?>
-<?php require './view/menu.php';
-$input = new \src\controller\Input(); ?>
+<?php require './view/menu.php'; ?>
 
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-10 blog-main">
             <div class="blog-post">
-                <a href="../../index.php"> <<<< Retour</a>
-                <div class="warning">
-                    <?php
-                    if (isset($_GET['warning'])){
-                        echo "<br/> " . htmlspecialchars($input->get('warning')) . "<br/>";
-                    }
-                    ?>
+                <div class="lien">
+                    <a href="../index.php"> <<<< Retour</a>
                 </div>
                 <h2 class="blog-post-title-single">
                     <img class="profileImg" src="./public/img/profile.jpg" />

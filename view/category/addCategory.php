@@ -6,14 +6,9 @@
             <div class="blog-post">
                 <div>
                     <h2>Ajouter une catégorie</h2>
-                    <br>
                 </div>
                 <div>
-                    <form class="category-form" action="admin-addcategory" method="post">
-                        <p>Nom de la catégorie :</p>
-                        <textarea name="categoryName" value="" cols="45" rows="1"></textarea><br />
-                        <button type="submit">Enregistrer</button>
-                    </form>
+                    <?php require './view/forms/addCategoryForm.php'; ?>
                 </div>
             </div>
         </div>

@@ -5,18 +5,34 @@ namespace src\manager;
 use src\model\Category;
 use src\model\PostsCategories;
 
+/**
+ * Class CategoryManager with sql requests related to categories
+ * @package src\manager
+ */
+
 class CategoryManager extends Manager
 {
+    /**
+     * @return array|mixed
+     */
     public function getAllCategories ()
     {
         return $this->prepareObject('SELECT * FROM category', Category::class, true);
     }
 
-    public function getCategory ($catId)
+    /**
+     * @param $catId
+     * @return array|mixed
+     */
+    public function getCategory ( $catId)
     {
         return $this->prepareObject('SELECT * FROM category WHERE id=' . $catId, Category::class, false);
     }
 
+    /**
+     * @param $postId
+     * @return array
+     */
     public function getCategories ( $postId )
     {
         $PostsCategories = $this->prepareObject('SELECT * FROM posts_categories WHERE post_id =' . $postId, PostsCategories::class, true);
@@ -29,17 +45,27 @@ class CategoryManager extends Manager
         return $categories;
     }
 
-    public function modifyCategory($catId, $name)
+    /**
+     * @param $catId
+     * @param $name
+     */
+    public function modifyCategory( $catId, $name)
     {
         return $this->prepareStmt('UPDATE category SET name = "' . $name . '" WHERE id=' . $catId);
     }
 
-    public function addCategory($name)
+    /**
+     * @param $name
+     */
+    public function addCategory( $name)
     {
         return $this->prepareStmt('INSERT INTO category (name) VALUES ("'. $name . '")');
     }
 
-    public function deleteCategory($catId)
+    /**
+     * @param $catId
+     */
+    public function deleteCategory( $catId)
     {
         try{
             return $this->prepareStmt('DELETE FROM category WHERE id=' . $catId);

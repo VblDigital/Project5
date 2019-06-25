@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: VALEBLES
- * Date: 01/04/2019
- * Time: 20:34
- */
 
 namespace src\model;
 
+/**
+ * Class Comment
+ * @package src\model
+ */
 class Comment{
     private $id;
     private $text;
@@ -26,6 +24,9 @@ class Comment{
         }
     }
 
+    /**
+     * @param $text
+     */
     public function setText ( $text )
     {
         if(is_string($text)) {
@@ -33,6 +34,9 @@ class Comment{
         }
     }
 
+    /**
+     * @param $date
+     */
     public function setDate ( $date )
     {
         if($date = date($date)) {
@@ -40,11 +44,17 @@ class Comment{
         }
     }
 
+    /**
+     * @param $author
+     */
     public function setAuthor ( $author )
     {
             $this->author = $author;
     }
 
+    /**
+     * @param $post_id
+     */
     public function setPost_Id ( $post_id )
     {
         $post_id = (int)$post_id;
@@ -53,6 +63,9 @@ class Comment{
         }
     }
 
+    /**
+     * @param $published
+     */
     public function setPublished( $published )
     {
         $this->published = $published;
@@ -98,6 +111,9 @@ class Comment{
         return $this->post_id;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPublished ()
     {
         return $this->published;

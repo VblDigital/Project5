@@ -2,7 +2,10 @@
 
 namespace src\model;
 
-
+/**
+ * Class CategoryForm
+ * @package src\model
+ */
 class CategoryForm
 {
     private $data;

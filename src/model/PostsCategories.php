@@ -2,6 +2,10 @@
 
 namespace src\model;
 
+/**
+ * Class PostsCategories
+ * @package src\model
+ */
 class PostsCategories
 {
     private $id;

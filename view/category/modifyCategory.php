@@ -10,11 +10,7 @@ $input = new \src\controller\Input(); ?>
                     <br>
                 </div>
                 <div>
-                    <form class="category-form" action="admin-modifycategory-<?= $input->get('id'); ?>" method="post">
-                        <p>Changer le nom de la catégorie :</p>
-                        <textarea name="categoryName" rows="1" cols="45"><?php echo $dataCategories->getName(); ?></textarea><br />
-                        <button type="submit">Enregistrer</button>
-                    </form>
+                    <?php require './view/forms/modifyCategoryForm.php'; ?>
                 </div>
             </div>
         </div>

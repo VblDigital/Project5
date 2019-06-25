@@ -5,12 +5,21 @@ namespace src\controller\backendController;
 use src\controller\Input;
 use src\manager\CommentManager;
 
+/**
+ * Class AdminCommentController
+ * @package src\controller\backendController
+ * To manage comments in Admin part
+ */
 class AdminCommentController
 {
+    /**
+     * @return integer
+     * Action after new comment's form submission
+     */
     public function submitComment()
     {
         $input = new Input();
-        if (isset($_POST['commentAuthor']) && ($_POST['commentText']) && ($_POST['postId'])) {
+        if ($input->post('commentAuthor') && $input->post('commentText') && $input->post('postId')) {
             {
                 $author = $input->post('commentAuthor');
                 $text = $input->post('commentText');
@@ -23,6 +32,10 @@ class AdminCommentController
         }
     }
 
+    /**
+     * @return array
+     * Display all the published comments
+     */
     public function viewComments()
     {
         $commentManager = new CommentManager();
@@ -31,6 +44,10 @@ class AdminCommentController
         return ['dataComments' => $viewcomments, 'view' => './view/comment/viewComments.php'];
     }
 
+    /**
+     * @return array
+     * Action after new comment's form submission
+     */
     public function viewSubmittedComments()
     {
         $commentManager = new CommentManager();
@@ -39,6 +56,10 @@ class AdminCommentController
         return ['dataComments' => $viewcomments, 'view' => './view/comment/viewSubmittedComments.php'];
     }
 
+    /**
+     * @return array
+     * Action to publish a new submitted comment
+     */
     public function approveComment()
     {
         $input = new Input();
@@ -49,6 +70,10 @@ class AdminCommentController
         return ['dataComments' => $viewcomments, 'view' => './view/comment/viewSubmittedComments.php'];
     }
 
+    /**
+     * @return array
+     * Action to delete a published comment
+     */
     public function deleteComment()
     {
         $input = new Input();
@@ -61,6 +86,10 @@ class AdminCommentController
         return ['dataComments' => $viewcomments, 'view' => './view/comment/viewComments.php'];
     }
 
+    /**
+     * @return array
+     * Action to delete a submitted comment
+     */
     public function deleteSubmittedComment()
     {
         $input = new Input();

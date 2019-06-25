@@ -2,6 +2,10 @@
 
 namespace src\model;
 
+/**
+ * Class User
+ * @package src\model
+ */
 class User
 {
     private $id;

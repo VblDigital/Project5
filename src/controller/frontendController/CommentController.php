@@ -5,9 +5,18 @@ namespace src\controller\frontendController;
 use src\controller\Input;
 use src\manager\CommentManager;
 
+/**
+ * Class CommentController
+ * @package src\controller\frontendController
+ * To submit a comment in frontend
+ */
 class CommentController
 {
-    public function submitComment($postId)
+    /**
+     * @return array
+     * Action after new comment's form submission
+     */
+    public function submitComment( $postId)
     {
         $input = new Input();
 

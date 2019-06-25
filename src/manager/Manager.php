@@ -1,8 +1,15 @@
 <?php
 namespace src\manager;
 
+/**
+ * Class Manager
+ * @package src\manager
+ */
 class Manager
 {
+    /**
+     * @return \PDO -> connexion to database
+     */
     public static function getPDO ()
     {
         $pdo = new \PDO('mysql:host=localhost;dbname=project5_bdd', 'root', '');
@@ -11,13 +18,24 @@ class Manager
         return $pdo;
     }
 
-    public function prepareStmt ($statement)
+    /**
+     * @param $statement
+     * Prepare the results of a sql request
+     */
+    public function prepareStmt ( $statement)
     {
         $req = $this->getPDO()->prepare($statement);
         $req->execute();
     }
 
-    public function prepareObject ($statement, $class_name, $all = false)
+    /**
+     * @param $statement
+     * @param $class_name
+     * @param bool $all
+     * @return array|mixed
+     * Prepare the results of a sql request - object layout
+     */
+    public function prepareObject ( $statement, $class_name, $all = false)
     {
         $req = $this->getPDO()->prepare($statement);
         $req->execute(array());

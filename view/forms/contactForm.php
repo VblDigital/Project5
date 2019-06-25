@@ -11,20 +11,22 @@
                     <h2>Pour me contacter</h2>
                 </div>
                 <div class="warning">
-                    <?php if (isset($texte)){
-                        echo $texte;}
-                    ?><br/>
+                    <?php
+                        $message->message();
+                    ?>
                 </div>
                 <div>
+                    <div>Tous les champs sont obligatoires.</div>
                     <form class="category-form" action="contact" method="post">
                         <p>Votre nom :<br/>
                             <textarea name="name" cols="50" rows="1"></textarea>
                         </p>
                         <p>Votre adresse email :<br/>
-                            <textarea name="email" cols="100" rows="1"></textarea>
+                            <textarea name="email" cols="100" rows="1"></textarea><br/>
+                            <i>Le format de votre adresse email doit être XXX@XXX.XXX</i>
                         </p>
                         <p>Votre message :<br/>
-                            <textarea name="message" cols="150" rows="10"></textarea>
+                            <textarea name="text" cols="150" rows="10"></textarea>
                         </p>
                         <button type="submit">Envoyer</button>
                     </form>
