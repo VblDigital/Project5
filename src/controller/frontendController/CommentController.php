@@ -20,7 +20,7 @@ class CommentController
     {
         $input = new Input();
 
-        if (isset($_POST['commentAuthor']) && isset($_POST['commentText']) && isset($_POST['postId']))
+        if ($input->post('commentAuthor') && $input->post('commentText') && $input->post('postId'))
         {
             $commentAuthor = $input->post('commentAuthor');
             $commentText = $input->post('commentText');

@@ -33,6 +33,9 @@ RewriteRule ^admin-approvecomment-([0-9]+)$ /index.php?action=admin&p=approveCom
 RewriteRule ^admin-deletecomment-([0-9]+)$ /index.php?action=admin&p=deleteComment&id=$1 [L]
 RewriteRule ^admin-deletesubmittedcomment-([0-9]+)$ /index.php?action=admin&p=deleteSubmittedComment&id=$1 [L]
 RewriteRule ^admin-logout$ /index.php?action=admin&p=userlogout [L]
+RewriteRule ^admin-passrecovery$ /index.php?action=admin&p=passrecovery [L]
+RewriteRule ^admin-recoveryemail$ /index.php?action=admin&p=recoveryemail [L]
+RewriteRule ^admin-checkuser$ /index.php?action=admin&p=checkuser [L]
 
 RewriteRule ^profile$ /index.php?p=profile [L]
 RewriteRule ^cv$ /index.php?p=cv [L]

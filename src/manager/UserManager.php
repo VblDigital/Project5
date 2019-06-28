@@ -104,4 +104,22 @@ class UserManager extends Manager
     {
         $_SESSION['user'] = $this->prepareObject('SELECT * FROM user where username = "'. $username . '" && password = "'. $password . '"', User::class, false );
     }
+
+    /**
+     * @param $email
+     */
+    public function checkUserEmail( $email)
+    {
+        $_SESSION['email'] = $this->prepareObject('SELECT * FROM user where email = "'. $email . '"', User::class, false );
+    }
+
+    public function newPass( $userId, $newpassword )
+    {
+        $this->prepareStmt('UPDATE user SET password = "' . $newpassword . '", newpass = "1" WHERE id=' . $userId);
+    }
+
+    public function refreshNewpass( $userId )
+    {
+        $this->prepareStmt('UPDATE user SET newpass = "0" WHERE id=' . $userId);
+    }
 }

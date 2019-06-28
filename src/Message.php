@@ -8,6 +8,9 @@ namespace src;
  */
 class Message
 {
+    /**
+     * @param $message
+     */
     public function setMessage ($message){
         $_SESSION['message'] = $message;
     }

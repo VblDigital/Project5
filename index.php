@@ -39,12 +39,12 @@ $input = new Input();
 $message = new \src\Message();
 
 try {
-    if (!isset($_GET['action']) && !isset($_GET['p']) || !isset($_GET['action']) && isset($_GET['p']) && $input->get('p') == 'listPosts') {
+    if ($input->get('action') == null && $input->get('p') == null || $input->get('action') && $input->get('p') && $input->get('p') == 'listPosts') {
         // frontend -> display all the posts
         $postController->listPosts();
-    } elseif (!isset($_GET['action'])) {
+    } elseif ($input->get('action') == null) {
         if ($input->get('p') == 'post') {
-            if (isset($_GET['id']) && $input->get('id') > 0) {
+            if ($input->get('id') && $input->get('id') > 0) {
                 // frontend -> display one post
                 $postController->post();
             } else {
@@ -71,16 +71,26 @@ try {
             header('Location:post-' . $addCommentData);
         }
     // to access to the backend
-    } elseif (isset($_GET['action']) && $input->get('action') == 'admin') {
-        if (isset($_GET['p']) && $input->get('p') == 'check-user'){
+    } elseif ($input->get('action') && $input->get('action') == 'admin') {
+        if ($input->get('p') && $input->get('p') == 'checkuser'){
             // login
-            $adminUserController->checkUser();
-        }
+            $checkUserData = $adminUserController->checkUser();
 
-        if (!isset($_GET['p']) && ($input->session('user') == false) || isset($_GET['p']) && ($input->session('user') == false)) {
+            $alert = $checkUserData['alert'];
+            $view = $checkUserData['view'];
+            $adminController->admin($view, null, null, null, null, null, $alert);
+        } elseif ($input->get('p') && $input->get('p') == 'passrecovery'){
+            $adminController->admin('./view/forms/passRecoveryForm.php', null);
+        } elseif (($input->get('p') && $input->get('p') == 'recoveryemail')) {
+            $recoveryEmailData = $adminUserController->passRecovery();
+
+            $alert = $recoveryEmailData['alert'];
+            $view = $recoveryEmailData['view'];
+            $adminController->admin($view, null, null, null, null, null, $alert);
+        } elseif ($input->get('p') == null && ($input->session('user') == false) || $input->get('p') && ($input->session('user') == false)) {
             // if the user is not logged
             $adminController->admin('./view/forms/userConnectForm.php', null);
-        } elseif (isset($_GET['p']) && $input->session('user')){
+        } elseif ($input->get('p') && $input->session('user')){
 
             // backend -> Categories
 
@@ -276,7 +286,7 @@ try {
                 $adminController->admin('./view/forms/userConnectForm.php', null);
 
             }
-        } elseif (!isset($_GET['p']) && $input->session('user')) {
+        } elseif ($input->get('p') == null && $input->session('user')) {
                 $view = 'view/admin/adminMenu.php';
                 $adminController->admin($view, null);
         }

@@ -2,7 +2,7 @@
     <div>
         Pour accéder à la page d'administration, il vous faut au préalable vous connecter :
     </div>
-    <form  name="loginForm" method="POST" action="./index.php?action=admin&p=check-user">
+    <form  name="loginForm" method="POST" action="admin-checkuser">
         <div>
             <div class="warning">
                 <?php
@@ -26,6 +26,9 @@
         <br/>
         <div>
             <input type="submit" name="submit" value="Valider">
+        </div>
+        <div>
+            <br/><a href="admin-passrecovery">Mot de passe oublié ?</a>
         </div>
     </form>
 </div>

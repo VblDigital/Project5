@@ -12,6 +12,7 @@ class User
     private $username;
     private $password;
     private $email;
+    private $newpass;
     /**
      * @param mixed $id
      * @return int
@@ -49,6 +50,14 @@ class User
             $this->email = $email;
         }
     }
+
+    /**
+     * @param mixed $newpass
+     */
+    public function setNewpass ( $newpass ): void
+    {
+        $this->newpass = $newpass;
+    }
     /**
      * @return mixed
      */
@@ -72,5 +81,13 @@ class User
      */
     public function getEmail () {
         return $this->email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewpass ()
+    {
+        return $this->newpass;
     }
 }

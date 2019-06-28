@@ -22,7 +22,7 @@ class ContactController
         $input = new Input();
         $message = new Message();
 
-        if ($_POST['name'] != null && $_POST['email'] != null && $_POST['text'] != null) {
+        if ($input->post('name') != null && $input->post('email') != null && $input->post('text') != null) {
             $name = $input->post('name');
             $email = $input->post('email');
             $text = $input->post('text');
