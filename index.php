@@ -25,6 +25,7 @@ use \src\controller\Input;
 use Mailgun\Mailgun;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
 
 // object creation
 $adminCategoryController = new AdminCategoryController();
@@ -37,6 +38,9 @@ $commentController = new CommentController();
 $contactController = new ContactController();
 $input = new Input();
 $message = new \src\Message();
+
+$dotenv = Dotenv::create(__DIR__);
+$dotenv->load();
 
 try {
     if ($input->get('action') == null && $input->get('p') == null || $input->get('action') && $input->get('p') && $input->get('p') == 'listPosts') {

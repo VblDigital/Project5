@@ -25,6 +25,7 @@ class ContactController
         if ($input->post('name') != null && $input->post('email') != null && $input->post('text') != null) {
             $name = $input->post('name');
             $email = $input->post('email');
+            $emailSecure = str_replace(array("\n","\r",PHP_EOL),'',$email);
             $text = $input->post('text');
 
             $message = new Message();
@@ -35,17 +36,17 @@ class ContactController
                 try {
                     //Server settings
                     $mail->isSMTP();                                            // Set mailer to use SMTP
-                    $mail->Host = 'smtp.mailgun.org';                     // Specify main and backup SMTP servers
+                    $mail->Host = $_ENV['EMAIL_HOST'];                     // Specify main and backup SMTP servers
                     $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-                    $mail->Username = 'postmaster@sandbox77380c8d295d42b8980f538139b34c86.mailgun.org'; // SMTP username
-                    $mail->Password = '49e16f34743c196137cddbb41f0e6acd-29b7488f-f49be92b'; // SMTP password
+                    $mail->Username = $_ENV['EMAIL_USERNAME']; // SMTP username
+                    $mail->Password = $_ENV['EMAIL_PASS']; // SMTP password
                     $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
                     $mail->Port = 587;                                    // TCP port to connect to
 
                     //Recipients
-                    $mail->setFrom($email, $name);
+                    $mail->setFrom($emailSecure, $name);
                     $mail->addAddress('vbopenclass@gmail.com');
-                    $mail->addReplyTo($email);
+                    $mail->addReplyTo($emailSecure);
 
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML

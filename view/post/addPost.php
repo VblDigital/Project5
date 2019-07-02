@@ -6,7 +6,6 @@
             <div class="blog-post">
                 <div>
                     <h2>Ajouter un billet</h2>
-                    <br>
                 </div>
                 <div>
                     <?php require './view/forms/addPostForm.php'; ?>

@@ -12,7 +12,12 @@ class Manager
      */
     public static function getPDO ()
     {
-        $pdo = new \PDO('mysql:host=localhost;dbname=project5_bdd', 'root', '');
+        $host = $_ENV['DB_SERVER'];
+        $username = $_ENV['DB_USER'];
+        $password = $_ENV['DB_PASS'];
+        $dbname = $_ENV['DB_NAME'];
+
+        $pdo = new \PDO('mysql:host='. $host .';dbname=' . $dbname, $username, $password);
         $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
         return $pdo;
@@ -22,7 +27,7 @@ class Manager
      * @param $statement
      * Prepare the results of a sql request
      */
-    public function prepareStmt ( $statement)
+    public function prepareStmt ($statement)
     {
         $req = $this->getPDO()->prepare($statement);
         $req->execute();

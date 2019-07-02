@@ -1,4 +1,10 @@
 <form class="category-form" action="admin-addpost" method="post" enctype="multipart/form-data">
+    <div class="warning">
+        <?php
+        $message = new \src\Message();
+        $message->message();
+        ?>
+    </div>
     <p>Auteur :<br/>
         <select id="author" name="author">
             <?php foreach ($dataUsers as $user) {?>

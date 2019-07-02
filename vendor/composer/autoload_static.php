@@ -45,6 +45,10 @@ class ComposerStaticInit7bc6a5339dafe3ffbc73637769d7732a
             'Http\\Client\\Common\\' => 19,
             'Http\\Client\\' => 12,
         ),
+        'D' => 
+        array (
+            'Dotenv\\' => 7,
+        ),
         'C' => 
         array (
             'Clue\\StreamFilter\\' => 18,
@@ -114,6 +118,10 @@ class ComposerStaticInit7bc6a5339dafe3ffbc73637769d7732a
         array (
             0 => __DIR__ . '/..' . '/php-http/httplug/src',
         ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
         'Clue\\StreamFilter\\' => 
         array (
             0 => __DIR__ . '/..' . '/clue/stream-filter/src',
@@ -125,6 +133,13 @@ class ComposerStaticInit7bc6a5339dafe3ffbc73637769d7732a
     );
 
     public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PhpOption\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
+            ),
+        ),
         'M' => 
         array (
             'Mailgun' => 
