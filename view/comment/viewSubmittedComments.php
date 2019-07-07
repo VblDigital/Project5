@@ -12,7 +12,7 @@
                             <th>Auteur du commentaire</th>
                             <th>Texte du commentaire</th>
                             <th>Date de publication</th>
-                            <th>Titre du billet</th>
+                            <th>Référence du billet</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -27,8 +27,10 @@
                                 setlocale(LC_TIME, 'fr_FR.utf8','fra');
                                 echo utf8_encode(strftime("%#d %B %Y", strtotime($date)));?></td>
                             <td class="nom"><?= $comment->getPostId(); ?></td>
-                            <td><a href="admin-approvecomment-<?= $comment->getId(); ?>">Approuver le commentaire</a></td>
-                            <td><a href="admin-deletesubmittedcomment-<?= $comment->getId(); ?>">Supprimer le commentaire</a></td>
+                            <td><a href="admin-approvecomment-<?= $comment->getId(); ?>">
+                            Approuver le commentaire</a></td>
+                            <td><a href="admin-deletesubmittedcomment-<?= $comment->getId(); ?>">
+                            Supprimer le commentaire</a></td>
                         </tr>
                         </tbody>
                         <?php }

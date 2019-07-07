@@ -48,9 +48,10 @@ class AdminUserController
         $input = new Input();
         if ($input->post('username') && $input->post('password') && $input->post('email'))
         {
-            $username = $input->post('username');
-            $password = $input->post('password');
-            $email = $input->post('email');
+            $username = htmlspecialchars($input->post('username'));
+            $password = htmlspecialchars($input->post('password'));
+            $password = md5($password);
+            $email = htmlspecialchars($input->post('email'));
         }
         $userManager = new UserManager();
         $userManager->addUser($username, $password, $email);
@@ -69,8 +70,8 @@ class AdminUserController
         $id = $input->get('id');
         if ($input->post('username') && $input->post('email'))
         {
-            $username = $input->post('username');
-            $email = $input->post('email');
+            $username = htmlspecialchars($input->post('username'));
+            $email = htmlspecialchars($input->post('email'));
         }
 
         $userManager = new UserManager();
@@ -91,7 +92,7 @@ class AdminUserController
 
         if ($input->post('password'))
         {
-            $password = $input->post('password');
+            $password = md5($input->post('password'));
         }
 
         $userManager = new UserManager();
@@ -124,20 +125,22 @@ class AdminUserController
     public function checkUser()
     {
         $input = new Input();
-        if ($input->post('username') && $input->post('password'))
+        if ($input->post('username') && ($input->post('password')))
         {
-            $username = $input->post('username');
-            $password = $input->post('password');
+            $username = htmlspecialchars($input->post('username'));
+            $password = htmlspecialchars($input->post('password'));
+            $password = md5($password);
 
             $userManager = new UserManager();
             $userManager->checkUser($username, $password);
-            if ($_SESSION['user'] == false)
+
+            if ($_SESSION['user'] == null)
             {
                 $message = new Message();
                 $alert = $message->setMessage('L\'identifiant et/ou le mot de passe est incorrect.');
                 return ['alert' => $alert, 'view' => './view/forms/userConnectForm.php'];
             }
-            $id = $_SESSION['email']->getId();
+            $id = $_SESSION['user']->getId();
             $userManager->refreshNewpass($id);
             header('Location: /admin');
         } else {
@@ -157,14 +160,14 @@ class AdminUserController
                 // the email format is valid
                 $userManager = new UserManager();
                 $test = $userManager->checkUserEmail($email);
-                if ($_SESSION['email'] == false)
+                if ($input->session('email') == false)
                 {
                     //No account is linked to this email address
                     $message = new Message();
                     $alert = $message->setMessage('Cette adresse email ne correspond à aucun compte connu.');
                     return ['alert' => $alert, 'view' => './view/forms/passRecoveryForm.php'];
                 } else {
-                    $checkNewPass = $_SESSION['email']->getNewpass();
+                    $checkNewPass = $input->session('email')->getNewpass();
                     if ($checkNewPass == "1") {
                         // a new password has been requested
                         $message = new Message();
@@ -178,18 +181,19 @@ class AdminUserController
                         //Send the new password by email
                         $mail = new PHPMailer(true);
                         $message = new Message();
-                        $email = $_SESSION['email']->getEmail();
+                        $email = $input->session('email')->getEmail();
                         $name = "";
-                        $text = "Bonjour, <br/> Voici votre nouveau de mot de passe : " . $newpass . ". <br/> Le blog de Valérie Bleser.";
+                        $text = "Bonjour, <br/> Voici votre nouveau de mot de passe : " . $newpass . ". 
+                        <br/> Le blog de Valérie Bleser.";
 
                         //Server settings
-                        $mail->isSMTP();                                            // Set mailer to use SMTP
-                        $mail->Host = 'smtp.mailgun.org';                     // Specify main and backup SMTP servers
-                        $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+                        $mail->isSMTP(); // Set mailer to use SMTP
+                        $mail->Host = 'smtp.mailgun.org'; // Specify main and backup SMTP servers
+                        $mail->SMTPAuth = true; // Enable SMTP authentication
                         $mail->Username = 'postmaster@sandbox77380c8d295d42b8980f538139b34c86.mailgun.org'; // SMTP username
                         $mail->Password = '49e16f34743c196137cddbb41f0e6acd-29b7488f-f49be92b'; // SMTP password
-                        $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                        $mail->Port = 587;                                    // TCP port to connect to
+                        $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+                        $mail->Port = 587; // TCP port to connect to
 
                         //Recipients
                         $mail->setFrom($email, $name);
@@ -197,7 +201,7 @@ class AdminUserController
                         $mail->addReplyTo($email);
 
                         // Content
-                        $mail->isHTML(true);                                  // Set email format to HTML
+                        $mail->isHTML(true); // Set email format to HTML
                         $mail->Subject = 'Récupération de mot de passe';
                         $mail->Body = $text;
                         $mail->AltBody = $text;
@@ -206,7 +210,7 @@ class AdminUserController
                         $alert = $message->setMessage('Nouveau mot de passe envoyé.');
 
                         //Insert the new password in the database
-                        $id = ($_SESSION['email']->getId());
+                        $id = ($input->session('email')->getId());
                         $userManager = new UserManager();
                         $userManager->newPass($id, $newpass);
 

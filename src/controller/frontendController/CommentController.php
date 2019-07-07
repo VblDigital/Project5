@@ -16,15 +16,15 @@ class CommentController
      * @return array
      * Action after new comment's form submission
      */
-    public function submitComment( $postId)
+    public function submitComment($postId)
     {
         $input = new Input();
 
         if ($input->post('commentAuthor') && $input->post('commentText') && $input->post('postId'))
         {
-            $commentAuthor = $input->post('commentAuthor');
-            $commentText = $input->post('commentText');
-            $postId = $input->post('postId');
+            $commentAuthor = htmlspecialchars($input->post('commentAuthor'));
+            $commentText = htmlspecialchars($input->post('commentText'));
+            $postId = htmlspecialchars($input->post('postId'));
         }
 
         $commentManager = new CommentManager();

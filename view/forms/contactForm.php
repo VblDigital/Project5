@@ -23,6 +23,7 @@
                         </p>
                         <p>Votre adresse email :<br/>
                             <textarea name="email" cols="100" rows="1"></textarea><br/>
+
                             <i>Le format de votre adresse email doit être XXX@XXX.XXX</i>
                         </p>
                         <p>Votre message :<br/>

@@ -41,23 +41,23 @@ class AdminPostController
     }
 
     /**
-     * @return arrayb
+     * @return array
      * Action after new post's form submission
      */
     public function addPost()
     {
         // if an image has been uploaded, we create the file and path, after a size and a extension check
         $input = new Input();
-        if($_FILES['img']['size'] > 0){
-            $fileName = $_FILES['img']['name'];
+        if($input->files('img')['size'] > 0){
+            $fileName = $input->files('img')['name'];
             //check of extension and size
             $authorizedExtensions = array("jpg", "png", "gif", "jpeg", "JPG", "PNG", "GIF", "JPEG");
-            $extension = basename($_FILES['img']['type']);
-            $authorizedSize = 10000000;
-            $size = $_FILES['img']['size'];
+            $extension = basename($input->files('img')['type']);
+            $authorizedSize = 1000000;
+            $size = $input->files('img')['size'];
             if (in_array($extension, $authorizedExtensions) && $size <= $authorizedSize) {
                 $newname = md5($fileName);
-                $fileTmpName = $_FILES['img']['tmp_name'];
+                $fileTmpName = $input->files('img')['tmp_name'];
                 $imgFolder = './public/img/' . $newname;
                 move_uploaded_file($fileTmpName, $imgFolder);
             } else {
@@ -80,17 +80,19 @@ class AdminPostController
             }
         }
         //if all the fields have been filled
-        if ($input->post('author') && $input->post('title') && $input->post('chapo') && $input->post('text') && $input->post('category') && isset($newname) && isset($imgFolder))
+        if ($input->post('author') && $input->post('title') && $input->post('chapo') &&
+            $input->post('text') && $input->post('category') && isset($newname) && isset($imgFolder))
         {
-            $author = $input->post('author');
-            $title = $input->post('title');
-            $chapo = $input->post('chapo');
-            $text = $input->post('text');
-            $fileName = $_FILES['img']['name'];
+            $author = htmlspecialchars($input->post('author'));
+            $title = htmlspecialchars($input->post('title'));
+            $chapo = htmlspecialchars($input->post('chapo'));
+            $text = htmlspecialchars($input->post('text'));
+            $fileName = ($input->files('img')['name']);
             $newname = md5($fileName);
             $imgFolder = './public/img/' . $newname;
             $category = $input->post('category');
-        } elseif ($input->post('title') == null || $input->post('chapo') == null || $input->post('text') == null || $input->post('category')== null) {
+        } elseif ($input->post('title') == null || $input->post('chapo') == null ||
+            $input->post('text') == null || $input->post('category')== null) {
             // if all the fields have not been filled
             $message = new Message();
             $message->setMessage('Tous les champs n\'ont pas été complétés');
@@ -108,12 +110,13 @@ class AdminPostController
 
             $adminController->admin($view, null, $dataCategories, null, $dataUsers);
             exit;
-        } elseif ($input->post('author') && $input->post('title') && $input->post('chapo') && $input->post('text') && $input->post('category') && !isset($newname) || !isset($imgFolder)) {
+        } elseif ($input->post('author') && $input->post('title') && $input->post('chapo') &&
+            $input->post('text') && $input->post('category') && !isset($newname) || !isset($imgFolder)) {
             // if all the fileds have been filled but no image is uploaded
-            $author = $input->post('author');
-            $title = $input->post('title');
-            $chapo = $input->post('chapo');
-            $text = $input->post('text');
+            $author = htmlspecialchars($input->post('author'));
+            $title = htmlspecialchars($input->post('title'));
+            $chapo = htmlspecialchars($input->post('chapo'));
+            $text = htmlspecialchars($input->post('text'));
             $category = $input->post('category');
             $newname = null;
             $imgFolder = null;
@@ -144,7 +147,6 @@ class AdminPostController
             $text = $input->post('text');
             $category = $input->post('category');
         }
-
         $postManager = new PostManager();
         $post = $postManager->modifyPost($id, $title, $chapo, $text);
         $postManager->unlinkPostToCategory($id);
@@ -153,20 +155,34 @@ class AdminPostController
         {
             $postManager->linkPostToCategory($cat, $postId);
         }
-
         if($_FILES['img']['size'] > 0) {
             $fileName = $_FILES['img']['name'];
-            $newname = md5($fileName);
-            if (isset($newname)) {
-                $postId = $input->get('id');
+            //check of extension and size
+            $authorizedExtensions = array("jpg", "png", "gif", "jpeg", "JPG", "PNG", "GIF", "JPEG");
+            $extension = basename($_FILES['img']['type']);
+            $authorizedSize = 10000000;
+            $size = $_FILES['img']['size'];
+            if (in_array($extension, $authorizedExtensions) && $size <= $authorizedSize) {
+                $newname = md5($fileName);
                 $fileTmpName = $_FILES['img']['tmp_name'];
                 $imgFolder = './public/img/' . $newname;
                 move_uploaded_file($fileTmpName, $imgFolder);
-                $postManager->addFile($postId, $fileName, $imgFolder);
+                $postManager->addFile($postId, $newname, $imgFolder);
+            } else {
+                $message = new Message();
+                $message->setMessage('Ce format n\'est pas un format d\'image accepté');
+                $dataPosts = null;
+                $adminController = new AdminController();
+                $categoryManager = new CategoryManager();
+                $dataCategories = $categoryManager->getAllCategories();
+                $userManager = new UserManager();
+                $dataUsers = $userManager->getUsers();
+                $view = './view/post/addPost.php';
+                $adminController->admin($view, null, $dataCategories, null, $dataUsers);
+                exit;
             }
         }
         $viewPosts = $postManager->getPosts();
-
         return ['dataPost' => $viewPosts, 'view' => './view/post/viewPosts.php'];
     }
 

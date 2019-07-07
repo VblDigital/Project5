@@ -23,10 +23,10 @@ class ContactController
         $message = new Message();
 
         if ($input->post('name') != null && $input->post('email') != null && $input->post('text') != null) {
-            $name = $input->post('name');
-            $email = $input->post('email');
+            $name = htmlspecialchars($input->post('name'));
+            $email = htmlspecialchars($input->post('email'));
             $emailSecure = str_replace(array("\n","\r",PHP_EOL),'',$email);
-            $text = $input->post('text');
+            $text = htmlspecialchars($input->post('text'));
 
             $message = new Message();
 
@@ -35,13 +35,13 @@ class ContactController
 
                 try {
                     //Server settings
-                    $mail->isSMTP();                                            // Set mailer to use SMTP
-                    $mail->Host = $_ENV['EMAIL_HOST'];                     // Specify main and backup SMTP servers
-                    $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-                    $mail->Username = $_ENV['EMAIL_USERNAME']; // SMTP username
-                    $mail->Password = $_ENV['EMAIL_PASS']; // SMTP password
-                    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
-                    $mail->Port = 587;                                    // TCP port to connect to
+                    $mail->isSMTP(); // Set mailer to use SMTP
+                    $mail->Host = $input->env('EMAIL_HOST'); // Specify main and backup SMTP servers
+                    $mail->SMTPAuth = true; // Enable SMTP authentication
+                    $mail->Username = $input->env('EMAIL_USERNAME'); // SMTP username
+                    $mail->Password = $input->env('EMAIL_PASS'); // SMTP password
+                    $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port = 587; // TCP port to connect to
 
                     //Recipients
                     $mail->setFrom($emailSecure, $name);
@@ -60,7 +60,8 @@ class ContactController
                     $message->setMessage('pas envoyé');
                 }
             } else {
-                $message->setMessage('Le format / votre adresse email n\'apparaît pas corrects. Le message n\'a pû être envoyé');
+                $message->setMessage('Le format / votre adresse email n\'apparaît pas corrects.
+                 Le message n\'a pû être envoyé');
             }
         } else {
             $message->setMessage('Veuillez remplir tous les champs.');

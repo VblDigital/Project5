@@ -23,7 +23,8 @@
     </p>
     <p>Categorie(s) :<br/><br/>
         <?php foreach ($dataCategories as $category) {?>
-            <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>"><?= $category->getName(); ?><br/></input>
+            <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>"><?= $category->getName(); ?>
+            <br/></input>
         <?php } ?>
     </p>
     <p>

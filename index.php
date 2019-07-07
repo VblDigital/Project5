@@ -43,7 +43,8 @@ $dotenv = Dotenv::create(__DIR__);
 $dotenv->load();
 
 try {
-    if ($input->get('action') == null && $input->get('p') == null || $input->get('action') && $input->get('p') && $input->get('p') == 'listPosts') {
+    if ($input->get('action') == null && $input->get('p') == null || $input->get('action') && $input->get('p') &&
+        $input->get('p') == 'listPosts') {
         // frontend -> display all the posts
         $postController->listPosts();
     } elseif ($input->get('action') == null) {
@@ -71,7 +72,8 @@ try {
             require './view/forms/contactForm.php';
         } elseif ($input->get('p') == 'submitcomment') {
             $addCommentData = $adminCommentController->submitComment();
-            $message->setMessage('Votre commentaire a été soumis pour validation. Il sera traité dans les meilleurs délais.');
+            $message->setMessage('Votre commentaire a été soumis pour validation. Il sera traité dans les meilleurs
+            délais.');
             header('Location:post-' . $addCommentData);
         }
     // to access to the backend
@@ -82,7 +84,8 @@ try {
 
             $alert = $checkUserData['alert'];
             $view = $checkUserData['view'];
-            $adminController->admin($view, null, null, null, null, null, $alert);
+            $adminController->admin($view, null, null, null, null,
+                null, $alert);
         } elseif ($input->get('p') && $input->get('p') == 'passrecovery'){
             $adminController->admin('./view/forms/passRecoveryForm.php', null);
         } elseif (($input->get('p') && $input->get('p') == 'recoveryemail')) {
@@ -90,8 +93,10 @@ try {
 
             $alert = $recoveryEmailData['alert'];
             $view = $recoveryEmailData['view'];
-            $adminController->admin($view, null, null, null, null, null, $alert);
-        } elseif ($input->get('p') == null && ($input->session('user') == false) || $input->get('p') && ($input->session('user') == false)) {
+            $adminController->admin($view, null, null, null, null,
+                null, $alert);
+        } elseif ($input->get('p') == null && ($input->session('user') == false) || $input->get('p') &&
+            ($input->session('user') == false)) {
             // if the user is not logged
             $adminController->admin('./view/forms/userConnectForm.php', null);
         } elseif ($input->get('p') && $input->session('user')){
@@ -116,7 +121,8 @@ try {
                 $dataCategories = $addCategoriesData['dataCategories'];
                 $alert = $addCategoriesData['alert'];
                 $view = $addCategoriesData['view'];
-                $adminController->admin($view, null, $dataCategories, null, null, null, $alert);
+                $adminController->admin($view, null, $dataCategories, null, null,
+                    null, $alert);
 
             } elseif ($input->get('p') === 'modifyCategoryForm') {
                 $viewCategoryData = $adminCategoryController->viewCategory();
@@ -255,35 +261,40 @@ try {
 
                 $dataComments = $viewCommentsData['dataComments'];
                 $view = $viewCommentsData['view'];
-                $adminController->admin($view, null, null, null, null, $dataComments);
+                $adminController->admin($view, null, null, null, null,
+                    $dataComments);
 
             } elseif ($input->get('p') === 'viewSubmittedComments') {
                 $viewCommentsData = $adminCommentController->viewSubmittedComments();
 
                 $dataComments = $viewCommentsData['dataComments'];
                 $view = $viewCommentsData['view'];
-                $adminController->admin($view, null, null, null, null, $dataComments);
+                $adminController->admin($view, null, null, null, null,
+                    $dataComments);
 
             } elseif ($input->get('p') === 'approveComment') {
                 $viewCommentsData = $adminCommentController->approveComment();
 
                 $dataComments = $viewCommentsData['dataComments'];
                 $view = $viewCommentsData['view'];
-                $adminController->admin($view, null, null, null, null, $dataComments);
+                $adminController->admin($view, null, null, null, null,
+                    $dataComments);
 
             } elseif ($input->get('p') === 'deleteComment') {
                 $deleteCommentData = $adminCommentController->deleteComment();
 
                 $dataComments = $deleteCommentData['dataComments'];
                 $view = $deleteCommentData['view'];
-                $adminController->admin($view, null, null, null, null, $dataComments);
+                $adminController->admin($view, null, null, null, null,
+                    $dataComments);
 
             } elseif ($input->get('p') === 'deleteSubmittedComment') {
                 $deleteCommentData = $adminCommentController->deleteSubmittedComment();
 
                 $dataComments = $deleteCommentData['dataComments'];
                 $view = $deleteCommentData['view'];
-                $adminController->admin($view, null, null, null, null, $dataComments);
+                $adminController->admin($view, null, null, null, null,
+                    $dataComments);
 
             } elseif ($input->get('p') === 'userlogout'){
                 $_SESSION['user']=false;

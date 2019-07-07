@@ -7,7 +7,8 @@
     <meta name="author" content="Valérie Bleser Copyright 2019">
     <meta name="generator" content="Jekyll v3.8.5">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    crossorigin="anonymous">
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <!-- Custom styles for this template -->

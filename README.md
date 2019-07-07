@@ -14,17 +14,26 @@ This blog has been developed for PHP version 7.2.
 
 Please follow the step by step procedure to install the blog locally. 
 
- 1. Clone or download the website in the folder of your local server.
+1. Clone or download the website in the folder of your local server.
     ```
     For exemple : C:\wamp64\www\
     ```
- 2. Install the database project5.
- 3. Modify the credentials in the file Manager.php with your data for DNS, username and password. 
-    ```
-    For exemple 'mysql:host=localhost;dbname=project5', 'root', ''
-    ```
+2. Install the database project5_bdd.
 
-### Installing
+3. Create a file .env in the same folder than index.php and insert your credentials for Database and SMTP
+    ```
+    DB_SERVER=XXX
+    DB_USER=XXX
+    DB_PASS=XXX
+    DB_NAME=XXX
+    
+    EMAIL_HOST=XXX
+    EMAIL_USERNAME=XXX
+    EMAIL_PASS=XXX
+    ```
+4. Unzip the file 'img.zip' in /public/img/
+
+### Credentials
 
 Credentials for backend : Tester / Tester
 

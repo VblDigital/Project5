@@ -47,7 +47,7 @@ class AdminCategoryController
         $input = new Input();
 
         if ($input->post('categoryName')) {
-            $name = $input->post('categoryName');
+            $name = htmlspecialchars($input->post('categoryName'));
 
             $categoryManager = new CategoryManager();
             $categoryManager->addCategory($name);
@@ -71,7 +71,7 @@ class AdminCategoryController
         $id = $input->get('id');
 
         if ($input->post('categoryName')) {
-            $name = $input->post('categoryName');
+            $name = htmlspecialchars($input->post('categoryName'));
 
             $categoryManager = new CategoryManager();
             $categoryManager->modifyCategory($id, $name);

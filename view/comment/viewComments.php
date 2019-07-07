@@ -12,7 +12,7 @@
                             <th>Auteur du commentaire</th>
                             <th>Texte du commentaire</th>
                             <th>Date de publication</th>
-                            <th>Titre du billet</th>
+                            <th>Référence du billet</th>
                             <th></th>
                         </tr>
                         </thead>

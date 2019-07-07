@@ -18,8 +18,10 @@
                     En formation chez Openclassrooms - parcours <strong>Développeur d'application - PHP / Symfony</strong>
                 </div>
                 <div class="blog-post">
-                    Après une vingtaine d'années dans différents domaines de la Finance, je décide lors d'un tournant de ma carrière de revenir à ma passion de jeunesse - l'informatique.<br/></br/>
-                    Après différents bilans de compétence et un début de formation dans le domaine de l'architecture réseau, je me réoriente vers la programmation.<br/><br/>
+                    Après une vingtaine d'années dans différents domaines de la Finance, je décide lors d'un tournant de
+                    ma carrière de revenir à ma passion de jeunesse - l'informatique.<br/></br/>
+                    Après différents bilans de compétence et un début de formation dans le domaine de l'architecture
+                    réseau, je me réoriente vers la programmation.<br/><br/>
                 </div>
             </div>
         </div>

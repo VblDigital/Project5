@@ -21,9 +21,9 @@ class AdminCommentController
         $input = new Input();
         if ($input->post('commentAuthor') && $input->post('commentText') && $input->post('postId')) {
             {
-                $author = $input->post('commentAuthor');
-                $text = $input->post('commentText');
-                $postId = $input->post('postId');
+                $author = htmlspecialchars($input->post('commentAuthor'));
+                $text = htmlspecialchars($input->post('commentText'));
+                $postId = htmlspecialchars($input->post('postId'));
             }
 
             $commentManager = new CommentManager();
