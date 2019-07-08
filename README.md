@@ -42,6 +42,9 @@ Credentials for backend : Tester / Tester
   * [WampServer](http://www.wampserver.com/) - Version Version 3.1.9 - 64bit -> Windows web development environment included Apache2, PHP and a MySQL database + PhpMyAdmin to manage the databases
   * [PhpStorm](https://www.jetbrains.com/phpstorm/) - 2019.1.1 -> PHP IDE
   * [Codacy](https://www.codacy.com) - code reviews and monitors code quality, static analysis, code coverage and metrics for PHP
+  * [Composer](https://getcomposer.org/) - Dependency Manager for PHP
+  * [Filezilla](https://filezilla-project.org/) - FTP solution
+  
 
 ## Used languages
 
