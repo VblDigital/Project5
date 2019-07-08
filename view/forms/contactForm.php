@@ -22,12 +22,12 @@
                             <textarea name="name" cols="50" rows="1"></textarea>
                         </p>
                         <p>Votre adresse email :<br/>
-                            <textarea name="email" cols="100" rows="1"></textarea><br/>
+                            <textarea name="email" cols="75" rows="1"></textarea><br/>
 
                             <i>Le format de votre adresse email doit être XXX@XXX.XXX</i>
                         </p>
                         <p>Votre message :<br/>
-                            <textarea name="text" cols="150" rows="10"></textarea>
+                            <textarea name="text" cols="75" rows="10"></textarea>
                         </p>
                         <button type="submit">Envoyer</button>
                     </form>

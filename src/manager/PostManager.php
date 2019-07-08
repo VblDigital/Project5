@@ -59,13 +59,13 @@ class PostManager extends Manager
      * @param $chapo
      * @return array|mixed
      */
-    public function modifyPost($postId, $title, $text, $chapo)
+    public function modifyPost($postId, $title, $chapo, $text)
     {
         $this->prepareStmt(
             'UPDATE post 
-            SET title = :title, text = :text, chapo = :chapo, updated_date = current_timestamp
+            SET title = :title, chapo = :chapo, text = :text,  updated_date = current_timestamp
             WHERE id= :postId',
-            [':title' => $title, ':text' => $text, ':chapo' => $chapo, ':postId' => $postId]
+            [':title' => $title, ':chapo' => $chapo, ':text' => $text,  ':postId' => $postId]
         );
         return $this->getPost($postId);
     }
@@ -79,10 +79,10 @@ class PostManager extends Manager
      * @param $imgFolder
      * @return array|mixed
      */
-    public function addPost($author, $title, $text, $chapo, $fileName, $imgFolder)
+    public function addPost($author, $title, $chapo, $text, $fileName, $imgFolder)
     {
         $this->prepareStmt(
-            'INSERT INTO post (created_by, title, text, chapo, file_name, file_url)
+            'INSERT INTO post (created_by, title, chapo, text, file_name, file_url)
             VALUES (:author, :title, :chapo, :text, :fileName, :imgFolder)',
             [':author' => $author, ':title' => $title, ':chapo' => $chapo, ':text' => $text, ':fileName' => $fileName,
                 'imgFolder' => $imgFolder]

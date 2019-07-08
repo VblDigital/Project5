@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Le blog de Valérie Bleser">
     <meta name="author" content="Valérie Bleser Copyright 2019">
@@ -13,6 +13,19 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href= "/../public/css/blog.css" rel="stylesheet">
+    <!-- Load jQuery  -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!-- Load WysiBB JS and Theme -->
+    <script src="/js/jquery.wysibb.min.js"></script>
+    <link rel="stylesheet" href="/css/default/wbbtheme.css" />
+
+    <!-- Init WysiBB BBCode editor -->
+    <script>
+        $(function() {
+            $("#editor").wysibb();
+        })
+    </script>
 </head>
 <body>
 <?= $content ?>

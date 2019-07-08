@@ -1,7 +1,7 @@
 <?php $input = new \src\controller\Input(); ?>
 <div class="blog-post">
     <div>
-        <br/><h3>Ajouter un commentaire</h3>
+        <br/><h4>Ajouter un commentaire</h4>
     </div>
     <div>
         <form class="comment-form" action="submitcomment-<?= $input->get('id'); ?>" method="post">

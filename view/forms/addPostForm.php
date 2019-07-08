@@ -16,10 +16,10 @@
         <textarea name="title" cols="50" rows="1"></textarea>
     </p>
     <p>Chapo :<br/>
-        <textarea name="chapo" cols="150" rows="3"></textarea>
+        <textarea name="chapo" cols="75" rows="3"></textarea>
     </p>
     <p>Texte :<br/>
-        <textarea name="text" cols="150" rows="10"></textarea>
+        <textarea class="editor" name="text" cols="75" rows="10"></textarea>
     </p>
     <p>Categorie(s) :<br/><br/>
         <?php foreach ($dataCategories as $category) {?>
