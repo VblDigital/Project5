@@ -13,7 +13,7 @@
         </select>
     </p>
     <p>Titre :<br/>
-        <textarea name="title" cols="50" rows="1"></textarea>
+        <input type="text" name="title" cols="50" rows="1" />
     </p>
     <p>Chapo :<br/>
         <textarea name="chapo" cols="75" rows="3"></textarea>
@@ -23,8 +23,8 @@
     </p>
     <p>Categorie(s) :<br/><br/>
         <?php foreach ($dataCategories as $category) {?>
-            <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>"><?= $category->getName(); ?>
-            <br/></input>
+            <input type="checkbox" name="category[]" value="<?= $category->getId(); ?>" /><?= $category->getName(); ?>
+            <br/>
         <?php } ?>
     </p>
     <p>

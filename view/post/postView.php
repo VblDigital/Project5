@@ -29,7 +29,7 @@ $input = new \src\controller\Input(); ?>
                     par <?= $post->getCreatedBy()->getUsername(); ?>
                 </div>
                 <div class="blog-post">
-                    <?= $post->getText();?><br/>
+                    <?= nl2br($post->getText());?><br/>
                 </div>
                 <div>
                     <img class='medium' src="<?= $post->getFileUrl();?>"/>

@@ -6,6 +6,6 @@
         ?>
     </div>
     <p>Changer le nom de la catégorie :</p>
-    <textarea name="categoryName" rows="1" cols="45"><?php echo $dataCategories->getName(); ?></textarea><br />
+    <input type="text" name="categoryName" rows="1" cols="45" /><?php echo $dataCategories->getName(); ?><br />
     <button type="submit">Enregistrer</button>
 </form>

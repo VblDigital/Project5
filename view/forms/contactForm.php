@@ -19,10 +19,10 @@
                     <div>Tous les champs sont obligatoires.</div>
                     <form class="category-form" action="contact" method="post">
                         <p>Votre nom :<br/>
-                            <textarea name="name" cols="50" rows="1"></textarea>
+                            <input name="name" cols="50" rows="1" />
                         </p>
                         <p>Votre adresse email :<br/>
-                            <textarea name="email" cols="75" rows="1"></textarea><br/>
+                            <input type="email" name="email" cols="75" rows="1" /><br/>
 
                             <i>Le format de votre adresse email doit être XXX@XXX.XXX</i>
                         </p>

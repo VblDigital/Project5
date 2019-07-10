@@ -44,8 +44,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="nom" colspan="2"><?= $post->getTitle(); ?></td>
-                    <td  colspan="2"><?= $post->getChapo(); ?></td>
+                    <td class="nom" colspan="2"><?= nl2br($post->getTitle()); ?></td>
+                    <td  colspan="2"><?= nl2br($post->getChapo()); ?></td>
                     <td><?= $post->getText(); ?></td>
                 </tr>
                 <tr class="dashed">

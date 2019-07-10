@@ -3,7 +3,7 @@
         <?= $dataPosts->getCreatedBy()->getUsername(); ?>
     </p>
     <p>Titre :</p>
-    <textarea name="title" cols="50" rows="1"><?= $dataPosts->getTitle();?></textarea>
+    <input name="title" cols="50" rows="1" /><?= $dataPosts->getTitle();?>
     <p>Chapo :</p>
     <textarea name="chapo" cols="150" rows="3"><?= $dataPosts->getChapo();?></textarea>
     <p>Texte :</p>

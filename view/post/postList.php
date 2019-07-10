@@ -23,7 +23,7 @@
                     par <?= $datas->getCreatedBy()->getUsername(); ?>
                 </div>
                 <div class="blog-post">
-                    <?= $datas->getChapo(); ?><br/>
+                    <?= nl2br($datas->getChapo()); ?><br/>
                 </div>
                 <div>
                     <a href="./post-<?= $datas->getId(); ?>">Lire la suite</a>

@@ -6,6 +6,6 @@
         ?>
     </div>
     <p>Nom de la catégorie :</p>
-    <textarea name="categoryName" value="" cols="45" rows="1"></textarea><br />
+    <input type="text" name="categoryName" value="" cols="45" rows="1"><br />
     <button type="submit">Enregistrer</button>
 </form>

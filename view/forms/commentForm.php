@@ -6,7 +6,7 @@
     <div>
         <form class="comment-form" action="submitcomment-<?= $input->get('id'); ?>" method="post">
             <p>Pseudonyme :</p>
-            <textarea name="commentAuthor" cols="50" rows="1"></textarea>
+            <input type="text" name="commentAuthor" cols="50" rows="1" />
             <p>Texte :</p>
             <textarea name="commentText" cols="70" rows="7"></textarea><br/>
             <input type="hidden" name="postId" value="<?= $input->get('id');?>" />

@@ -210,9 +210,10 @@ class AdminUserController
                         $alert = $message->setMessage('Nouveau mot de passe envoyé.');
 
                         //Insert the new password in the database
+                        $cryptedPass = md5($newpass);
                         $id = ($input->session('email')->getId());
                         $userManager = new UserManager();
-                        $userManager->newPass($id, $newpass);
+                        $userManager->newPass($id, $cryptedPass);
 
                         return ['alert' => $alert, 'view' => './view/forms/userConnectForm.php'];
                     }
