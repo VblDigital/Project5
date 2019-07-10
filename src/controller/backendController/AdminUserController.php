@@ -188,10 +188,10 @@ class AdminUserController
 
                         //Server settings
                         $mail->isSMTP(); // Set mailer to use SMTP
-                        $mail->Host = 'smtp.mailgun.org'; // Specify main and backup SMTP servers
+                        $mail->Host = $input->env('EMAIL_HOST'); // Specify main and backup SMTP servers
                         $mail->SMTPAuth = true; // Enable SMTP authentication
-                        $mail->Username = 'postmaster@sandbox77380c8d295d42b8980f538139b34c86.mailgun.org'; // SMTP username
-                        $mail->Password = '49e16f34743c196137cddbb41f0e6acd-29b7488f-f49be92b'; // SMTP password
+                        $mail->Username = $input->env('EMAIL_USERNAME'); // SMTP username
+                        $mail->Password = $input->env('EMAIL_PASS'); // SMTP password
                         $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
                         $mail->Port = 587; // TCP port to connect to
 
